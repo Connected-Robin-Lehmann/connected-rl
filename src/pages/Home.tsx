@@ -1,4 +1,6 @@
+
 import Hero from "@/components/Hero";
+import BeforeAfterComparison from "@/components/BeforeAfterComparison";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -76,6 +78,13 @@ const Home = () => {
               </Card>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Before/After Comparison Section */}
+      <section className="py-20 bg-muted/50">
+        <div className="container mx-auto px-4">
+          <BeforeAfterComparison />
         </div>
       </section>
     </div>
