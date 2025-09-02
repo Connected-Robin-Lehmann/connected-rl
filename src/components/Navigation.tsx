@@ -1,8 +1,12 @@
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Menu } from "lucide-react";
+import { useState } from "react";
 
 const Navigation = () => {
   const location = useLocation();
+  const [isOpen, setIsOpen] = useState(false);
   
   const navItems = [
     { label: "Start", href: "/" },
@@ -19,6 +23,7 @@ const Navigation = () => {
           Connected
         </Link>
         
+        {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-6">
           {navItems.map((item) => (
             <Link
@@ -38,6 +43,39 @@ const Navigation = () => {
         <Button asChild className="hidden md:inline-flex">
           <Link to="/contact">Kostenloses Angebot</Link>
         </Button>
+
+        {/* Mobile Navigation */}
+        <Sheet open={isOpen} onOpenChange={setIsOpen}>
+          <SheetTrigger asChild>
+            <Button variant="ghost" size="icon" className="md:hidden">
+              <Menu className="h-5 w-5" />
+              <span className="sr-only">Menü öffnen</span>
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+            <nav className="flex flex-col space-y-4 mt-8">
+              {navItems.map((item) => (
+                <Link
+                  key={item.href}
+                  to={item.href}
+                  onClick={() => setIsOpen(false)}
+                  className={`text-lg font-medium transition-colors hover:text-primary ${
+                    location.pathname === item.href
+                      ? "text-primary"
+                      : "text-muted-foreground"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              ))}
+              <Button asChild className="mt-6 w-full">
+                <Link to="/contact" onClick={() => setIsOpen(false)}>
+                  Kostenloses Angebot
+                </Link>
+              </Button>
+            </nav>
+          </SheetContent>
+        </Sheet>
       </div>
     </header>
   );
