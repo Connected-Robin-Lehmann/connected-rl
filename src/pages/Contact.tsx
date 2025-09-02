@@ -37,8 +37,8 @@ const Contact = () => {
     {
       icon: Mail,
       title: "E-Mail",
-      value: "robin.lehmann2007@gmail.com",
-      link: "mailto:robin.lehmann2007@gmail.com"
+      value: "connected.rl@gmail.com",
+      link: "mailto:connected.rl@gmail.com"
     },
     {
       icon: MapPin,

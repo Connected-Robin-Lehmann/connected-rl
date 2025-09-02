@@ -100,7 +100,7 @@ const About = () => {
             <div className="grid md:grid-cols-3 gap-6 mb-8">
               <div className="flex items-center justify-center space-x-3">
                 <Mail className="w-5 h-5 text-primary" />
-                <span>robin.lehmann2007@gmail.com</span>
+                <span>connected.rl@gmail.com</span>
               </div>
               <div className="flex items-center justify-center space-x-3">
                 <MapPin className="w-5 h-5 text-primary" />
