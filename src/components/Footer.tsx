@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -53,14 +52,14 @@ const Footer = () => {
                   Über mich
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link
                   to="/references"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   Referenzen
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link
                   to="/contact"
@@ -96,10 +95,11 @@ const Footer = () => {
         </div>
 
         <div className="border-t mt-12 pt-8 text-center text-sm text-muted-foreground">
-          <p>
+          {/* <p>
             &copy; {new Date().getFullYear()} Connected - Robin Lehmann. Alle
             Rechte vorbehalten.
-          </p>
+          </p> */}
+          <p>Connected - Inhaber: Robin Lehmann</p>
         </div>
       </div>
     </footer>
