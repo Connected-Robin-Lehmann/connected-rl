@@ -28,35 +28,35 @@ const BeforeAfterComparison = () => {
               <div className="ml-4 text-xs text-gray-600">alte-website.de</div>
             </div>
             
-            {/* Schlechtes Design */}
+            {/* Schlechtes Design - Same content but poor styling */}
             <div className="bg-gray-100 min-h-[400px]">
               {/* Schlechter Header */}
               <div className="bg-red-600 text-white p-4 text-center">
-                <h3 className="text-xl font-bold">MEINE FIRMA</h3>
+                <h3 className="text-xl font-bold">CONNECTED</h3>
                 <div className="flex justify-center gap-4 mt-2 text-sm">
                   <span>HOME</span>
-                  <span>ÜBER UNS</span>
+                  <span>LEISTUNGEN</span>
                   <span>KONTAKT</span>
                 </div>
               </div>
               
               {/* Schlechter Content */}
               <div className="p-4">
-                <h4 className="text-lg font-bold mb-2 text-red-600">WILLKOMMEN!</h4>
-                <p className="text-sm mb-4">Dies ist unsere Website. Hier finden Sie alles über unser Unternehmen.</p>
+                <h4 className="text-lg font-bold mb-2 text-red-600">WEBENTWICKLUNG</h4>
+                <p className="text-sm mb-4">Professionelle Websites für Ihr Unternehmen. Moderne Lösungen.</p>
                 
                 <div className="bg-yellow-300 border-2 border-black p-3 mb-4">
-                  <p className="text-xs font-bold">NEUE ANGEBOTE! KLICKEN SIE HIER!</p>
+                  <p className="text-xs font-bold">KOSTENLOSE BERATUNG! JETZT KONTAKT!</p>
                 </div>
                 
                 <div className="grid grid-cols-2 gap-2">
-                  <div className="bg-blue-200 p-2 text-xs">
-                    <h5 className="font-bold">Service 1</h5>
-                    <p>Beschreibung...</p>
+                  <div className="bg-blue-200 p-2 text-xs border border-black">
+                    <h5 className="font-bold">Webdesign</h5>
+                    <p>Moderne Websites</p>
                   </div>
-                  <div className="bg-green-200 p-2 text-xs">
-                    <h5 className="font-bold">Service 2</h5>
-                    <p>Beschreibung...</p>
+                  <div className="bg-green-200 p-2 text-xs border border-black">
+                    <h5 className="font-bold">Betreuung</h5>
+                    <p>Langfristige Pflege</p>
                   </div>
                 </div>
               </div>
@@ -99,7 +99,7 @@ const BeforeAfterComparison = () => {
               <div className="ml-4 text-xs text-gray-600">neue-website.de</div>
             </div>
             
-            {/* Gutes Design */}
+            {/* Gutes Design - Same content but modern styling */}
             <div className="bg-white min-h-[400px]">
               {/* Moderner Header */}
               <div className="bg-gradient-primary text-white p-4">
@@ -116,8 +116,12 @@ const BeforeAfterComparison = () => {
               {/* Moderner Content */}
               <div className="p-6">
                 <div className="text-center mb-6">
-                  <h4 className="text-2xl font-bold mb-2">Professionelle Webentwicklung</h4>
-                  <p className="text-muted-foreground">Moderne, responsive Websites für Ihr Unternehmen</p>
+                  <h4 className="text-2xl font-bold mb-2">Webentwicklung</h4>
+                  <p className="text-muted-foreground">Professionelle Websites für Ihr Unternehmen. Moderne Lösungen.</p>
+                </div>
+                
+                <div className="bg-gradient-card p-4 rounded-lg shadow-card mb-6 text-center">
+                  <p className="text-sm font-medium text-accent">Kostenlose Beratung verfügbar</p>
                 </div>
                 
                 <div className="grid gap-4 mb-6">
@@ -128,15 +132,26 @@ const BeforeAfterComparison = () => {
                       </div>
                       <div>
                         <h5 className="font-semibold">Webdesign</h5>
-                        <p className="text-sm text-muted-foreground">Modernes Design</p>
+                        <p className="text-sm text-muted-foreground">Moderne Websites</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="bg-gradient-card p-4 rounded-lg shadow-card">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center">
+                        <Code className="w-5 h-5 text-white" />
+                      </div>
+                      <div>
+                        <h5 className="font-semibold">Betreuung</h5>
+                        <p className="text-sm text-muted-foreground">Langfristige Pflege</p>
                       </div>
                     </div>
                   </div>
                 </div>
                 
                 <div className="text-center">
-                  <button className="bg-gradient-primary text-white px-6 py-2 rounded-lg text-sm font-medium">
-                    Kostenlose Beratung
+                  <button className="bg-gradient-primary text-white px-6 py-2 rounded-lg text-sm font-medium shadow-card hover:shadow-glow transition-shadow">
+                    Jetzt Kontakt aufnehmen
                   </button>
                 </div>
               </div>

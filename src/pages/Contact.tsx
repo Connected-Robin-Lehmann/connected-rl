@@ -64,12 +64,6 @@ const Contact = () => {
       link: "mailto:connected.rl@gmail.com"
     },
     {
-      icon: MapPin,
-      title: "Adresse",
-      value: "Dürerstraße 10, 69126 Heidelberg",
-      link: "https://maps.google.com/?q=Dürerstraße+10,+69126+Heidelberg"
-    },
-    {
       icon: Phone,
       title: "Telefon",
       value: "Auf Anfrage verfügbar",

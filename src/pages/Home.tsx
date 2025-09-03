@@ -49,8 +49,15 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Features Section */}
+      {/* Before/After Comparison Section */}
       <section className="py-20">
+        <div className="container mx-auto px-4">
+          <BeforeAfterComparison />
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-20 bg-muted/50">
         <div className="container mx-auto px-4">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-3xl md:text-4xl font-bold">
@@ -78,13 +85,6 @@ const Home = () => {
               </Card>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Before/After Comparison Section */}
-      <section className="py-20 bg-muted/50">
-        <div className="container mx-auto px-4">
-          <BeforeAfterComparison />
         </div>
       </section>
     </div>

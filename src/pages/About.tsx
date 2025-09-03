@@ -97,14 +97,10 @@ const About = () => {
           {/* Contact Info */}
           <div className="text-center">
             <h3 className="text-2xl font-bold mb-6">Kontakt</h3>
-            <div className="grid md:grid-cols-3 gap-6 mb-8">
+            <div className="grid md:grid-cols-2 gap-6 mb-8">
               <div className="flex items-center justify-center space-x-3">
                 <Mail className="w-5 h-5 text-primary" />
                 <span>connected.rl@gmail.com</span>
-              </div>
-              <div className="flex items-center justify-center space-x-3">
-                <MapPin className="w-5 h-5 text-primary" />
-                <span>Dürerstraße 10, 69126 Heidelberg</span>
               </div>
               <div className="flex items-center justify-center space-x-3">
                 <Phone className="w-5 h-5 text-primary" />
