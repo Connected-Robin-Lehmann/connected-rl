@@ -12,7 +12,6 @@ const Navigation = () => {
     { label: "Start", href: "/" },
     { label: "Leistungen", href: "/services" },
     { label: "Über mich", href: "/about" },
-    { label: "Referenzen", href: "/references" },
     { label: "Kontakt", href: "/contact" },
   ];
 

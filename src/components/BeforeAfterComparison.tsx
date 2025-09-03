@@ -1,5 +1,5 @@
 
-import { X, Check, ArrowRight, Code } from "lucide-react";
+import { X, Check, ArrowRight, Code, Shield } from "lucide-react";
 
 const BeforeAfterComparison = () => {
   return (
@@ -100,59 +100,90 @@ const BeforeAfterComparison = () => {
             </div>
             
             {/* Gutes Design - Same content but modern styling */}
-            <div className="bg-white min-h-[400px]">
+            <div className="bg-white min-h-[400px] relative overflow-hidden">
               {/* Moderner Header */}
-              <div className="bg-gradient-primary text-white p-4">
-                <div className="flex justify-between items-center">
-                  <h3 className="text-xl font-bold">Connected</h3>
-                  <div className="hidden md:flex gap-6 text-sm">
-                    <span>Home</span>
-                    <span>Leistungen</span>
-                    <span>Kontakt</span>
+              <div className="bg-gradient-primary text-white p-4 sm:p-6 relative">
+                <div className="absolute inset-0 bg-white/5"></div>
+                <div className="relative flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+                  <h3 className="text-xl sm:text-2xl font-bold">Connected</h3>
+                  <div className="flex flex-wrap gap-3 sm:gap-6 text-sm">
+                    <span className="hover:text-white/80 transition-colors cursor-pointer">Home</span>
+                    <span className="hover:text-white/80 transition-colors cursor-pointer">Leistungen</span>
+                    <span className="hover:text-white/80 transition-colors cursor-pointer">Kontakt</span>
                   </div>
                 </div>
               </div>
               
               {/* Moderner Content */}
-              <div className="p-6">
-                <div className="text-center mb-6">
-                  <h4 className="text-2xl font-bold mb-2">Webentwicklung</h4>
-                  <p className="text-muted-foreground">Professionelle Websites für Ihr Unternehmen. Moderne Lösungen.</p>
+              <div className="p-4 sm:p-6 lg:p-8">
+                <div className="text-center mb-6 sm:mb-8">
+                  <h4 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-3 bg-gradient-primary bg-clip-text text-transparent">
+                    Professionelle Webentwicklung
+                  </h4>
+                  <p className="text-muted-foreground text-sm sm:text-base max-w-md mx-auto leading-relaxed">
+                    Moderne, responsive Websites für Ihr Unternehmen. Professionelle Lösungen mit persönlicher Betreuung.
+                  </p>
                 </div>
                 
-                <div className="bg-gradient-card p-4 rounded-lg shadow-card mb-6 text-center">
-                  <p className="text-sm font-medium text-accent">Kostenlose Beratung verfügbar</p>
+                {/* Hero CTA */}
+                <div className="bg-gradient-card p-4 sm:p-6 rounded-xl shadow-card mb-6 sm:mb-8 text-center border border-accent/10">
+                  <div className="inline-flex items-center gap-2 mb-2">
+                    <div className="w-2 h-2 bg-accent rounded-full animate-pulse"></div>
+                    <p className="text-sm font-medium text-accent">Kostenlose Erstberatung verfügbar</p>
+                  </div>
+                  <p className="text-xs text-muted-foreground">Unverbindlich • Persönlich • Professionell</p>
                 </div>
                 
-                <div className="grid gap-4 mb-6">
-                  <div className="bg-gradient-card p-4 rounded-lg shadow-card">
+                {/* Services Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
+                  <div className="bg-gradient-card p-4 rounded-lg shadow-card hover:shadow-glow transition-all duration-300 group">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center">
+                      <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                         <Code className="w-5 h-5 text-white" />
                       </div>
-                      <div>
-                        <h5 className="font-semibold">Webdesign</h5>
-                        <p className="text-sm text-muted-foreground">Moderne Websites</p>
+                      <div className="flex-1 min-w-0">
+                        <h5 className="font-semibold text-sm sm:text-base">Webdesign</h5>
+                        <p className="text-xs sm:text-sm text-muted-foreground truncate">Moderne & responsive</p>
                       </div>
                     </div>
                   </div>
-                  <div className="bg-gradient-card p-4 rounded-lg shadow-card">
+                  <div className="bg-gradient-card p-4 rounded-lg shadow-card hover:shadow-glow transition-all duration-300 group">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center">
-                        <Code className="w-5 h-5 text-white" />
+                      <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <Shield className="w-5 h-5 text-white" />
                       </div>
-                      <div>
-                        <h5 className="font-semibold">Betreuung</h5>
-                        <p className="text-sm text-muted-foreground">Langfristige Pflege</p>
+                      <div className="flex-1 min-w-0">
+                        <h5 className="font-semibold text-sm sm:text-base">Betreuung</h5>
+                        <p className="text-xs sm:text-sm text-muted-foreground truncate">Langfristige Pflege</p>
                       </div>
                     </div>
                   </div>
                 </div>
                 
+                {/* CTA Button */}
                 <div className="text-center">
-                  <button className="bg-gradient-primary text-white px-6 py-2 rounded-lg text-sm font-medium shadow-card hover:shadow-glow transition-shadow">
-                    Jetzt Kontakt aufnehmen
+                  <button className="bg-gradient-primary text-white px-6 sm:px-8 py-3 rounded-lg text-sm font-medium shadow-card hover:shadow-glow transition-all duration-300 hover:scale-105 inline-flex items-center gap-2 group">
+                    <span>Jetzt Kontakt aufnehmen</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                   </button>
+                </div>
+                
+                {/* Trust Indicators */}
+                <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-border/50">
+                  <div className="flex flex-wrap justify-center gap-4 sm:gap-6 text-xs text-muted-foreground">
+                    <div className="flex items-center gap-1">
+                      <Check className="w-3 h-3 text-accent" />
+                      <span>SSL-Sicher</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Check className="w-3 h-3 text-accent" />
+                      <span>DSGVO-konform</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Check className="w-3 h-3 text-accent" />
+                      <span>Wartungsservice</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
