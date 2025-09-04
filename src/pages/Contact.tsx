@@ -1,19 +1,25 @@
-import { useState } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { useEffect, useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Mail, MapPin, Phone, Clock, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
+import nodemailer from "nodemailer";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     subject: "",
-    message: ""
+    message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
@@ -23,36 +29,45 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      const { data, error } = await supabase.functions.invoke('send-contact-email', {
-        body: formData
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
       });
 
-      if (error) {
-        throw error;
+      if (!res.ok) {
+        const { error } = await res
+          .json()
+          .catch(() => ({ error: "Request failed" }));
+        throw new Error(error);
       }
 
       toast({
         title: "Nachricht erfolgreich gesendet!",
-        description: "Vielen Dank für Ihre Anfrage. Sie erhalten eine Bestätigungs-E-Mail und ich melde mich zeitnah bei Ihnen.",
+        description:
+          "Vielen Dank für Ihre Anfrage. Sie erhalten eine Bestätigungs-E-Mail und ich melde mich zeitnah bei Ihnen.",
       });
-      
+
       setFormData({ name: "", email: "", subject: "", message: "" });
     } catch (error: any) {
-      console.error('Error sending email:', error);
+      console.error("Error sending email:", error);
       toast({
         title: "Fehler beim Senden",
-        description: "Entschuldigung, beim Senden der Nachricht ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut oder kontaktieren Sie mich direkt per E-Mail.",
-        variant: "destructive"
+        description:
+          "Entschuldigung, beim Senden der Nachricht ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut oder kontaktieren Sie mich direkt per E-Mail.",
+        variant: "destructive",
       });
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -61,20 +76,20 @@ const Contact = () => {
       icon: Mail,
       title: "E-Mail",
       value: "connected.rl@gmail.com",
-      link: "mailto:connected.rl@gmail.com"
+      link: "mailto:connected.rl@gmail.com",
     },
     {
       icon: Phone,
       title: "Telefon",
       value: "Auf Anfrage verfügbar",
-      link: null
+      link: null,
     },
     {
       icon: Clock,
       title: "Erreichbarkeit",
       value: "Mo-Fr: 9:00-18:00 Uhr",
-      link: null
-    }
+      link: null,
+    },
   ];
 
   return (
@@ -83,8 +98,8 @@ const Contact = () => {
         <div className="text-center space-y-4 mb-16">
           <h1 className="text-4xl md:text-5xl font-bold">Kontakt</h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Haben Sie Fragen oder möchten Sie ein Projekt besprechen? 
-            Ich freue mich auf Ihre Nachricht!
+            Haben Sie Fragen oder möchten Sie ein Projekt besprechen? Ich freue
+            mich auf Ihre Nachricht!
           </p>
         </div>
 
@@ -94,7 +109,8 @@ const Contact = () => {
             <CardHeader>
               <CardTitle className="text-2xl">Nachricht senden</CardTitle>
               <CardDescription>
-                Füllen Sie das Formular aus und ich melde mich zeitnah bei Ihnen.
+                Füllen Sie das Formular aus und ich melde mich zeitnah bei
+                Ihnen.
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -124,7 +140,7 @@ const Contact = () => {
                     />
                   </div>
                 </div>
-                
+
                 <div className="space-y-2">
                   <Label htmlFor="subject">Betreff</Label>
                   <Input
@@ -135,7 +151,7 @@ const Contact = () => {
                     placeholder="Worum geht es?"
                   />
                 </div>
-                
+
                 <div className="space-y-2">
                   <Label htmlFor="message">Nachricht *</Label>
                   <Textarea
@@ -148,8 +164,13 @@ const Contact = () => {
                     required
                   />
                 </div>
-                
-                <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
+
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="w-full"
+                  disabled={isSubmitting}
+                >
                   {isSubmitting ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -168,15 +189,18 @@ const Contact = () => {
             <div>
               <h2 className="text-2xl font-bold mb-4">Kontaktinformationen</h2>
               <p className="text-muted-foreground mb-8">
-                Sie erreichen mich über verschiedene Kanäle. Für eine schnelle 
-                Antwort nutzen Sie gerne das Kontaktformular oder schreiben mir 
+                Sie erreichen mich über verschiedene Kanäle. Für eine schnelle
+                Antwort nutzen Sie gerne das Kontaktformular oder schreiben mir
                 direkt eine E-Mail.
               </p>
             </div>
 
             <div className="grid gap-4">
               {contactInfo.map((info, index) => (
-                <Card key={index} className="shadow-card bg-gradient-card border-0">
+                <Card
+                  key={index}
+                  className="shadow-card bg-gradient-card border-0"
+                >
                   <CardContent className="p-6">
                     <div className="flex items-center space-x-4">
                       <div className="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center flex-shrink-0">
@@ -206,9 +230,11 @@ const Contact = () => {
             {/* CTA Section */}
             <Card className="bg-gradient-primary border-0 text-white">
               <CardContent className="p-8">
-                <h3 className="text-xl font-bold mb-2">Kostenloses Erstgespräch</h3>
+                <h3 className="text-xl font-bold mb-2">
+                  Kostenloses Erstgespräch
+                </h3>
                 <p className="opacity-90 mb-4">
-                  Lassen Sie uns in einem unverbindlichen Gespräch über Ihr 
+                  Lassen Sie uns in einem unverbindlichen Gespräch über Ihr
                   Projekt sprechen und gemeinsam die beste Lösung finden.
                 </p>
                 <ul className="space-y-2 text-sm opacity-90">
