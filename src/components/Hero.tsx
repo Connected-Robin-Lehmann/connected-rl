@@ -38,6 +38,7 @@ const Hero = () => {
               src={heroImage}
               alt="Digitale Vernetzung und Webentwicklung"
               className="relative rounded-2xl shadow-hero w-full h-auto"
+              fetchPriority="high"
             />
           </div>
         </div>
