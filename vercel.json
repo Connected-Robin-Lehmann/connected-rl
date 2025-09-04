@@ -2,7 +2,7 @@
   "rewrites": [{ "source": "/(.*)", "destination": "/" }],
   "functions": {
     "api/contact.ts": {
-      "runtime": "@vercel/node"
+      "runtime": "@vercel/node@18.x"
     }
   }
 }
