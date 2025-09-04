@@ -19,11 +19,13 @@ const About = () => {
           {/* Main Content */}
           <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
             <div className="space-y-6">
-              {/* Profile Image Placeholder */}
-              <div className="w-80 h-80 mx-auto lg:mx-0 bg-gradient-primary rounded-2xl flex items-center justify-center">
-                <div className="w-32 h-32 bg-white/20 rounded-full flex items-center justify-center">
-                  <span className="text-4xl text-white font-bold">RL</span>
-                </div>
+              {/* Profile Image */}
+              <div className="w-80 h-80 mx-auto lg:mx-0 rounded-2xl overflow-hidden shadow-elegant">
+                <img 
+                  src="/lovable-uploads/0daf82c9-c497-41c0-9613-2ba2ac9be4de.png" 
+                  alt="Robin Lehmann - Webentwickler und Digital Consultant" 
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
             
