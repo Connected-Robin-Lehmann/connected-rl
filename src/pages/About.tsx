@@ -21,14 +21,14 @@ const About = () => {
             <div className="space-y-6">
               {/* Profile Image */}
               <div className="w-80 h-80 mx-auto lg:mx-0 rounded-2xl overflow-hidden shadow-elegant">
-                <img 
-                  src="/lovable-uploads/0daf82c9-c497-41c0-9613-2ba2ac9be4de.png" 
-                  alt="Robin Lehmann - Webentwickler und Digital Consultant" 
+                <img
+                  src="/images/Robin-Lehmann.png"
+                  alt="Robin Lehmann - Webentwickler und Digital Consultant"
                   className="w-full h-full object-cover"
                 />
               </div>
             </div>
-            
+
             <div className="space-y-6">
               <div>
                 <h2 className="text-3xl font-bold mb-4">Robin Lehmann</h2>
@@ -36,24 +36,25 @@ const About = () => {
                   Webentwickler & Digital Consultant
                 </p>
               </div>
-              
+
               <div className="space-y-4 text-foreground">
                 <p>
-                  Mit jahrelanger Erfahrung in der Webentwicklung bringe ich Ihre 
-                  digitalen Projekte zum Erfolg. Mein Fokus liegt auf modernen, 
-                  benutzerfreundlichen Lösungen, die nicht nur technisch einwandfrei 
-                  funktionieren, sondern auch Ihre Geschäftsziele unterstützen.
+                  Mit jahrelanger Erfahrung in der Webentwicklung bringe ich
+                  Ihre digitalen Projekte zum Erfolg. Mein Fokus liegt auf
+                  modernen, benutzerfreundlichen Lösungen, die nicht nur
+                  technisch einwandfrei funktionieren, sondern auch Ihre
+                  Geschäftsziele unterstützen.
                 </p>
                 <p>
-                  Als Ihr persönlicher Ansprechpartner sorge ich dafür, dass Sie 
-                  sich keine Gedanken über die technischen Details machen müssen. 
-                  Von der ersten Beratung bis zur langfristigen Betreuung – 
-                  Sie haben immer einen direkten Draht zu mir.
+                  Als Ihr persönlicher Ansprechpartner sorge ich dafür, dass Sie
+                  sich keine Gedanken über die technischen Details machen
+                  müssen. Von der ersten Beratung bis zur langfristigen
+                  Betreuung – Sie haben immer einen direkten Draht zu mir.
                 </p>
                 <p>
-                  Kundennähe und Zuverlässigkeit stehen bei mir an erster Stelle. 
-                  Jedes Projekt wird individuell betreut, und ich nehme mir die 
-                  Zeit, Ihre spezifischen Anforderungen zu verstehen und 
+                  Kundennähe und Zuverlässigkeit stehen bei mir an erster
+                  Stelle. Jedes Projekt wird individuell betreut, und ich nehme
+                  mir die Zeit, Ihre spezifischen Anforderungen zu verstehen und
                   maßgeschneiderte Lösungen zu entwickeln.
                 </p>
               </div>
@@ -63,7 +64,9 @@ const About = () => {
           {/* Values Section */}
           <Card className="bg-gradient-card border-0 shadow-card mb-16">
             <CardContent className="p-8">
-              <h3 className="text-2xl font-bold mb-6 text-center">Meine Arbeitsweise</h3>
+              <h3 className="text-2xl font-bold mb-6 text-center">
+                Meine Arbeitsweise
+              </h3>
               <div className="grid md:grid-cols-3 gap-8">
                 <div className="text-center">
                   <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4">
@@ -71,7 +74,8 @@ const About = () => {
                   </div>
                   <h4 className="font-semibold mb-2">Zielorientiert</h4>
                   <p className="text-sm text-muted-foreground">
-                    Jede Website wird strategisch geplant und auf Ihre Geschäftsziele ausgerichtet.
+                    Jede Website wird strategisch geplant und auf Ihre
+                    Geschäftsziele ausgerichtet.
                   </p>
                 </div>
                 <div className="text-center">
@@ -80,7 +84,8 @@ const About = () => {
                   </div>
                   <h4 className="font-semibold mb-2">Persönlich</h4>
                   <p className="text-sm text-muted-foreground">
-                    Direkter Kontakt und persönliche Betreuung während des gesamten Projekts.
+                    Direkter Kontakt und persönliche Betreuung während des
+                    gesamten Projekts.
                   </p>
                 </div>
                 <div className="text-center">
@@ -89,7 +94,8 @@ const About = () => {
                   </div>
                   <h4 className="font-semibold mb-2">Effizient</h4>
                   <p className="text-sm text-muted-foreground">
-                    Schnelle Umsetzung ohne Kompromisse bei Qualität und Funktionalität.
+                    Schnelle Umsetzung ohne Kompromisse bei Qualität und
+                    Funktionalität.
                   </p>
                 </div>
               </div>
@@ -109,7 +115,7 @@ const About = () => {
                 <span>Telefon auf Anfrage</span>
               </div>
             </div>
-            
+
             <Button size="lg" asChild>
               <Link to="/contact">Projekt besprechen</Link>
             </Button>
