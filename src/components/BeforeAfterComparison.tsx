@@ -6,6 +6,29 @@ const BeforeAfterComparison = () => {
   const [isDragging, setIsDragging] = useState(false);
   const [showAnimation, setShowAnimation] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
+  const afterRef = useRef<HTMLDivElement>(null);
+  const animationRef = useRef<number>();
+
+  const updateSliderPosition = useCallback((clientX: number) => {
+    if (!containerRef.current || !afterRef.current) return;
+
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = clientX - rect.left;
+    const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
+    
+    // Update DOM directly for immediate visual feedback
+    afterRef.current.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
+    
+    // Cancel previous animation frame
+    if (animationRef.current) {
+      cancelAnimationFrame(animationRef.current);
+    }
+    
+    // Update state on next frame to avoid blocking
+    animationRef.current = requestAnimationFrame(() => {
+      setSliderPosition(percentage);
+    });
+  }, []);
 
   const handleMouseDown = useCallback(() => {
     setIsDragging(true);
@@ -17,22 +40,14 @@ const BeforeAfterComparison = () => {
   }, []);
 
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
-    if (!isDragging || !containerRef.current) return;
-
-    const rect = containerRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
-    setSliderPosition(percentage);
-  }, [isDragging]);
+    if (!isDragging) return;
+    updateSliderPosition(e.clientX);
+  }, [isDragging, updateSliderPosition]);
 
   const handleTouchMove = useCallback((e: React.TouchEvent) => {
-    if (!isDragging || !containerRef.current) return;
-
-    const rect = containerRef.current.getBoundingClientRect();
-    const x = e.touches[0].clientX - rect.left;
-    const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
-    setSliderPosition(percentage);
-  }, [isDragging]);
+    if (!isDragging) return;
+    updateSliderPosition(e.touches[0].clientX);
+  }, [isDragging, updateSliderPosition]);
 
   return (
     <div className="mb-20">
@@ -138,7 +153,8 @@ const BeforeAfterComparison = () => {
 
           {/* After (Modern Website) - Clipped by slider */}
           <div 
-            className="absolute inset-0 bg-white transition-all duration-300"
+            ref={afterRef}
+            className={`absolute inset-0 bg-white ${isDragging ? '' : 'transition-all duration-300'}`}
             style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
           >
             {/* Browser Header - Good */}
