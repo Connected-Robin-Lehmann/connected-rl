@@ -265,9 +265,9 @@ const BeforeAfterComparison = () => {
             onMouseDown={handleMouseDown}
             onTouchStart={handleMouseDown}
           >
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-lg border-4 border-accent flex items-center justify-center">
-              <div className="w-6 h-6 bg-gradient-to-r from-accent to-primary rounded-full flex items-center justify-center">
-                <ArrowRight className="w-3 h-3 text-white transform rotate-90" />
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 hover:w-12 hover:h-12 bg-white rounded-full shadow-lg border-2 hover:border-4 border-accent flex items-center justify-center transition-all duration-200">
+              <div className="w-4 h-4 hover:w-6 hover:h-6 bg-gradient-to-r from-accent to-primary rounded-full flex items-center justify-center transition-all duration-200">
+                <ArrowRight className="w-2 h-2 hover:w-3 hover:h-3 text-white transform rotate-90 transition-all duration-200" />
               </div>
             </div>
           </div>
