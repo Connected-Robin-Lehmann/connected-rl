@@ -1,267 +1,343 @@
-import { X, Check, ArrowRight, Globe, Star, Phone, Mail } from "lucide-react";
+import { useState, useRef, useCallback } from "react";
+import { X, Check, ArrowRight, Globe, Star, Phone, Mail, MousePointer2, Sparkles } from "lucide-react";
 
 const BeforeAfterComparison = () => {
+  const [sliderPosition, setSliderPosition] = useState(50);
+  const [isDragging, setIsDragging] = useState(false);
+  const [showAnimation, setShowAnimation] = useState(true);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseDown = useCallback(() => {
+    setIsDragging(true);
+    setShowAnimation(false);
+  }, []);
+
+  const handleMouseUp = useCallback(() => {
+    setIsDragging(false);
+  }, []);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+    if (!isDragging || !containerRef.current) return;
+
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
+    setSliderPosition(percentage);
+  }, [isDragging]);
+
+  const handleTouchMove = useCallback((e: React.TouchEvent) => {
+    if (!isDragging || !containerRef.current) return;
+
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = e.touches[0].clientX - rect.left;
+    const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
+    setSliderPosition(percentage);
+  }, [isDragging]);
+
   return (
     <div className="mb-20">
-      <div className="text-center space-y-4 mb-12">
-        <h2 className="text-3xl md:text-4xl font-bold">Vorher vs. Nachher</h2>
-        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-          Sehen Sie die Transformation von veralteten zu modernen Websites
+      {/* Attention-grabbing header */}
+      <div className="text-center space-y-6 mb-16">
+        <div className="inline-flex items-center gap-2 bg-gradient-to-r from-accent/10 to-primary/10 px-6 py-3 rounded-full border border-accent/20 animate-pulse">
+          <Sparkles className="w-5 h-5 text-accent animate-spin" />
+          <span className="text-sm font-semibold text-accent">Website Transformation</span>
+          <Sparkles className="w-5 h-5 text-accent animate-spin" />
+        </div>
+        <h2 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+          Vorher vs. Nachher
+        </h2>
+        <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          Erleben Sie die dramatische Transformation Ihrer Website interaktiv
         </p>
+        
+        {/* Interactive instruction */}
+        <div className="flex items-center justify-center gap-3 text-sm text-accent animate-bounce">
+          <MousePointer2 className="w-4 h-4" />
+          <span>Ziehen Sie den Slider um den Unterschied zu sehen</span>
+        </div>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-        {/* Vorher - Schlechtes Design */}
-        <div className="space-y-4">
-          <div className="flex items-center gap-2 text-destructive font-semibold text-lg">
-            <X className="w-6 h-6" />
-            Veraltetes Design (2010er Jahre)
-          </div>
-
-          <div className="border-2 border-destructive/20 rounded-lg overflow-hidden">
-            {/* Browser Header - schlecht */}
-            <div className="bg-gray-300 p-2 flex items-center gap-2">
-              <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-              <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-              <div className="ml-4 text-xs text-gray-600">
+      {/* Interactive Before/After Slider */}
+      <div className="max-w-7xl mx-auto mb-16">
+        <div 
+          ref={containerRef}
+          className="relative h-[600px] md:h-[700px] rounded-2xl overflow-hidden shadow-2xl cursor-col-resize select-none border-4 border-accent/20"
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleMouseUp}
+        >
+          {/* Before (Old Website) - Full Width Background */}
+          <div className="absolute inset-0 bg-yellow-100">
+            {/* Browser Header - Bad */}
+            <div className="bg-gray-300 p-3 flex items-center gap-2 border-b">
+              <div className="w-4 h-4 bg-red-500 rounded-full"></div>
+              <div className="w-4 h-4 bg-yellow-500 rounded-full"></div>
+              <div className="w-4 h-4 bg-green-500 rounded-full"></div>
+              <div className="ml-6 text-sm text-gray-600 font-mono">
                 altebäckerei-rutz.de
               </div>
             </div>
 
-            {/* Schlechtes Design */}
-            <div className="bg-yellow-100 min-h-[450px] relative">
-              {/* Schlechter Header */}
-              <div className="bg-orange-600 text-white p-3 text-center relative">
-                <h3 className="text-lg font-bold text-yellow-200 drop-shadow-lg">
-                  RUTZ
+            {/* Bad Design Content */}
+            <div className="p-6 h-full bg-gradient-to-br from-yellow-100 to-orange-200">
+              <div className="bg-orange-600 text-white p-6 text-center mb-6 transform rotate-1 shadow-lg">
+                <h3 className="text-3xl font-bold text-yellow-200 drop-shadow-lg mb-2">
+                  RUTZ BÄCKEREI
                 </h3>
-                <div className="flex justify-center gap-2 mt-1 text-xs text-yellow-100">
-                  <span className="border border-yellow-200 px-1">HOME</span>
-                  <span className="border border-yellow-200 px-1">
-                    PRODUKTE
-                  </span>
-                  <span className="border border-yellow-200 px-1">KONTAKT</span>
+                <div className="flex justify-center gap-4 text-lg text-yellow-100">
+                  <span className="border-2 border-yellow-200 px-3 py-1 transform -rotate-1">HOME</span>
+                  <span className="border-2 border-yellow-200 px-3 py-1 transform rotate-1">PRODUKTE</span>
+                  <span className="border-2 border-yellow-200 px-3 py-1 transform -rotate-1">KONTAKT</span>
                 </div>
               </div>
 
-              {/* Schlechter Content */}
-              <div className="p-3">
-                <div className="bg-red-500 text-white p-2 text-center mb-3 border-2 border-black rotate-1">
-                  <p className="text-xs font-bold animate-pulse">
-                    *** FRISCHE BRÖTCHEN TÄGLICH ***
-                  </p>
-                </div>
-
-                <h4 className="text-base font-bold mb-2 text-red-700 underline">
-                  WILLKOMMEN IN UNSERER BÄCKEREI!
-                </h4>
-                <p className="text-xs mb-3 text-justify">
-                  Seit 1985 backen wir für Sie die besten Brötchen der Stadt.
-                  Besuchen Sie uns!
+              <div className="bg-red-500 text-white p-4 text-center mb-6 border-4 border-black transform -rotate-1 shadow-xl">
+                <p className="text-xl font-bold animate-pulse">
+                  *** FRISCHE BRÖTCHEN TÄGLICH *** SONDERANGEBOT ***
                 </p>
+              </div>
 
-                <div className="bg-lime-300 border-4 border-red-500 p-2 mb-3 -rotate-1">
-                  <p className="text-xs font-bold text-red-800 text-center">
-                    SONDERANGEBOT! 10% RABATT! NUR HEUTE!
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-4">
+                  <h4 className="text-2xl font-bold text-red-700 underline">
+                    WILLKOMMEN IN UNSERER BÄCKEREI!
+                  </h4>
+                  <p className="text-lg leading-relaxed">
+                    Seit 1985 backen wir für Sie die besten Brötchen der Stadt. 
+                    Besuchen Sie uns und überzeugen Sie sich selbst!
                   </p>
-                </div>
-
-                <div className="grid grid-cols-2 gap-2 mb-3">
-                  <div className="bg-pink-200 p-2 text-xs border-2 border-purple-500">
-                    <h5 className="font-bold text-blue-700">Brötchen</h5>
-                    <p className="text-purple-800">Ab 0,35€</p>
-                  </div>
-                  <div className="bg-cyan-200 p-2 text-xs border-2 border-green-500">
-                    <h5 className="font-bold text-orange-700">Kuchen</h5>
-                    <p className="text-red-800">Hausgemacht!</p>
+                  
+                  <div className="bg-lime-300 border-4 border-red-500 p-4 transform rotate-1 shadow-lg">
+                    <p className="text-lg font-bold text-red-800 text-center">
+                      SONDERANGEBOT! 10% RABATT! NUR HEUTE!
+                    </p>
                   </div>
                 </div>
 
-                <div className="text-center">
-                  <div className="bg-gradient-to-r from-red-500 to-yellow-500 text-white p-1 text-xs font-bold border-2 border-black">
-                    BESUCHEN SIE UNS JETZT!
+                <div className="space-y-4">
+                  <div className="bg-pink-200 p-4 border-4 border-purple-500 transform -rotate-1">
+                    <h5 className="text-xl font-bold text-blue-700">Brötchen</h5>
+                    <p className="text-lg text-purple-800">Ab 0,35€</p>
                   </div>
+                  <div className="bg-cyan-200 p-4 border-4 border-green-500 transform rotate-1">
+                    <h5 className="text-xl font-bold text-orange-700">Kuchen</h5>
+                    <p className="text-lg text-red-800">Hausgemacht!</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="text-center mt-8">
+                <div className="bg-gradient-to-r from-red-500 to-yellow-500 text-white p-4 text-xl font-bold border-4 border-black transform rotate-1 shadow-xl">
+                  BESUCHEN SIE UNS JETZT!
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="space-y-2 text-sm text-muted-foreground">
-            <div className="flex items-center gap-2">
-              <X className="w-4 h-4 text-destructive" />
-              Überladenes Design mit grellen Farben
-            </div>
-            <div className="flex items-center gap-2">
-              <X className="w-4 h-4 text-destructive" />
-              Keine mobile Optimierung
-            </div>
-            <div className="flex items-center gap-2">
-              <X className="w-4 h-4 text-destructive" />
-              Unübersichtliche Struktur
-            </div>
-            <div className="flex items-center gap-2">
-              <X className="w-4 h-4 text-destructive" />
-              Veraltete Technik & schlechte UX
-            </div>
-          </div>
-        </div>
-
-        {/* Nachher - Gutes Design */}
-        <div className="space-y-4">
-          <div className="flex items-center gap-2 text-accent font-semibold text-lg">
-            <Check className="w-6 h-6" />
-            Modernes Design (2024)
-          </div>
-
-          <div className="border-2 border-accent/20 rounded-lg overflow-hidden">
-            {/* Browser Header - gut */}
-            <div className="bg-gray-300 p-2 flex items-center gap-2">
-              <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-              <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-              <div className="ml-4 text-xs text-gray-600">
+          {/* After (Modern Website) - Clipped by slider */}
+          <div 
+            className="absolute inset-0 bg-white transition-all duration-300"
+            style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
+          >
+            {/* Browser Header - Good */}
+            <div className="bg-slate-50 p-3 flex items-center gap-2 border-b border-slate-200">
+              <div className="w-4 h-4 bg-red-500 rounded-full"></div>
+              <div className="w-4 h-4 bg-yellow-500 rounded-full"></div>
+              <div className="w-4 h-4 bg-green-500 rounded-full"></div>
+              <div className="ml-6 text-sm text-slate-600 font-mono">
                 baeckerei-rutz.de
               </div>
             </div>
 
-            {/* Modernes Design */}
-            <div className="bg-white min-h-[450px] relative overflow-hidden">
-              {/* Moderner Header */}
-              <div className="bg-gradient-to-r from-amber-50 to-orange-50 border-b border-amber-200/50 p-4 sm:p-6">
-                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-500 rounded-full flex items-center justify-center">
-                      <Globe className="w-5 h-5 text-white" />
+            {/* Modern Design Content */}
+            <div className="h-full bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50">
+              {/* Modern Header */}
+              <div className="bg-white/80 backdrop-blur-sm border-b border-amber-200/50 p-6">
+                <div className="max-w-6xl mx-auto flex justify-between items-center">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-gradient-to-br from-amber-500 to-orange-500 rounded-xl flex items-center justify-center shadow-lg">
+                      <Globe className="w-6 h-6 text-white" />
                     </div>
-                    <h3 className="text-xl sm:text-2xl font-bold text-amber-900">
-                      Rutz
-                    </h3>
+                    <h3 className="text-3xl font-bold text-amber-900">Rutz</h3>
                   </div>
-                  <div className="flex flex-wrap gap-4 text-sm text-amber-700">
-                    <span className="hover:text-amber-900 transition-colors cursor-pointer">
-                      Start
-                    </span>
-                    <span className="hover:text-amber-900 transition-colors cursor-pointer">
-                      Produkte
-                    </span>
-                    <span className="hover:text-amber-900 transition-colors cursor-pointer">
-                      Kontakt
-                    </span>
-                  </div>
+                  <nav className="hidden md:flex gap-8 text-amber-700">
+                    <span className="hover:text-amber-900 transition-colors cursor-pointer font-medium">Start</span>
+                    <span className="hover:text-amber-900 transition-colors cursor-pointer font-medium">Produkte</span>
+                    <span className="hover:text-amber-900 transition-colors cursor-pointer font-medium">Kontakt</span>
+                  </nav>
                 </div>
               </div>
 
               {/* Hero Section */}
-              <div className="relative bg-gradient-to-br from-amber-50 to-orange-100 p-4 sm:p-6">
-                <div className="text-center mb-6">
-                  <h4 className="text-xl sm:text-2xl font-bold mb-3 text-amber-900">
+              <div className="max-w-6xl mx-auto p-8">
+                <div className="text-center mb-12">
+                  <h4 className="text-5xl font-bold mb-6 text-amber-900 leading-tight">
                     Traditionsbäckerei seit 1985
                   </h4>
-                  <p className="text-amber-700 text-sm sm:text-base max-w-md mx-auto leading-relaxed">
-                    Handwerklich gebackene Spezialitäten aus besten regionalen
-                    Zutaten
+                  <p className="text-xl text-amber-700 max-w-2xl mx-auto leading-relaxed">
+                    Handwerklich gebackene Spezialitäten aus besten regionalen Zutaten - 
+                    jeden Tag frisch für Sie zubereitet
                   </p>
                 </div>
 
                 {/* Trust Badge */}
-                <div className="bg-white/70 backdrop-blur-sm p-4 rounded-xl shadow-sm mb-6 text-center border border-amber-200/50">
-                  <div className="flex items-center justify-center gap-2 mb-2">
-                    <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
-                    <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
-                    <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
-                    <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
-                    <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
+                <div className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-xl mb-12 max-w-md mx-auto border border-amber-200/50">
+                  <div className="flex items-center justify-center gap-2 mb-4">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-6 h-6 text-amber-500 fill-amber-500" />
+                    ))}
                   </div>
-                  <p className="text-xs text-amber-700">
+                  <p className="text-center text-amber-700 font-medium">
                     Täglich frisch • Familientradition • Regional
                   </p>
                 </div>
 
                 {/* Products Grid */}
-                <div className="grid grid-cols-2 gap-3 mb-6">
-                  <div className="bg-white/80 backdrop-blur-sm p-4 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 border border-amber-200/30">
+                <div className="grid md:grid-cols-2 gap-8 mb-12 max-w-2xl mx-auto">
+                  <div className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-amber-200/30 group">
                     <div className="text-center">
-                      <div className="w-8 h-8 bg-gradient-to-br from-amber-500 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-2">
-                        <span className="text-white text-xs">🥖</span>
+                      <div className="w-16 h-16 bg-gradient-to-br from-amber-500 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                        <span className="text-white text-2xl">🥖</span>
                       </div>
-                      <h5 className="font-semibold text-amber-900 text-sm">
-                        Brötchen
-                      </h5>
-                      <p className="text-xs text-amber-700">ab 0,35€</p>
+                      <h5 className="text-xl font-bold text-amber-900 mb-2">Brötchen</h5>
+                      <p className="text-amber-700">ab 0,35€</p>
                     </div>
                   </div>
-                  <div className="bg-white/80 backdrop-blur-sm p-4 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 border border-amber-200/30">
+                  <div className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-amber-200/30 group">
                     <div className="text-center">
-                      <div className="w-8 h-8 bg-gradient-to-br from-amber-500 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-2">
-                        <span className="text-white text-xs">🥧</span>
+                      <div className="w-16 h-16 bg-gradient-to-br from-amber-500 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                        <span className="text-white text-2xl">🥧</span>
                       </div>
-                      <h5 className="font-semibold text-amber-900 text-sm">
-                        Kuchen
-                      </h5>
-                      <p className="text-xs text-amber-700">hausgemacht</p>
+                      <h5 className="text-xl font-bold text-amber-900 mb-2">Kuchen</h5>
+                      <p className="text-amber-700">hausgemacht</p>
                     </div>
                   </div>
                 </div>
 
                 {/* CTA Button */}
-                <div className="text-center mb-4">
-                  <button className="bg-gradient-to-r from-amber-500 to-orange-500 text-white px-6 py-2 rounded-lg text-sm font-medium shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 inline-flex items-center gap-2">
+                <div className="text-center mb-8">
+                  <button className="bg-gradient-to-r from-amber-500 to-orange-500 text-white px-12 py-4 rounded-xl text-lg font-bold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 inline-flex items-center gap-3">
                     <span>Öffnungszeiten ansehen</span>
-                    <ArrowRight className="w-4 h-4" />
+                    <ArrowRight className="w-5 h-5" />
                   </button>
                 </div>
 
                 {/* Contact Info */}
-                <div className="flex flex-col sm:flex-row justify-center gap-4 text-xs text-amber-700">
-                  <div className="flex items-center gap-1 justify-center">
-                    <Phone className="w-3 h-3" />
-                    <span>0621 / 123456</span>
+                <div className="flex justify-center gap-8 text-amber-700">
+                  <div className="flex items-center gap-2">
+                    <Phone className="w-5 h-5" />
+                    <span className="font-medium">0621 / 123456</span>
                   </div>
-                  <div className="flex items-center gap-1 justify-center">
-                    <Mail className="w-3 h-3" />
-                    <span>info@baeckerei-rutz.de</span>
+                  <div className="flex items-center gap-2">
+                    <Mail className="w-5 h-5" />
+                    <span className="font-medium">info@baeckerei-rutz.de</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="space-y-2 text-sm text-muted-foreground">
-            <div className="flex items-center gap-2">
-              <Check className="w-4 h-4 text-accent" />
-              Elegantes, warmes Farbschema
+          {/* Slider Handle */}
+          <div 
+            className={`absolute top-0 bottom-0 w-1 bg-gradient-to-b from-accent to-primary cursor-col-resize z-10 ${showAnimation ? 'animate-pulse' : ''}`}
+            style={{ left: `${sliderPosition}%`, transform: 'translateX(-50%)' }}
+            onMouseDown={handleMouseDown}
+            onTouchStart={handleMouseDown}
+          >
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-lg border-4 border-accent flex items-center justify-center">
+              <div className="w-6 h-6 bg-gradient-to-r from-accent to-primary rounded-full flex items-center justify-center">
+                <ArrowRight className="w-3 h-3 text-white transform rotate-90" />
+              </div>
             </div>
+          </div>
+
+          {/* Labels */}
+          <div className="absolute top-4 left-4 bg-destructive/90 text-destructive-foreground px-4 py-2 rounded-lg font-bold shadow-lg">
             <div className="flex items-center gap-2">
-              <Check className="w-4 h-4 text-accent" />
-              Vollständig responsive Design
+              <X className="w-5 h-5" />
+              VORHER (2010)
             </div>
+          </div>
+          <div className="absolute top-4 right-4 bg-accent/90 text-accent-foreground px-4 py-2 rounded-lg font-bold shadow-lg">
             <div className="flex items-center gap-2">
-              <Check className="w-4 h-4 text-accent" />
-              Klare Struktur & intuitive Navigation
+              <Check className="w-5 h-5" />
+              NACHHER (2024)
             </div>
-            <div className="flex items-center gap-2">
-              <Check className="w-4 h-4 text-accent" />
-              Moderne Technologien & beste Performance
+          </div>
+        </div>
+
+        {/* Feature Comparison */}
+        <div className="grid md:grid-cols-2 gap-8 mt-12 max-w-4xl mx-auto">
+          <div className="space-y-4 p-6 bg-destructive/5 rounded-xl border border-destructive/20">
+            <h4 className="text-xl font-bold text-destructive flex items-center gap-2">
+              <X className="w-6 h-6" />
+              Probleme der alten Website
+            </h4>
+            <div className="space-y-3 text-muted-foreground">
+              <div className="flex items-center gap-3">
+                <X className="w-4 h-4 text-destructive flex-shrink-0" />
+                <span>Überladenes Design mit grellen Farben</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <X className="w-4 h-4 text-destructive flex-shrink-0" />
+                <span>Keine mobile Optimierung</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <X className="w-4 h-4 text-destructive flex-shrink-0" />
+                <span>Unübersichtliche Struktur</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <X className="w-4 h-4 text-destructive flex-shrink-0" />
+                <span>Veraltete Technik & schlechte Performance</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-4 p-6 bg-accent/5 rounded-xl border border-accent/20">
+            <h4 className="text-xl font-bold text-accent flex items-center gap-2">
+              <Check className="w-6 h-6" />
+              Vorteile der neuen Website
+            </h4>
+            <div className="space-y-3 text-muted-foreground">
+              <div className="flex items-center gap-3">
+                <Check className="w-4 h-4 text-accent flex-shrink-0" />
+                <span>Elegantes, warmes Farbschema</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <Check className="w-4 h-4 text-accent flex-shrink-0" />
+                <span>Vollständig responsive Design</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <Check className="w-4 h-4 text-accent flex-shrink-0" />
+                <span>Klare Struktur & intuitive Navigation</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <Check className="w-4 h-4 text-accent flex-shrink-0" />
+                <span>Moderne Technologien & beste Performance</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="text-center mt-12">
-        <div className="flex items-center justify-center gap-4 mb-6">
-          <div className="h-px bg-border flex-1 max-w-32"></div>
-          <div className="bg-gradient-primary p-3 rounded-full">
-            <ArrowRight className="w-6 h-6 text-white" />
-          </div>
-          <div className="h-px bg-border flex-1 max-w-32"></div>
+      {/* Call to Action */}
+      <div className="text-center bg-gradient-to-r from-accent/10 to-primary/10 p-12 rounded-2xl border border-accent/20">
+        <div className="max-w-3xl mx-auto">
+          <h3 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">
+            Bereit für Ihre Website-Transformation?
+          </h3>
+          <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
+            Lassen Sie uns gemeinsam Ihre veraltete Website in eine moderne, 
+            professionelle Online-Präsenz verwandeln, die Ihre Kunden begeistert.
+          </p>
+          <button className="bg-gradient-to-r from-accent to-primary text-white px-8 py-4 rounded-xl text-lg font-bold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 inline-flex items-center gap-3">
+            <Sparkles className="w-5 h-5" />
+            <span>Kostenloses Beratungsgespräch</span>
+            <ArrowRight className="w-5 h-5" />
+          </button>
         </div>
-        <h3 className="text-xl font-bold mb-2">Von alt zu modern</h3>
-        <p className="text-muted-foreground max-w-md mx-auto">
-          So verwandeln wir veraltete Websites in moderne, professionelle
-          Online-Präsenzen, die Ihre Kunden begeistern und Ihr Geschäft
-          voranbringen.
-        </p>
       </div>
     </div>
   );
