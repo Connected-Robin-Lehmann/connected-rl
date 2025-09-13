@@ -7,28 +7,24 @@ const BeforeAfterComparison = () => {
   const [showAnimation, setShowAnimation] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
   const afterRef = useRef<HTMLDivElement>(null);
-  const animationRef = useRef<number>();
+  const sliderRef = useRef<HTMLDivElement>(null);
 
   const updateSliderPosition = useCallback((clientX: number) => {
-    if (!containerRef.current || !afterRef.current) return;
+    if (!containerRef.current || !afterRef.current || !sliderRef.current) return;
 
     const rect = containerRef.current.getBoundingClientRect();
     const x = clientX - rect.left;
     const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
     
-    // Update DOM directly for immediate visual feedback
+    // Update DOM directly with no delays
     afterRef.current.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
+    sliderRef.current.style.left = `${percentage}%`;
     
-    // Cancel previous animation frame
-    if (animationRef.current) {
-      cancelAnimationFrame(animationRef.current);
-    }
-    
-    // Update state on next frame to avoid blocking
-    animationRef.current = requestAnimationFrame(() => {
+    // Only update state when not dragging for final position
+    if (!isDragging) {
       setSliderPosition(percentage);
-    });
-  }, []);
+    }
+  }, [isDragging]);
 
   const handleMouseDown = useCallback(() => {
     setIsDragging(true);
@@ -37,6 +33,12 @@ const BeforeAfterComparison = () => {
 
   const handleMouseUp = useCallback(() => {
     setIsDragging(false);
+    // Update final state position when dragging stops
+    if (containerRef.current && sliderRef.current) {
+      const left = sliderRef.current.style.left;
+      const percentage = parseFloat(left.replace('%', ''));
+      setSliderPosition(percentage);
+    }
   }, []);
 
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
@@ -257,6 +259,7 @@ const BeforeAfterComparison = () => {
 
           {/* Slider Handle */}
           <div 
+            ref={sliderRef}
             className={`absolute top-0 bottom-0 w-1 bg-gradient-to-b from-accent to-primary cursor-col-resize z-10 ${showAnimation ? 'animate-pulse' : ''}`}
             style={{ left: `${sliderPosition}%`, transform: 'translateX(-50%)' }}
             onMouseDown={handleMouseDown}
