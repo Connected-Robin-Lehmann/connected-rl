@@ -271,20 +271,6 @@ const BeforeAfterComparison = () => {
               </div>
             </div>
           </div>
-
-          {/* Labels */}
-          <div className="absolute top-4 left-4 bg-destructive/90 text-destructive-foreground px-4 py-2 rounded-lg font-bold shadow-lg">
-            <div className="flex items-center gap-2">
-              <X className="w-5 h-5" />
-              VORHER (2010)
-            </div>
-          </div>
-          <div className="absolute top-4 right-4 bg-accent/90 text-accent-foreground px-4 py-2 rounded-lg font-bold shadow-lg">
-            <div className="flex items-center gap-2">
-              <Check className="w-5 h-5" />
-              NACHHER (2024)
-            </div>
-          </div>
         </div>
 
         {/* Feature Comparison */}
