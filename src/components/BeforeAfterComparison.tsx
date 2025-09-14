@@ -8,6 +8,8 @@ const BeforeAfterComparison = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const afterRef = useRef<HTMLDivElement>(null);
   const sliderRef = useRef<HTMLDivElement>(null);
+  const beforeScrollRef = useRef<HTMLDivElement>(null);
+  const afterScrollRef = useRef<HTMLDivElement>(null);
 
   const updateSliderPosition = useCallback((clientX: number) => {
     if (!containerRef.current || !afterRef.current || !sliderRef.current) return;
@@ -51,6 +53,22 @@ const BeforeAfterComparison = () => {
     updateSliderPosition(e.touches[0].clientX);
   }, [isDragging, updateSliderPosition]);
 
+  const syncScroll = useCallback((source: HTMLDivElement, target: HTMLDivElement) => {
+    target.scrollTop = source.scrollTop;
+  }, []);
+
+  const handleBeforeScroll = useCallback(() => {
+    if (beforeScrollRef.current && afterScrollRef.current) {
+      syncScroll(beforeScrollRef.current, afterScrollRef.current);
+    }
+  }, [syncScroll]);
+
+  const handleAfterScroll = useCallback(() => {
+    if (afterScrollRef.current && beforeScrollRef.current) {
+      syncScroll(afterScrollRef.current, beforeScrollRef.current);
+    }
+  }, [syncScroll]);
+
   return (
     <div className="mb-20">
       {/* Attention-grabbing header */}
@@ -75,7 +93,7 @@ const BeforeAfterComparison = () => {
       </div>
 
       {/* Interactive Before/After Slider */}
-      <div className="max-w-7xl mx-auto mb-16">
+      <div className="max-w-[95vw] mx-auto mb-16">
         <div 
           ref={containerRef}
           className="relative h-[600px] md:h-[700px] rounded-2xl overflow-hidden shadow-2xl cursor-col-resize select-none border-4 border-accent/20"
@@ -86,68 +104,105 @@ const BeforeAfterComparison = () => {
           onTouchEnd={handleMouseUp}
         >
           {/* Before (Old Website) - Full Width Background */}
-          <div className="absolute inset-0 bg-yellow-100">
+          <div 
+            ref={beforeScrollRef}
+            className="absolute inset-0 bg-slate-100 overflow-y-auto"
+            onScroll={handleBeforeScroll}
+          >
             {/* Browser Header - Bad */}
-            <div className="bg-gray-300 p-3 flex items-center gap-2 border-b">
+            <div className="bg-gray-400 p-3 flex items-center gap-2 border-b border-gray-500 sticky top-0 z-10">
               <div className="w-4 h-4 bg-red-500 rounded-full"></div>
               <div className="w-4 h-4 bg-yellow-500 rounded-full"></div>
               <div className="w-4 h-4 bg-green-500 rounded-full"></div>
-              <div className="ml-6 text-sm text-gray-600 font-mono">
-                altebäckerei-rutz.de
+              <div className="ml-6 text-sm text-gray-700 font-mono">
+                müller-law-office.com
               </div>
             </div>
 
-            {/* Bad Design Content */}
-            <div className="p-6 h-full bg-gradient-to-br from-yellow-100 to-orange-200">
-              <div className="bg-orange-600 text-white p-6 text-center mb-6 transform rotate-1 shadow-lg">
-                <h3 className="text-3xl font-bold text-yellow-200 drop-shadow-lg mb-2">
-                  RUTZ BÄCKEREI
-                </h3>
-                <div className="flex justify-center gap-4 text-lg text-yellow-100">
-                  <span className="border-2 border-yellow-200 px-3 py-1 transform -rotate-1">HOME</span>
-                  <span className="border-2 border-yellow-200 px-3 py-1 transform rotate-1">PRODUKTE</span>
-                  <span className="border-2 border-yellow-200 px-3 py-1 transform -rotate-1">KONTAKT</span>
+            {/* Old Website Content */}
+            <div className="min-h-[1200px] bg-gradient-to-b from-slate-100 to-gray-200">
+              {/* Header */}
+              <div className="bg-blue-800 text-white p-8 text-center border-b-4 border-yellow-400">
+                <h1 className="text-4xl font-bold text-yellow-300 mb-4">
+                  RECHTSANWALTSKANZLEI DR. MÜLLER
+                </h1>
+                <div className="flex justify-center gap-8 text-lg">
+                  <span className="border-2 border-white px-4 py-2">HOME</span>
+                  <span className="border-2 border-white px-4 py-2">ÜBER UNS</span>
+                  <span className="border-2 border-white px-4 py-2">LEISTUNGEN</span>
+                  <span className="border-2 border-white px-4 py-2">KONTAKT</span>
                 </div>
               </div>
 
-              <div className="bg-red-500 text-white p-4 text-center mb-6 border-4 border-black transform -rotate-1 shadow-xl">
-                <p className="text-xl font-bold animate-pulse">
-                  *** FRISCHE BRÖTCHEN TÄGLICH *** SONDERANGEBOT ***
-                </p>
-              </div>
+              {/* Main Content */}
+              <div className="p-8">
+                {/* Welcome Banner */}
+                <div className="bg-red-600 text-white p-6 text-center mb-8 border-4 border-black shadow-lg">
+                  <h2 className="text-3xl font-bold animate-pulse">
+                    *** WILLKOMMEN BEI IHREM ANWALT *** SEIT 1995 ***
+                  </h2>
+                </div>
 
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="space-y-4">
-                  <h4 className="text-2xl font-bold text-red-700 underline">
-                    WILLKOMMEN IN UNSERER BÄCKEREI!
-                  </h4>
-                  <p className="text-lg leading-relaxed">
-                    Seit 1985 backen wir für Sie die besten Brötchen der Stadt. 
-                    Besuchen Sie uns und überzeugen Sie sich selbst!
+                {/* Main Text */}
+                <div className="bg-white border-4 border-blue-800 p-8 mb-8">
+                  <h3 className="text-2xl font-bold text-red-700 underline mb-4">
+                    IHRE RECHTE SIND UNSER AUFTRAG!
+                  </h3>
+                  <p className="text-lg mb-4 leading-tight">
+                    Seit über 25 Jahren vertreten wir erfolgreich die Interessen unserer Mandanten in allen Rechtsbereichen. 
+                    Vertrauen Sie auf unsere Erfahrung und Kompetenz!
                   </p>
+                  <p className="text-lg mb-4">
+                    Wir sind spezialisiert auf Familienrecht, Arbeitsrecht, Strafrecht, Zivilrecht und vieles mehr.
+                    Kontaktieren Sie uns noch heute für eine kostenlose Erstberatung!
+                  </p>
+                </div>
+
+                {/* Services */}
+                <div className="grid md:grid-cols-2 gap-6 mb-8">
+                  <div className="bg-yellow-200 border-4 border-red-500 p-6">
+                    <h4 className="text-xl font-bold text-blue-800 mb-3">Familienrecht</h4>
+                    <p className="text-lg">Scheidung, Sorgerecht, Unterhalt - wir helfen Ihnen!</p>
+                    <div className="mt-4 bg-green-400 p-2 text-center font-bold">
+                      KOSTENLOSE BERATUNG!
+                    </div>
+                  </div>
+                  <div className="bg-cyan-200 border-4 border-purple-500 p-6">
+                    <h4 className="text-xl font-bold text-red-800 mb-3">Arbeitsrecht</h4>
+                    <p className="text-lg">Kündigung, Abfindung, Arbeitsverträge</p>
+                    <div className="mt-4 bg-orange-400 p-2 text-center font-bold">
+                      24/7 ERREICHBAR!
+                    </div>
+                  </div>
+                </div>
+
+                {/* Contact */}
+                <div className="bg-gradient-to-r from-green-400 to-blue-500 text-white p-8 text-center border-4 border-black">
+                  <h3 className="text-3xl font-bold mb-4">RUFEN SIE JETZT AN!</h3>
+                  <p className="text-2xl font-bold">Tel: 0621 / 987654</p>
+                  <p className="text-xl mt-2">Email: info@mueller-law.de</p>
+                </div>
+
+                {/* More Content for Scrolling */}
+                <div className="mt-8 space-y-6">
+                  <div className="bg-pink-200 border-4 border-green-600 p-6">
+                    <h4 className="text-2xl font-bold text-purple-800">Unsere Erfolge:</h4>
+                    <ul className="list-disc list-inside text-lg mt-4 space-y-2">
+                      <li>Über 1000 erfolgreiche Fälle</li>
+                      <li>25 Jahre Erfahrung</li>
+                      <li>Spezialisiert auf schwierige Fälle</li>
+                      <li>Faire Preise - Transparente Abrechnung</li>
+                    </ul>
+                  </div>
                   
-                  <div className="bg-lime-300 border-4 border-red-500 p-4 transform rotate-1 shadow-lg">
-                    <p className="text-lg font-bold text-red-800 text-center">
-                      SONDERANGEBOT! 10% RABATT! NUR HEUTE!
-                    </p>
+                  <div className="bg-orange-300 border-4 border-blue-600 p-6">
+                    <h4 className="text-2xl font-bold text-red-800">Öffnungszeiten:</h4>
+                    <div className="text-lg mt-4">
+                      <p>Mo-Fr: 8:00 - 18:00 Uhr</p>
+                      <p>Sa: 9:00 - 14:00 Uhr</p>
+                      <p>Termine auch außerhalb der Öffnungszeiten möglich!</p>
+                    </div>
                   </div>
-                </div>
-
-                <div className="space-y-4">
-                  <div className="bg-pink-200 p-4 border-4 border-purple-500 transform -rotate-1">
-                    <h5 className="text-xl font-bold text-blue-700">Brötchen</h5>
-                    <p className="text-lg text-purple-800">Ab 0,35€</p>
-                  </div>
-                  <div className="bg-cyan-200 p-4 border-4 border-green-500 transform rotate-1">
-                    <h5 className="text-xl font-bold text-orange-700">Kuchen</h5>
-                    <p className="text-lg text-red-800">Hausgemacht!</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="text-center mt-8">
-                <div className="bg-gradient-to-r from-red-500 to-yellow-500 text-white p-4 text-xl font-bold border-4 border-black transform rotate-1 shadow-xl">
-                  BESUCHEN SIE UNS JETZT!
                 </div>
               </div>
             </div>
@@ -159,100 +214,219 @@ const BeforeAfterComparison = () => {
             className={`absolute inset-0 bg-white ${isDragging ? '' : 'transition-all duration-300'}`}
             style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
           >
-            {/* Browser Header - Good */}
-            <div className="bg-slate-50 p-3 flex items-center gap-2 border-b border-slate-200">
-              <div className="w-4 h-4 bg-red-500 rounded-full"></div>
-              <div className="w-4 h-4 bg-yellow-500 rounded-full"></div>
-              <div className="w-4 h-4 bg-green-500 rounded-full"></div>
-              <div className="ml-6 text-sm text-slate-600 font-mono">
-                baeckerei-rutz.de
-              </div>
-            </div>
-
-            {/* Modern Design Content */}
-            <div className="h-full bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50">
-              {/* Modern Header */}
-              <div className="bg-white/80 backdrop-blur-sm border-b border-amber-200/50 p-6">
-                <div className="max-w-6xl mx-auto flex justify-between items-center">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-amber-500 to-orange-500 rounded-xl flex items-center justify-center shadow-lg">
-                      <Globe className="w-6 h-6 text-white" />
-                    </div>
-                    <h3 className="text-3xl font-bold text-amber-900">Rutz</h3>
-                  </div>
-                  <nav className="hidden md:flex gap-8 text-amber-700">
-                    <span className="hover:text-amber-900 transition-colors cursor-pointer font-medium">Start</span>
-                    <span className="hover:text-amber-900 transition-colors cursor-pointer font-medium">Produkte</span>
-                    <span className="hover:text-amber-900 transition-colors cursor-pointer font-medium">Kontakt</span>
-                  </nav>
+            <div 
+              ref={afterScrollRef}
+              className="h-full overflow-y-auto"
+              onScroll={handleAfterScroll}
+            >
+              {/* Browser Header - Good */}
+              <div className="bg-white p-3 flex items-center gap-2 border-b border-slate-200 sticky top-0 z-10">
+                <div className="w-4 h-4 bg-red-500 rounded-full"></div>
+                <div className="w-4 h-4 bg-yellow-500 rounded-full"></div>
+                <div className="w-4 h-4 bg-green-500 rounded-full"></div>
+                <div className="ml-6 text-sm text-slate-600 font-mono">
+                  mueller-rechtsanwaelte.de
                 </div>
               </div>
 
-              {/* Hero Section */}
-              <div className="max-w-6xl mx-auto p-8">
-                <div className="text-center mb-12">
-                  <h4 className="text-5xl font-bold mb-6 text-amber-900 leading-tight">
-                    Traditionsbäckerei seit 1985
-                  </h4>
-                  <p className="text-xl text-amber-700 max-w-2xl mx-auto leading-relaxed">
-                    Handwerklich gebackene Spezialitäten aus besten regionalen Zutaten - 
-                    jeden Tag frisch für Sie zubereitet
-                  </p>
-                </div>
-
-                {/* Trust Badge */}
-                <div className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-xl mb-12 max-w-md mx-auto border border-amber-200/50">
-                  <div className="flex items-center justify-center gap-2 mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-6 h-6 text-amber-500 fill-amber-500" />
-                    ))}
-                  </div>
-                  <p className="text-center text-amber-700 font-medium">
-                    Täglich frisch • Familientradition • Regional
-                  </p>
-                </div>
-
-                {/* Products Grid */}
-                <div className="grid md:grid-cols-2 gap-8 mb-12 max-w-2xl mx-auto">
-                  <div className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-amber-200/30 group">
-                    <div className="text-center">
-                      <div className="w-16 h-16 bg-gradient-to-br from-amber-500 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                        <span className="text-white text-2xl">🥖</span>
+              {/* Modern Law Firm Website */}
+              <div className="min-h-[1200px] bg-gradient-to-br from-slate-50 to-gray-50">
+                {/* Modern Header */}
+                <header className="bg-white/95 backdrop-blur-sm border-b border-slate-200/50 p-6 sticky top-[52px] z-20">
+                  <div className="max-w-6xl mx-auto flex justify-between items-center">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 bg-gradient-to-br from-slate-800 to-slate-600 rounded-lg flex items-center justify-center">
+                        <span className="text-white font-bold text-xl">M</span>
                       </div>
-                      <h5 className="text-xl font-bold text-amber-900 mb-2">Brötchen</h5>
-                      <p className="text-amber-700">ab 0,35€</p>
+                      <div>
+                        <h1 className="text-2xl font-bold text-slate-900">Müller & Partner</h1>
+                        <p className="text-sm text-slate-600">Rechtsanwälte</p>
+                      </div>
+                    </div>
+                    <nav className="hidden md:flex gap-8 text-slate-700">
+                      <a className="hover:text-slate-900 transition-colors cursor-pointer font-medium">Home</a>
+                      <a className="hover:text-slate-900 transition-colors cursor-pointer font-medium">Leistungen</a>
+                      <a className="hover:text-slate-900 transition-colors cursor-pointer font-medium">Team</a>
+                      <a className="hover:text-slate-900 transition-colors cursor-pointer font-medium">Kontakt</a>
+                    </nav>
+                  </div>
+                </header>
+
+                {/* Hero Section */}
+                <section className="max-w-6xl mx-auto px-6 py-16">
+                  <div className="text-center mb-12">
+                    <h2 className="text-5xl font-bold mb-6 text-slate-900 leading-tight">
+                      Kompetente Rechtsberatung<br />
+                      <span className="text-slate-600">mit persönlicher Betreuung</span>
+                    </h2>
+                    <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+                      Seit über 25 Jahren stehen wir unseren Mandanten mit Expertise und 
+                      Engagement zur Seite. Vertrauen Sie auf unsere Erfahrung.
+                    </p>
+                  </div>
+
+                  {/* Trust Indicators */}
+                  <div className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg mb-16 max-w-2xl mx-auto border border-slate-200/50">
+                    <div className="flex items-center justify-center gap-8 text-center">
+                      <div>
+                        <div className="text-3xl font-bold text-slate-900">25+</div>
+                        <div className="text-sm text-slate-600">Jahre Erfahrung</div>
+                      </div>
+                      <div className="w-px h-12 bg-slate-300"></div>
+                      <div>
+                        <div className="text-3xl font-bold text-slate-900">1000+</div>
+                        <div className="text-sm text-slate-600">Mandanten betreut</div>
+                      </div>
+                      <div className="w-px h-12 bg-slate-300"></div>
+                      <div>
+                        <div className="text-3xl font-bold text-slate-900">95%</div>
+                        <div className="text-sm text-slate-600">Erfolgsquote</div>
+                      </div>
                     </div>
                   </div>
-                  <div className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-amber-200/30 group">
-                    <div className="text-center">
-                      <div className="w-16 h-16 bg-gradient-to-br from-amber-500 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                        <span className="text-white text-2xl">🥧</span>
+
+                  {/* Services */}
+                  <div className="grid md:grid-cols-2 gap-8 mb-16">
+                    <div className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-200/30 group">
+                      <div className="mb-6">
+                        <div className="w-16 h-16 bg-gradient-to-br from-slate-800 to-slate-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                          <span className="text-white text-2xl">⚖️</span>
+                        </div>
+                        <h3 className="text-2xl font-bold text-slate-900 mb-3">Familienrecht</h3>
+                        <p className="text-slate-600 leading-relaxed mb-4">
+                          Einfühlsame Beratung bei Scheidung, Sorgerecht und Unterhaltsfragen. 
+                          Wir finden gemeinsam die beste Lösung für Ihre Familie.
+                        </p>
+                        <ul className="space-y-2 text-slate-700">
+                          <li className="flex items-center gap-2">
+                            <div className="w-1.5 h-1.5 bg-slate-400 rounded-full"></div>
+                            <span>Scheidungsverfahren</span>
+                          </li>
+                          <li className="flex items-center gap-2">
+                            <div className="w-1.5 h-1.5 bg-slate-400 rounded-full"></div>
+                            <span>Sorgerecht & Umgang</span>
+                          </li>
+                          <li className="flex items-center gap-2">
+                            <div className="w-1.5 h-1.5 bg-slate-400 rounded-full"></div>
+                            <span>Unterhalt & Versorgungsausgleich</span>
+                          </li>
+                        </ul>
                       </div>
-                      <h5 className="text-xl font-bold text-amber-900 mb-2">Kuchen</h5>
-                      <p className="text-amber-700">hausgemacht</p>
+                    </div>
+
+                    <div className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-200/30 group">
+                      <div className="mb-6">
+                        <div className="w-16 h-16 bg-gradient-to-br from-slate-800 to-slate-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                          <span className="text-white text-2xl">🏢</span>
+                        </div>
+                        <h3 className="text-2xl font-bold text-slate-900 mb-3">Arbeitsrecht</h3>
+                        <p className="text-slate-600 leading-relaxed mb-4">
+                          Professionelle Unterstützung bei allen arbeitsrechtlichen Fragen. 
+                          Wir setzen Ihre Rechte erfolgreich durch.
+                        </p>
+                        <ul className="space-y-2 text-slate-700">
+                          <li className="flex items-center gap-2">
+                            <div className="w-1.5 h-1.5 bg-slate-400 rounded-full"></div>
+                            <span>Kündigungsschutz</span>
+                          </li>
+                          <li className="flex items-center gap-2">
+                            <div className="w-1.5 h-1.5 bg-slate-400 rounded-full"></div>
+                            <span>Abfindungsverhandlungen</span>
+                          </li>
+                          <li className="flex items-center gap-2">
+                            <div className="w-1.5 h-1.5 bg-slate-400 rounded-full"></div>
+                            <span>Arbeitsverträge</span>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                {/* CTA Button */}
-                <div className="text-center mb-8">
-                  <button className="bg-gradient-to-r from-amber-500 to-orange-500 text-white px-12 py-4 rounded-xl text-lg font-bold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 inline-flex items-center gap-3">
-                    <span>Öffnungszeiten ansehen</span>
-                    <ArrowRight className="w-5 h-5" />
-                  </button>
-                </div>
+                  {/* Contact Section */}
+                  <div className="bg-slate-900 text-white p-12 rounded-2xl text-center">
+                    <h3 className="text-3xl font-bold mb-6">Vereinbaren Sie einen Termin</h3>
+                    <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
+                      Gerne besprechen wir Ihr Anliegen in einem persönlichen Gespräch. 
+                      Die Erstberatung ist für Sie kostenfrei.
+                    </p>
+                    <div className="flex flex-col md:flex-row items-center justify-center gap-8 mb-8">
+                      <div className="flex items-center gap-3">
+                        <Phone className="w-6 h-6 text-slate-400" />
+                        <div>
+                          <div className="font-semibold">Telefon</div>
+                          <div className="text-slate-300">0621 / 987654</div>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <Mail className="w-6 h-6 text-slate-400" />
+                        <div>
+                          <div className="font-semibold">E-Mail</div>
+                          <div className="text-slate-300">info@mueller-rechtsanwaelte.de</div>
+                        </div>
+                      </div>
+                    </div>
+                    <button className="bg-white text-slate-900 px-8 py-4 rounded-xl font-semibold hover:bg-slate-100 transition-colors inline-flex items-center gap-3">
+                      <span>Beratungstermin vereinbaren</span>
+                      <ArrowRight className="w-5 h-5" />
+                    </button>
+                  </div>
 
-                {/* Contact Info */}
-                <div className="flex justify-center gap-8 text-amber-700">
-                  <div className="flex items-center gap-2">
-                    <Phone className="w-5 h-5" />
-                    <span className="font-medium">0621 / 123456</span>
+                  {/* Additional Content for Scrolling */}
+                  <div className="mt-16 space-y-12">
+                    <div className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-slate-200/30">
+                      <h4 className="text-2xl font-bold text-slate-900 mb-6">Öffnungszeiten</h4>
+                      <div className="grid md:grid-cols-2 gap-8">
+                        <div>
+                          <h5 className="font-semibold text-slate-900 mb-3">Kanzlei</h5>
+                          <div className="space-y-2 text-slate-600">
+                            <div className="flex justify-between">
+                              <span>Montag - Donnerstag</span>
+                              <span>8:00 - 17:00 Uhr</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span>Freitag</span>
+                              <span>8:00 - 15:00 Uhr</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div>
+                          <h5 className="font-semibold text-slate-900 mb-3">Termine</h5>
+                          <p className="text-slate-600">
+                            Termine auch außerhalb der Geschäftszeiten 
+                            nach Vereinbarung möglich.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-slate-200/30">
+                      <h4 className="text-2xl font-bold text-slate-900 mb-6">Warum Müller & Partner?</h4>
+                      <div className="grid md:grid-cols-3 gap-6">
+                        <div className="text-center">
+                          <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                            <Check className="w-6 h-6 text-slate-600" />
+                          </div>
+                          <h5 className="font-semibold text-slate-900 mb-2">Erfahrung</h5>
+                          <p className="text-slate-600 text-sm">Über 25 Jahre Praxis in verschiedenen Rechtsgebieten</p>
+                        </div>
+                        <div className="text-center">
+                          <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                            <Star className="w-6 h-6 text-slate-600" />
+                          </div>
+                          <h5 className="font-semibold text-slate-900 mb-2">Qualität</h5>
+                          <p className="text-slate-600 text-sm">Höchste Standards in Beratung und Vertretung</p>
+                        </div>
+                        <div className="text-center">
+                          <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                            <Phone className="w-6 h-6 text-slate-600" />
+                          </div>
+                          <h5 className="font-semibold text-slate-900 mb-2">Erreichbarkeit</h5>
+                          <p className="text-slate-600 text-sm">Persönlicher Ansprechpartner für alle Fragen</p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Mail className="w-5 h-5" />
-                    <span className="font-medium">info@baeckerei-rutz.de</span>
-                  </div>
-                </div>
+                </section>
               </div>
             </div>
           </div>
