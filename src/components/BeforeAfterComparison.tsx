@@ -1,10 +1,13 @@
 import { useState, useRef, useCallback } from "react";
-import { X, Check, ArrowRight, Globe, Star, Phone, Mail, MousePointer2, Sparkles } from "lucide-react";
+import { X, Check, ArrowRight, Globe, Star, Phone, Mail, MousePointer2, Sparkles, Calendar, Shield, Award, MapPin, Clock } from "lucide-react";
+
+type ViewMode = 'vorher' | 'vergleich' | 'nachher';
 
 const BeforeAfterComparison = () => {
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
   const [showAnimation, setShowAnimation] = useState(true);
+  const [viewMode, setViewMode] = useState<ViewMode>('vergleich');
   const containerRef = useRef<HTMLDivElement>(null);
   const afterRef = useRef<HTMLDivElement>(null);
   const sliderRef = useRef<HTMLDivElement>(null);
@@ -85,122 +88,165 @@ const BeforeAfterComparison = () => {
           Erleben Sie die dramatische Transformation Ihrer Website interaktiv
         </p>
         
-        {/* Interactive instruction */}
-        <div className="flex items-center justify-center gap-3 text-sm text-accent animate-bounce">
-          <MousePointer2 className="w-4 h-4" />
-          <span>Ziehen Sie den Slider um den Unterschied zu sehen</span>
+        {/* View Mode Controls */}
+        <div className="flex items-center justify-center gap-4 bg-muted/50 p-2 rounded-full max-w-md mx-auto">
+          <button
+            onClick={() => setViewMode('vorher')}
+            className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
+              viewMode === 'vorher' 
+                ? 'bg-primary text-primary-foreground shadow-lg' 
+                : 'text-muted-foreground hover:text-foreground'
+            }`}
+          >
+            Vorher
+          </button>
+          <button
+            onClick={() => setViewMode('vergleich')}
+            className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
+              viewMode === 'vergleich' 
+                ? 'bg-primary text-primary-foreground shadow-lg' 
+                : 'text-muted-foreground hover:text-foreground'
+            }`}
+          >
+            Vergleich
+          </button>
+          <button
+            onClick={() => setViewMode('nachher')}
+            className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
+              viewMode === 'nachher' 
+                ? 'bg-primary text-primary-foreground shadow-lg' 
+                : 'text-muted-foreground hover:text-foreground'
+            }`}
+          >
+            Nachher
+          </button>
         </div>
+        
+        {/* Interactive instruction */}
+        {viewMode === 'vergleich' && (
+          <div className="flex items-center justify-center gap-3 text-sm text-accent animate-bounce">
+            <MousePointer2 className="w-4 h-4" />
+            <span>Ziehen Sie den Slider um den Unterschied zu sehen</span>
+          </div>
+        )}
       </div>
 
-      {/* Interactive Before/After Slider */}
+      {/* Interactive Before/After Display */}
       <div className="max-w-[95vw] mx-auto mb-16">
         <div 
           ref={containerRef}
-          className="relative h-[600px] md:h-[700px] rounded-2xl overflow-hidden shadow-2xl cursor-col-resize select-none border-4 border-accent/20"
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseUp}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleMouseUp}
+          className={`relative h-[600px] md:h-[700px] rounded-2xl overflow-hidden shadow-2xl border-4 border-accent/20 ${
+            viewMode === 'vergleich' ? 'cursor-col-resize select-none' : ''
+          }`}
+          onMouseMove={viewMode === 'vergleich' ? handleMouseMove : undefined}
+          onMouseUp={viewMode === 'vergleich' ? handleMouseUp : undefined}
+          onMouseLeave={viewMode === 'vergleich' ? handleMouseUp : undefined}
+          onTouchMove={viewMode === 'vergleich' ? handleTouchMove : undefined}
+          onTouchEnd={viewMode === 'vergleich' ? handleMouseUp : undefined}
         >
-          {/* Before (Old Website) - Full Width Background */}
+          {/* Before (Old Website) - Show based on view mode */}
           <div 
             ref={beforeScrollRef}
-            className="absolute inset-0 bg-slate-100 overflow-y-auto"
+            className={`absolute inset-0 bg-slate-100 overflow-y-auto ${
+              viewMode === 'nachher' ? 'hidden' : ''
+            }`}
             onScroll={handleBeforeScroll}
           >
-            {/* Browser Header - Bad */}
-            <div className="bg-gray-400 p-3 flex items-center gap-2 border-b border-gray-500 sticky top-0 z-10">
+            {/* Browser Header - Old */}
+            <div className="bg-gray-300 p-3 flex items-center gap-2 border-b border-gray-400 sticky top-0 z-10">
               <div className="w-4 h-4 bg-red-500 rounded-full"></div>
               <div className="w-4 h-4 bg-yellow-500 rounded-full"></div>
               <div className="w-4 h-4 bg-green-500 rounded-full"></div>
-              <div className="ml-6 text-sm text-gray-700 font-mono">
-                müller-law-office.com
+              <div className="ml-6 text-sm text-gray-600 font-mono">
+                mueller-law-office.com
               </div>
             </div>
 
-            {/* Old Website Content */}
-            <div className="min-h-[1200px] bg-gradient-to-b from-slate-100 to-gray-200">
+            {/* Old Website Content - Less Dramatic */}
+            <div className="min-h-[1200px] bg-gradient-to-b from-gray-50 to-gray-100">
               {/* Header */}
-              <div className="bg-blue-800 text-white p-8 text-center border-b-4 border-yellow-400">
-                <h1 className="text-4xl font-bold text-yellow-300 mb-4">
-                  RECHTSANWALTSKANZLEI DR. MÜLLER
+              <div className="bg-blue-700 text-white p-6 text-center">
+                <h1 className="text-3xl font-bold mb-4">
+                  Rechtsanwaltskanzlei Dr. Müller
                 </h1>
-                <div className="flex justify-center gap-8 text-lg">
-                  <span className="border-2 border-white px-4 py-2">HOME</span>
-                  <span className="border-2 border-white px-4 py-2">ÜBER UNS</span>
-                  <span className="border-2 border-white px-4 py-2">LEISTUNGEN</span>
-                  <span className="border-2 border-white px-4 py-2">KONTAKT</span>
+                <div className="flex justify-center gap-6 text-base">
+                  <span className="border px-3 py-1">HOME</span>
+                  <span className="border px-3 py-1">ÜBER UNS</span>
+                  <span className="border px-3 py-1">LEISTUNGEN</span>
+                  <span className="border px-3 py-1">KONTAKT</span>
                 </div>
               </div>
 
               {/* Main Content */}
-              <div className="p-8">
-                {/* Welcome Banner */}
-                <div className="bg-red-600 text-white p-6 text-center mb-8 border-4 border-black shadow-lg">
-                  <h2 className="text-3xl font-bold animate-pulse">
-                    *** WILLKOMMEN BEI IHREM ANWALT *** SEIT 1995 ***
+              <div className="p-6">
+                {/* Welcome Section */}
+                <div className="bg-blue-100 border-l-4 border-blue-600 p-6 mb-6">
+                  <h2 className="text-2xl font-bold text-blue-800 mb-3">
+                    Willkommen bei Ihrer Rechtsanwaltskanzlei
                   </h2>
+                  <p className="text-gray-700">
+                    Seit 1995 stehen wir Ihnen mit umfassender Rechtsberatung zur Seite.
+                  </p>
                 </div>
 
                 {/* Main Text */}
-                <div className="bg-white border-4 border-blue-800 p-8 mb-8">
-                  <h3 className="text-2xl font-bold text-red-700 underline mb-4">
-                    IHRE RECHTE SIND UNSER AUFTRAG!
+                <div className="bg-white border border-gray-300 p-6 mb-6 shadow-sm">
+                  <h3 className="text-xl font-bold text-gray-800 mb-3">
+                    Ihre Rechte sind unser Auftrag
                   </h3>
-                  <p className="text-lg mb-4 leading-tight">
+                  <p className="text-gray-700 mb-3 leading-relaxed">
                     Seit über 25 Jahren vertreten wir erfolgreich die Interessen unserer Mandanten in allen Rechtsbereichen. 
                     Vertrauen Sie auf unsere Erfahrung und Kompetenz!
                   </p>
-                  <p className="text-lg mb-4">
+                  <p className="text-gray-700">
                     Wir sind spezialisiert auf Familienrecht, Arbeitsrecht, Strafrecht, Zivilrecht und vieles mehr.
-                    Kontaktieren Sie uns noch heute für eine kostenlose Erstberatung!
+                    Kontaktieren Sie uns für eine Erstberatung!
                   </p>
                 </div>
 
                 {/* Services */}
-                <div className="grid md:grid-cols-2 gap-6 mb-8">
-                  <div className="bg-yellow-200 border-4 border-red-500 p-6">
-                    <h4 className="text-xl font-bold text-blue-800 mb-3">Familienrecht</h4>
-                    <p className="text-lg">Scheidung, Sorgerecht, Unterhalt - wir helfen Ihnen!</p>
-                    <div className="mt-4 bg-green-400 p-2 text-center font-bold">
-                      KOSTENLOSE BERATUNG!
+                <div className="grid md:grid-cols-2 gap-4 mb-6">
+                  <div className="bg-yellow-50 border border-yellow-200 p-4">
+                    <h4 className="text-lg font-bold text-gray-800 mb-2">Familienrecht</h4>
+                    <p className="text-gray-700 text-sm">Scheidung, Sorgerecht, Unterhalt - wir helfen Ihnen!</p>
+                    <div className="mt-3 bg-yellow-200 p-2 text-center text-sm font-semibold">
+                      Kostenlose Erstberatung
                     </div>
                   </div>
-                  <div className="bg-cyan-200 border-4 border-purple-500 p-6">
-                    <h4 className="text-xl font-bold text-red-800 mb-3">Arbeitsrecht</h4>
-                    <p className="text-lg">Kündigung, Abfindung, Arbeitsverträge</p>
-                    <div className="mt-4 bg-orange-400 p-2 text-center font-bold">
-                      24/7 ERREICHBAR!
+                  <div className="bg-blue-50 border border-blue-200 p-4">
+                    <h4 className="text-lg font-bold text-gray-800 mb-2">Arbeitsrecht</h4>
+                    <p className="text-gray-700 text-sm">Kündigung, Abfindung, Arbeitsverträge</p>
+                    <div className="mt-3 bg-blue-200 p-2 text-center text-sm font-semibold">
+                      Schnelle Hilfe
                     </div>
                   </div>
                 </div>
 
                 {/* Contact */}
-                <div className="bg-gradient-to-r from-green-400 to-blue-500 text-white p-8 text-center border-4 border-black">
-                  <h3 className="text-3xl font-bold mb-4">RUFEN SIE JETZT AN!</h3>
-                  <p className="text-2xl font-bold">Tel: 0621 / 987654</p>
-                  <p className="text-xl mt-2">Email: info@mueller-law.de</p>
+                <div className="bg-gray-800 text-white p-6 text-center">
+                  <h3 className="text-2xl font-bold mb-3">Kontaktieren Sie uns</h3>
+                  <p className="text-lg">Tel: 0621 / 987654</p>
+                  <p className="mt-1">Email: info@mueller-law.de</p>
                 </div>
 
                 {/* More Content for Scrolling */}
-                <div className="mt-8 space-y-6">
-                  <div className="bg-pink-200 border-4 border-green-600 p-6">
-                    <h4 className="text-2xl font-bold text-purple-800">Unsere Erfolge:</h4>
-                    <ul className="list-disc list-inside text-lg mt-4 space-y-2">
+                <div className="mt-6 space-y-4">
+                  <div className="bg-white border border-gray-200 p-4">
+                    <h4 className="text-lg font-bold text-gray-800">Unsere Stärken:</h4>
+                    <ul className="list-disc list-inside text-gray-700 mt-2 space-y-1">
                       <li>Über 1000 erfolgreiche Fälle</li>
                       <li>25 Jahre Erfahrung</li>
-                      <li>Spezialisiert auf schwierige Fälle</li>
-                      <li>Faire Preise - Transparente Abrechnung</li>
+                      <li>Individuelle Betreuung</li>
+                      <li>Transparente Kostenstruktur</li>
                     </ul>
                   </div>
                   
-                  <div className="bg-orange-300 border-4 border-blue-600 p-6">
-                    <h4 className="text-2xl font-bold text-red-800">Öffnungszeiten:</h4>
-                    <div className="text-lg mt-4">
+                  <div className="bg-white border border-gray-200 p-4">
+                    <h4 className="text-lg font-bold text-gray-800">Öffnungszeiten:</h4>
+                    <div className="text-gray-700 mt-2">
                       <p>Mo-Fr: 8:00 - 18:00 Uhr</p>
                       <p>Sa: 9:00 - 14:00 Uhr</p>
-                      <p>Termine auch außerhalb der Öffnungszeiten möglich!</p>
+                      <p className="text-sm text-gray-600 mt-1">Termine nach Vereinbarung</p>
                     </div>
                   </div>
                 </div>
@@ -208,11 +254,15 @@ const BeforeAfterComparison = () => {
             </div>
           </div>
 
-          {/* After (Modern Website) - Clipped by slider */}
+          {/* After (Modern Website) - Show based on view mode */}
           <div 
             ref={afterRef}
-            className={`absolute inset-0 bg-white ${isDragging ? '' : 'transition-all duration-300'}`}
-            style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
+            className={`absolute inset-0 bg-white ${
+              viewMode === 'vergleich' && !isDragging ? 'transition-all duration-300' : ''
+            } ${viewMode === 'vorher' ? 'hidden' : ''}`}
+            style={{ 
+              clipPath: viewMode === 'vergleich' ? `inset(0 ${100 - sliderPosition}% 0 0)` : 'none'
+            }}
           >
             <div 
               ref={afterScrollRef}
@@ -342,6 +392,97 @@ const BeforeAfterComparison = () => {
                     </div>
                   </div>
 
+                  {/* Additional Services */}
+                  <div className="grid md:grid-cols-3 gap-6 mb-16">
+                    <div className="bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-slate-200/30">
+                      <div className="w-12 h-12 bg-gradient-to-br from-slate-800 to-slate-600 rounded-lg flex items-center justify-center mb-4">
+                        <Shield className="w-6 h-6 text-white" />
+                      </div>
+                      <h4 className="text-lg font-bold text-slate-900 mb-2">Strafrecht</h4>
+                      <p className="text-slate-600 text-sm">Professionelle Verteidigung in Strafverfahren</p>
+                    </div>
+                    <div className="bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-slate-200/30">
+                      <div className="w-12 h-12 bg-gradient-to-br from-slate-800 to-slate-600 rounded-lg flex items-center justify-center mb-4">
+                        <Award className="w-6 h-6 text-white" />
+                      </div>
+                      <h4 className="text-lg font-bold text-slate-900 mb-2">Zivilrecht</h4>
+                      <p className="text-slate-600 text-sm">Umfassende Beratung in zivilrechtlichen Angelegenheiten</p>
+                    </div>
+                    <div className="bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-slate-200/30">
+                      <div className="w-12 h-12 bg-gradient-to-br from-slate-800 to-slate-600 rounded-lg flex items-center justify-center mb-4">
+                        <Calendar className="w-6 h-6 text-white" />
+                      </div>
+                      <h4 className="text-lg font-bold text-slate-900 mb-2">Online Termine</h4>
+                      <p className="text-slate-600 text-sm">Bequeme Terminbuchung über unser Online-System</p>
+                    </div>
+                  </div>
+
+                  {/* Team Section */}
+                  <div className="bg-white/90 backdrop-blur-sm p-12 rounded-2xl shadow-lg border border-slate-200/30 mb-16">
+                    <h3 className="text-3xl font-bold text-slate-900 text-center mb-8">Unser Team</h3>
+                    <div className="grid md:grid-cols-2 gap-8">
+                      <div className="text-center">
+                        <div className="w-24 h-24 bg-gradient-to-br from-slate-800 to-slate-600 rounded-full mx-auto mb-4 flex items-center justify-center">
+                          <span className="text-white text-2xl font-bold">DM</span>
+                        </div>
+                        <h4 className="text-xl font-bold text-slate-900 mb-2">Dr. Michael Müller</h4>
+                        <p className="text-slate-600 mb-2">Fachanwalt für Familienrecht</p>
+                        <p className="text-slate-500 text-sm">25+ Jahre Erfahrung</p>
+                      </div>
+                      <div className="text-center">
+                        <div className="w-24 h-24 bg-gradient-to-br from-slate-800 to-slate-600 rounded-full mx-auto mb-4 flex items-center justify-center">
+                          <span className="text-white text-2xl font-bold">AS</span>
+                        </div>
+                        <h4 className="text-xl font-bold text-slate-900 mb-2">Anna Schmidt</h4>
+                        <p className="text-slate-600 mb-2">Fachanwältin für Arbeitsrecht</p>
+                        <p className="text-slate-500 text-sm">15+ Jahre Erfahrung</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Location & Hours */}
+                  <div className="grid md:grid-cols-2 gap-8 mb-16">
+                    <div className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-slate-200/30">
+                      <div className="flex items-center gap-3 mb-6">
+                        <MapPin className="w-6 h-6 text-slate-700" />
+                        <h4 className="text-xl font-bold text-slate-900">Standort</h4>
+                      </div>
+                      <div className="space-y-2 text-slate-700">
+                        <p>Musterstraße 123</p>
+                        <p>68161 Mannheim</p>
+                        <p>Deutschland</p>
+                      </div>
+                      <div className="mt-6 h-32 bg-slate-200 rounded-lg flex items-center justify-center">
+                        <span className="text-slate-500">Karte</span>
+                      </div>
+                    </div>
+                    <div className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-slate-200/30">
+                      <div className="flex items-center gap-3 mb-6">
+                        <Clock className="w-6 h-6 text-slate-700" />
+                        <h4 className="text-xl font-bold text-slate-900">Öffnungszeiten</h4>
+                      </div>
+                      <div className="space-y-3 text-slate-700">
+                        <div className="flex justify-between">
+                          <span>Montag - Freitag</span>
+                          <span>8:00 - 18:00</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>Samstag</span>
+                          <span>9:00 - 14:00</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>Sonntag</span>
+                          <span>Geschlossen</span>
+                        </div>
+                        <div className="mt-4 p-3 bg-slate-100 rounded-lg">
+                          <p className="text-sm text-slate-600">
+                            Termine außerhalb der Öffnungszeiten nach Vereinbarung möglich
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                   {/* Contact Section */}
                   <div className="bg-slate-900 text-white p-12 rounded-2xl text-center">
                     <h3 className="text-3xl font-bold mb-6">Vereinbaren Sie einen Termin</h3>
@@ -431,20 +572,30 @@ const BeforeAfterComparison = () => {
             </div>
           </div>
 
-          {/* Slider Handle */}
-          <div 
-            ref={sliderRef}
-            className={`absolute top-0 bottom-0 w-1 bg-gradient-to-b from-accent to-primary cursor-col-resize z-10 ${showAnimation ? 'animate-pulse' : ''}`}
-            style={{ left: `${sliderPosition}%`, transform: 'translateX(-50%)' }}
-            onMouseDown={handleMouseDown}
-            onTouchStart={handleMouseDown}
-          >
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 hover:w-12 hover:h-12 bg-white rounded-full shadow-lg border-2 hover:border-4 border-accent flex items-center justify-center transition-all duration-200">
-              <div className="w-4 h-4 hover:w-6 hover:h-6 bg-gradient-to-r from-accent to-primary rounded-full flex items-center justify-center transition-all duration-200">
-                <ArrowRight className="w-2 h-2 hover:w-3 hover:h-3 text-white transform rotate-90 transition-all duration-200" />
+          {/* Slider - Only show in comparison mode */}
+          {viewMode === 'vergleich' && (
+            <div 
+              ref={sliderRef}
+              className={`absolute top-0 bottom-0 w-1 bg-white/90 backdrop-blur-sm cursor-col-resize z-30 transition-all duration-200 ${
+                isDragging ? 'shadow-2xl' : 'shadow-lg hover:shadow-xl'
+              }`}
+              style={{ left: `${sliderPosition}%` }}
+              onMouseDown={handleMouseDown}
+              onTouchStart={handleMouseDown}
+            >
+              {/* Slider Handle */}
+              <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white border-4 border-accent rounded-full flex items-center justify-center shadow-xl transition-all duration-200 ${
+                isDragging 
+                  ? 'scale-110 border-primary' 
+                  : 'scale-90 hover:scale-100 border-accent'
+              }`}>
+                <div className="flex gap-1">
+                  <div className="w-1 h-6 bg-accent/60 rounded-full"></div>
+                  <div className="w-1 h-6 bg-accent/60 rounded-full"></div>
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
 
         {/* Feature Comparison */}
