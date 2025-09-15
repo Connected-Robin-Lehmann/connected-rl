@@ -1,10 +1,13 @@
 import { useState, useRef, useCallback } from "react";
-import { X, Check, ArrowRight, Globe, Star, Phone, Mail, MousePointer2, Sparkles } from "lucide-react";
+import { X, Check, ArrowRight, Globe, Star, Phone, Mail, MousePointer2, Sparkles, Users, Award, Shield, Clock } from "lucide-react";
+
+type ViewMode = 'after' | 'comparison' | 'before';
 
 const BeforeAfterComparison = () => {
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
   const [showAnimation, setShowAnimation] = useState(true);
+  const [viewMode, setViewMode] = useState<ViewMode>('comparison');
   const containerRef = useRef<HTMLDivElement>(null);
   const afterRef = useRef<HTMLDivElement>(null);
   const sliderRef = useRef<HTMLDivElement>(null);
@@ -85,28 +88,72 @@ const BeforeAfterComparison = () => {
           Erleben Sie die dramatische Transformation Ihrer Website interaktiv
         </p>
         
-        {/* Interactive instruction */}
-        <div className="flex items-center justify-center gap-3 text-sm text-accent animate-bounce">
-          <MousePointer2 className="w-4 h-4" />
-          <span>Ziehen Sie den Slider um den Unterschied zu sehen</span>
+        {/* View Mode Controls */}
+        <div className="flex justify-center mb-8">
+          <div className="bg-white/80 backdrop-blur-sm p-2 rounded-xl border border-accent/20 shadow-lg">
+            <div className="flex gap-2">
+              <button
+                onClick={() => setViewMode('before')}
+                className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
+                  viewMode === 'before' 
+                    ? 'bg-accent text-white shadow-md' 
+                    : 'text-accent hover:bg-accent/10'
+                }`}
+              >
+                Vorher
+              </button>
+              <button
+                onClick={() => setViewMode('comparison')}
+                className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
+                  viewMode === 'comparison' 
+                    ? 'bg-accent text-white shadow-md' 
+                    : 'text-accent hover:bg-accent/10'
+                }`}
+              >
+                Vergleich
+              </button>
+              <button
+                onClick={() => setViewMode('after')}
+                className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
+                  viewMode === 'after' 
+                    ? 'bg-accent text-white shadow-md' 
+                    : 'text-accent hover:bg-accent/10'
+                }`}
+              >
+                Nachher
+              </button>
+            </div>
+          </div>
         </div>
+
+        {/* Interactive instruction - only show in comparison mode */}
+        {viewMode === 'comparison' && (
+          <div className="flex items-center justify-center gap-3 text-sm text-accent animate-bounce mb-6">
+            <MousePointer2 className="w-4 h-4" />
+            <span>Ziehen Sie den Slider um den Unterschied zu sehen</span>
+          </div>
+        )}
       </div>
 
-      {/* Interactive Before/After Slider */}
+      {/* Interactive Before/After Display */}
       <div className="max-w-[95vw] mx-auto mb-16">
         <div 
           ref={containerRef}
-          className="relative h-[600px] md:h-[700px] rounded-2xl overflow-hidden shadow-2xl cursor-col-resize select-none border-4 border-accent/20"
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseUp}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleMouseUp}
+          className={`relative h-[600px] md:h-[700px] rounded-2xl overflow-hidden shadow-2xl border-4 border-accent/20 ${
+            viewMode === 'comparison' ? 'cursor-col-resize' : ''
+          } select-none`}
+          onMouseMove={viewMode === 'comparison' ? handleMouseMove : undefined}
+          onMouseUp={viewMode === 'comparison' ? handleMouseUp : undefined}
+          onMouseLeave={viewMode === 'comparison' ? handleMouseUp : undefined}
+          onTouchMove={viewMode === 'comparison' ? handleTouchMove : undefined}
+          onTouchEnd={viewMode === 'comparison' ? handleMouseUp : undefined}
         >
-          {/* Before (Old Website) - Full Width Background */}
+          {/* Before (Old Website) - Show based on view mode */}
           <div 
             ref={beforeScrollRef}
-            className="absolute inset-0 bg-slate-100 overflow-y-auto"
+            className={`absolute inset-0 bg-slate-100 overflow-y-auto ${
+              viewMode === 'after' ? 'hidden' : ''
+            }`}
             onScroll={handleBeforeScroll}
           >
             {/* Browser Header - Bad */}
@@ -119,100 +166,118 @@ const BeforeAfterComparison = () => {
               </div>
             </div>
 
-            {/* Old Website Content */}
-            <div className="min-h-[1200px] bg-gradient-to-b from-slate-100 to-gray-200">
+            {/* Old Website Content - Less dramatically bad */}
+            <div className="min-h-[1200px] bg-gray-100">
               {/* Header */}
-              <div className="bg-blue-800 text-white p-8 text-center border-b-4 border-yellow-400">
-                <h1 className="text-4xl font-bold text-yellow-300 mb-4">
-                  RECHTSANWALTSKANZLEI DR. MÜLLER
+              <div className="bg-blue-900 text-white p-6 border-b-2 border-gray-400">
+                <h1 className="text-3xl font-bold mb-4 text-center">
+                  Rechtsanwaltskanzlei Dr. Müller
                 </h1>
-                <div className="flex justify-center gap-8 text-lg">
-                  <span className="border-2 border-white px-4 py-2">HOME</span>
-                  <span className="border-2 border-white px-4 py-2">ÜBER UNS</span>
-                  <span className="border-2 border-white px-4 py-2">LEISTUNGEN</span>
-                  <span className="border-2 border-white px-4 py-2">KONTAKT</span>
+                <div className="flex justify-center gap-4 text-sm">
+                  <span className="border border-white px-3 py-1">HOME</span>
+                  <span className="border border-white px-3 py-1">ÜBER UNS</span>
+                  <span className="border border-white px-3 py-1">LEISTUNGEN</span>
+                  <span className="border border-white px-3 py-1">KONTAKT</span>
                 </div>
               </div>
 
               {/* Main Content */}
-              <div className="p-8">
-                {/* Welcome Banner */}
-                <div className="bg-red-600 text-white p-6 text-center mb-8 border-4 border-black shadow-lg">
-                  <h2 className="text-3xl font-bold animate-pulse">
-                    *** WILLKOMMEN BEI IHREM ANWALT *** SEIT 1995 ***
+              <div className="p-6">
+                {/* Welcome Section */}
+                <div className="bg-white border-2 border-gray-400 p-6 mb-6 text-center">
+                  <h2 className="text-2xl font-bold mb-3">
+                    Willkommen bei Ihrer Anwaltskanzlei - Seit 1995
                   </h2>
+                  <p className="text-lg">
+                    Ihre Rechte sind unser Auftrag!
+                  </p>
                 </div>
 
                 {/* Main Text */}
-                <div className="bg-white border-4 border-blue-800 p-8 mb-8">
-                  <h3 className="text-2xl font-bold text-red-700 underline mb-4">
-                    IHRE RECHTE SIND UNSER AUFTRAG!
+                <div className="bg-white border border-gray-400 p-6 mb-6">
+                  <h3 className="text-xl font-bold mb-3 text-blue-900 underline">
+                    Professionelle Rechtsberatung seit über 25 Jahren
                   </h3>
-                  <p className="text-lg mb-4 leading-tight">
+                  <p className="mb-4 text-justify">
                     Seit über 25 Jahren vertreten wir erfolgreich die Interessen unserer Mandanten in allen Rechtsbereichen. 
-                    Vertrauen Sie auf unsere Erfahrung und Kompetenz!
+                    Vertrauen Sie auf unsere Erfahrung und Kompetenz! Wir sind spezialisiert auf Familienrecht, Arbeitsrecht, 
+                    Strafrecht, Zivilrecht und vieles mehr.
                   </p>
-                  <p className="text-lg mb-4">
-                    Wir sind spezialisiert auf Familienrecht, Arbeitsrecht, Strafrecht, Zivilrecht und vieles mehr.
+                  <p className="font-bold">
                     Kontaktieren Sie uns noch heute für eine kostenlose Erstberatung!
                   </p>
                 </div>
 
                 {/* Services */}
-                <div className="grid md:grid-cols-2 gap-6 mb-8">
-                  <div className="bg-yellow-200 border-4 border-red-500 p-6">
-                    <h4 className="text-xl font-bold text-blue-800 mb-3">Familienrecht</h4>
-                    <p className="text-lg">Scheidung, Sorgerecht, Unterhalt - wir helfen Ihnen!</p>
-                    <div className="mt-4 bg-green-400 p-2 text-center font-bold">
-                      KOSTENLOSE BERATUNG!
+                <div className="grid md:grid-cols-2 gap-4 mb-6">
+                  <div className="bg-gray-200 border border-gray-500 p-4">
+                    <h4 className="text-lg font-bold mb-2">Familienrecht</h4>
+                    <p>Scheidung, Sorgerecht, Unterhalt - wir helfen Ihnen kompetent und diskret!</p>
+                    <div className="mt-3 bg-blue-200 p-2 text-center text-sm font-bold">
+                      Kostenlose Erstberatung
                     </div>
                   </div>
-                  <div className="bg-cyan-200 border-4 border-purple-500 p-6">
-                    <h4 className="text-xl font-bold text-red-800 mb-3">Arbeitsrecht</h4>
-                    <p className="text-lg">Kündigung, Abfindung, Arbeitsverträge</p>
-                    <div className="mt-4 bg-orange-400 p-2 text-center font-bold">
-                      24/7 ERREICHBAR!
+                  <div className="bg-gray-200 border border-gray-500 p-4">
+                    <h4 className="text-lg font-bold mb-2">Arbeitsrecht</h4>
+                    <p>Kündigung, Abfindung, Arbeitsverträge - Ihre Rechte durchsetzen</p>
+                    <div className="mt-3 bg-green-200 p-2 text-center text-sm font-bold">
+                      Auch Termine außerhalb der Geschäftszeiten
                     </div>
                   </div>
                 </div>
 
                 {/* Contact */}
-                <div className="bg-gradient-to-r from-green-400 to-blue-500 text-white p-8 text-center border-4 border-black">
-                  <h3 className="text-3xl font-bold mb-4">RUFEN SIE JETZT AN!</h3>
-                  <p className="text-2xl font-bold">Tel: 0621 / 987654</p>
-                  <p className="text-xl mt-2">Email: info@mueller-law.de</p>
+                <div className="bg-blue-800 text-white p-6 text-center border border-gray-400">
+                  <h3 className="text-2xl font-bold mb-3">Kontaktieren Sie uns</h3>
+                  <p className="text-xl">Telefon: 0621 / 987654</p>
+                  <p className="text-lg mt-2">E-Mail: info@mueller-law.de</p>
                 </div>
 
                 {/* More Content for Scrolling */}
-                <div className="mt-8 space-y-6">
-                  <div className="bg-pink-200 border-4 border-green-600 p-6">
-                    <h4 className="text-2xl font-bold text-purple-800">Unsere Erfolge:</h4>
-                    <ul className="list-disc list-inside text-lg mt-4 space-y-2">
-                      <li>Über 1000 erfolgreiche Fälle</li>
-                      <li>25 Jahre Erfahrung</li>
-                      <li>Spezialisiert auf schwierige Fälle</li>
-                      <li>Faire Preise - Transparente Abrechnung</li>
+                <div className="mt-6 space-y-4">
+                  <div className="bg-white border border-gray-400 p-4">
+                    <h4 className="text-xl font-bold mb-3">Unsere Erfolge:</h4>
+                    <ul className="list-disc list-inside space-y-1">
+                      <li>Über 1000 erfolgreich abgeschlossene Fälle</li>
+                      <li>25 Jahre Berufserfahrung</li>
+                      <li>Spezialisierung auf komplexe Rechtsfälle</li>
+                      <li>Transparente und faire Kostenabrechnung</li>
                     </ul>
                   </div>
                   
-                  <div className="bg-orange-300 border-4 border-blue-600 p-6">
-                    <h4 className="text-2xl font-bold text-red-800">Öffnungszeiten:</h4>
-                    <div className="text-lg mt-4">
-                      <p>Mo-Fr: 8:00 - 18:00 Uhr</p>
-                      <p>Sa: 9:00 - 14:00 Uhr</p>
-                      <p>Termine auch außerhalb der Öffnungszeiten möglich!</p>
+                  <div className="bg-gray-200 border border-gray-500 p-4">
+                    <h4 className="text-xl font-bold mb-3">Öffnungszeiten:</h4>
+                    <div>
+                      <p>Montag - Freitag: 8:00 - 18:00 Uhr</p>
+                      <p>Samstag: 9:00 - 14:00 Uhr</p>
+                      <p className="mt-2 font-bold">Termine auch außerhalb der Öffnungszeiten nach Vereinbarung möglich!</p>
                     </div>
+                  </div>
+
+                  {/* Additional outdated elements */}
+                  <div className="bg-yellow-100 border-2 border-yellow-400 p-4">
+                    <h4 className="text-lg font-bold">Wichtiger Hinweis:</h4>
+                    <p className="text-sm mt-2">
+                      Diese Website wurde zuletzt im Jahr 2010 aktualisiert. 
+                      Aktuelle Informationen erhalten Sie telefonisch oder per E-Mail.
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* After (Modern Website) - Clipped by slider */}
+          {/* After (Modern Website) - Show based on view mode */}
           <div 
             ref={afterRef}
-            className={`absolute inset-0 bg-white ${isDragging ? '' : 'transition-all duration-300'}`}
-            style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
+            className={`absolute inset-0 bg-white ${
+              viewMode === 'before' ? 'hidden' : ''
+            } ${isDragging || viewMode !== 'comparison' ? '' : 'transition-all duration-300'}`}
+            style={{ 
+              clipPath: viewMode === 'comparison' 
+                ? `inset(0 ${100 - sliderPosition}% 0 0)` 
+                : 'inset(0 0% 0 0)' 
+            }}
           >
             <div 
               ref={afterScrollRef}
@@ -342,9 +407,126 @@ const BeforeAfterComparison = () => {
                     </div>
                   </div>
 
-                  {/* Contact Section */}
-                  <div className="bg-slate-900 text-white p-12 rounded-2xl text-center">
-                    <h3 className="text-3xl font-bold mb-6">Vereinbaren Sie einen Termin</h3>
+                   {/* Client Testimonials */}
+                   <div className="mb-16">
+                     <h3 className="text-3xl font-bold text-center mb-12 text-slate-900">
+                       Was unsere Mandanten sagen
+                     </h3>
+                     <div className="grid md:grid-cols-3 gap-8">
+                       <div className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-slate-200/30">
+                         <div className="flex mb-4">
+                           {[...Array(5)].map((_, i) => (
+                             <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                           ))}
+                         </div>
+                         <p className="text-slate-600 mb-6 italic">
+                           "Hervorragende Beratung und professionelle Abwicklung meines Scheidungsverfahrens. 
+                           Sehr empfehlenswert!"
+                         </p>
+                         <div className="flex items-center gap-3">
+                           <div className="w-12 h-12 bg-gradient-to-br from-slate-800 to-slate-600 rounded-full flex items-center justify-center">
+                             <span className="text-white font-bold">MS</span>
+                           </div>
+                           <div>
+                             <div className="font-semibold text-slate-900">Maria S.</div>
+                             <div className="text-sm text-slate-600">Mandantin seit 2022</div>
+                           </div>
+                         </div>
+                       </div>
+
+                       <div className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-slate-200/30">
+                         <div className="flex mb-4">
+                           {[...Array(5)].map((_, i) => (
+                             <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                           ))}
+                         </div>
+                         <p className="text-slate-600 mb-6 italic">
+                           "Kompetente Vertretung im Arbeitsrecht. Dank der Kanzlei konnte ich eine faire Abfindung erzielen."
+                         </p>
+                         <div className="flex items-center gap-3">
+                           <div className="w-12 h-12 bg-gradient-to-br from-slate-800 to-slate-600 rounded-full flex items-center justify-center">
+                             <span className="text-white font-bold">TK</span>
+                           </div>
+                           <div>
+                             <div className="font-semibold text-slate-900">Thomas K.</div>
+                             <div className="text-sm text-slate-600">Mandant seit 2021</div>
+                           </div>
+                         </div>
+                       </div>
+
+                       <div className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-slate-200/30">
+                         <div className="flex mb-4">
+                           {[...Array(5)].map((_, i) => (
+                             <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                           ))}
+                         </div>
+                         <p className="text-slate-600 mb-6 italic">
+                           "Zuverlässig, verständnisvoll und erfolgreich. Genau so sollte Rechtsberatung sein."
+                         </p>
+                         <div className="flex items-center gap-3">
+                           <div className="w-12 h-12 bg-gradient-to-br from-slate-800 to-slate-600 rounded-full flex items-center justify-center">
+                             <span className="text-white font-bold">AL</span>
+                           </div>
+                           <div>
+                             <div className="font-semibold text-slate-900">Andrea L.</div>
+                             <div className="text-sm text-slate-600">Mandantin seit 2020</div>
+                           </div>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+
+                   {/* Why Choose Us Section */}
+                   <div className="mb-16">
+                     <h3 className="text-3xl font-bold text-center mb-12 text-slate-900">
+                       Warum Müller & Partner?
+                     </h3>
+                     <div className="grid md:grid-cols-4 gap-8">
+                       <div className="text-center">
+                         <div className="w-20 h-20 bg-gradient-to-br from-slate-800 to-slate-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                           <Users className="w-10 h-10 text-white" />
+                         </div>
+                         <h4 className="text-xl font-bold mb-3 text-slate-900">Persönliche Betreuung</h4>
+                         <p className="text-slate-600">
+                           Jeder Mandant erhält eine individuelle und persönliche Betreuung durch erfahrene Anwälte.
+                         </p>
+                       </div>
+
+                       <div className="text-center">
+                         <div className="w-20 h-20 bg-gradient-to-br from-slate-800 to-slate-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                           <Award className="w-10 h-10 text-white" />
+                         </div>
+                         <h4 className="text-xl font-bold mb-3 text-slate-900">Bewährte Expertise</h4>
+                         <p className="text-slate-600">
+                           25+ Jahre Erfahrung und über 1000 erfolgreich abgeschlossene Fälle sprechen für sich.
+                         </p>
+                       </div>
+
+                       <div className="text-center">
+                         <div className="w-20 h-20 bg-gradient-to-br from-slate-800 to-slate-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                           <Shield className="w-10 h-10 text-white" />
+                         </div>
+                         <h4 className="text-xl font-bold mb-3 text-slate-900">Diskretion & Vertrauen</h4>
+                         <p className="text-slate-600">
+                           Ihre Angelegenheiten werden streng vertraulich behandelt und mit höchster Diskretion bearbeitet.
+                         </p>
+                       </div>
+
+                       <div className="text-center">
+                         <div className="w-20 h-20 bg-gradient-to-br from-slate-800 to-slate-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                           <Clock className="w-10 h-10 text-white" />
+                         </div>
+                         <h4 className="text-xl font-bold mb-3 text-slate-900">Schnelle Reaktion</h4>
+                         <p className="text-slate-600">
+                           Kurze Wartezeiten und schnelle Rückmeldungen - Ihre Zeit ist uns wichtig.
+                         </p>
+                       </div>
+                     </div>
+                   </div>
+
+                   {/* Contact Section */}
+                   <div className="bg-slate-900 text-white p-12 rounded-2xl text-center">
+                     <h3 className="text-3xl font-bold mb-6">Vereinbaren Sie einen Termin</h3>
                     <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
                       Gerne besprechen wir Ihr Anliegen in einem persönlichen Gespräch. 
                       Die Erstberatung ist für Sie kostenfrei.
@@ -431,20 +613,46 @@ const BeforeAfterComparison = () => {
             </div>
           </div>
 
-          {/* Slider Handle */}
-          <div 
-            ref={sliderRef}
-            className={`absolute top-0 bottom-0 w-1 bg-gradient-to-b from-accent to-primary cursor-col-resize z-10 ${showAnimation ? 'animate-pulse' : ''}`}
-            style={{ left: `${sliderPosition}%`, transform: 'translateX(-50%)' }}
-            onMouseDown={handleMouseDown}
-            onTouchStart={handleMouseDown}
-          >
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 hover:w-12 hover:h-12 bg-white rounded-full shadow-lg border-2 hover:border-4 border-accent flex items-center justify-center transition-all duration-200">
-              <div className="w-4 h-4 hover:w-6 hover:h-6 bg-gradient-to-r from-accent to-primary rounded-full flex items-center justify-center transition-all duration-200">
-                <ArrowRight className="w-2 h-2 hover:w-3 hover:h-3 text-white transform rotate-90 transition-all duration-200" />
+          {/* Slider Handle - only visible in comparison mode */}
+          {viewMode === 'comparison' && (
+            <div 
+              ref={sliderRef}
+              className="absolute top-0 h-full w-1 bg-white shadow-lg z-30 cursor-col-resize group"
+              style={{ left: `${sliderPosition}%` }}
+              onMouseDown={handleMouseDown}
+              onTouchStart={handleMouseDown}
+            >
+              {/* Slider line with glow effect */}
+              <div className="w-full h-full bg-gradient-to-b from-white via-accent to-white relative">
+                {/* Pulsing glow */}
+                <div className="absolute inset-0 bg-accent/30 blur-sm animate-pulse"></div>
+              </div>
+              
+              {/* Drag handle */}
+              <div 
+                className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-xl flex items-center justify-center border-2 border-accent group-hover:scale-125 transition-all duration-200 ${
+                  isDragging ? 'scale-125' : 'scale-90'
+                }`}
+              >
+                <div className="flex gap-0.5">
+                  <div className="w-0.5 h-4 bg-accent rounded-full"></div>
+                  <div className="w-0.5 h-4 bg-accent rounded-full"></div>
+                </div>
+              </div>
+
+              {/* Labels */}
+              <div className="absolute top-8 -left-16 text-center">
+                <div className="bg-white text-slate-900 px-3 py-1 rounded-lg shadow-lg text-sm font-semibold border border-slate-200">
+                  Vorher
+                </div>
+              </div>
+              <div className="absolute top-8 -right-16 text-center">
+                <div className="bg-white text-slate-900 px-3 py-1 rounded-lg shadow-lg text-sm font-semibold border border-slate-200">
+                  Nachher
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
 
         {/* Feature Comparison */}
