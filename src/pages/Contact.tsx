@@ -48,7 +48,13 @@ const Contact = () => {
           "Vielen Dank für Ihre Anfrage. Sie erhalten eine Bestätigungs-E-Mail und ich melde mich zeitnah bei Ihnen.",
       });
 
-      setFormData({ name: "", email: "", subject: "", message: "" });
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+        website: "",
+      });
     } catch (error: any) {
       console.error("Error sending email:", error);
       toast({
