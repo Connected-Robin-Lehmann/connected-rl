@@ -14,8 +14,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(405).json({ error: "Method not allowed" });
 
   try {
-    const { name, email, subject, message, website } = req.body || {};
-    if (!name || !email || !message)
+    const { name, email, subject, website, message } = req.body || {};
+    if (!name || !email || !message || !website)
       return res.status(400).json({ error: "Missing required fields" });
 
     await transporter.sendMail({
