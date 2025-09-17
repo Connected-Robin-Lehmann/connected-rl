@@ -14,7 +14,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(405).json({ error: "Method not allowed" });
 
   try {
-    const { name, email, subject, message } = req.body || {};
+    const { name, email, subject, message, website } = req.body || {};
     if (!name || !email || !message)
       return res.status(400).json({ error: "Missing required fields" });
 
@@ -23,7 +23,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       to: process.env.CONTACT_TO_EMAIL || process.env.SMTP_USER,
       replyTo: email,
       subject: subject?.trim() || `Neue Kontaktanfrage von ${name}`,
-      text: `Name: ${name}\nE-Mail: ${email}\n\n${message}`,
+      text: `Name: ${name}\nE-Mail: ${email}\nWebsite:${website}\n\n${message}`,
     });
 
     return res.status(200).json({ ok: true });
