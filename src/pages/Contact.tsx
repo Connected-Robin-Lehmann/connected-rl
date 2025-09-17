@@ -18,6 +18,7 @@ const Contact = () => {
     name: "",
     email: "",
     subject: "",
+    website: "",
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -148,6 +149,18 @@ const Contact = () => {
                     value={formData.subject}
                     onChange={handleInputChange}
                     placeholder="Worum geht es?"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="subject">Website</Label>
+                  <Input
+                    id="website"
+                    name="website"
+                    value={formData.website}
+                    onChange={handleInputChange}
+                    placeholder="Ihre bisherige Website (falls vorhanden)?"
+                    required={false}
                   />
                 </div>
 
