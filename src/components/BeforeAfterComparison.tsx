@@ -14,6 +14,8 @@ import {
   Shield,
   Clock,
 } from "lucide-react";
+import { Button } from "./ui/button";
+import { Link } from "react-router-dom";
 
 type ViewMode = "after" | "comparison" | "before";
 
@@ -852,22 +854,14 @@ const BeforeAfterComparison = () => {
       </div>
 
       {/* Call to Action */}
-      <div className="text-center bg-gradient-to-r from-accent/10 to-primary/10 p-12 rounded-2xl border border-accent/20">
-        <div className="max-w-3xl mx-auto">
-          <h3 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">
-            Bereit für Ihre Website-Transformation?
-          </h3>
-          <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-            Lassen Sie uns gemeinsam Ihre veraltete Website in eine moderne,
-            professionelle Online-Präsenz verwandeln, die Ihre Kunden
-            begeistert.
-          </p>
-          <button className="bg-gradient-to-r from-accent to-primary text-white px-8 py-4 rounded-xl text-lg font-bold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 inline-flex items-center gap-3">
-            <Sparkles className="w-5 h-5" />
-            <span>Kostenloses Beratungsgespräch</span>
-            <ArrowRight className="w-5 h-5" />
-          </button>
-        </div>
+      <div className="text-center bg-gradient-primary rounded-2xl p-8 md:p-12 text-white">
+        <h2 className="text-3xl font-bold mb-4">Bereit für Ihr Projekt?</h2>
+        <p className="text-lg mb-6 opacity-90">
+          Lassen Sie uns gemeinsam Ihre digitale Präsenz optimieren
+        </p>
+        <Button size="lg" variant="secondary" className="text-lg px-8" asChild>
+          <Link to="/contact">Jetzt Beratung anfragen</Link>
+        </Button>
       </div>
     </div>
   );
