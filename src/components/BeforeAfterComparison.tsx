@@ -1,7 +1,9 @@
-import { useState, useRef, useCallback, useEffect } from "react";
+import { useState, useRef, useCallback } from "react";
 import {
+  X,
   Check,
   ArrowRight,
+  Globe,
   Star,
   Phone,
   Mail,
@@ -11,7 +13,6 @@ import {
   Award,
   Shield,
   Clock,
-  X,
 } from "lucide-react";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
@@ -19,167 +20,97 @@ import { Link } from "react-router-dom";
 type ViewMode = "after" | "comparison" | "before";
 
 const BeforeAfterComparison = () => {
-  const [sliderPct, setSliderPct] = useState(50);
+  const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
+  const [showAnimation, setShowAnimation] = useState(true);
   const [viewMode, setViewMode] = useState<ViewMode>("comparison");
-
   const containerRef = useRef<HTMLDivElement>(null);
   const afterRef = useRef<HTMLDivElement>(null);
   const sliderRef = useRef<HTMLDivElement>(null);
   const beforeScrollRef = useRef<HTMLDivElement>(null);
   const afterScrollRef = useRef<HTMLDivElement>(null);
 
-  // Live value while dragging (avoid re-renders)
-  const livePctRef = useRef(sliderPct);
-  const rafRef = useRef<number | null>(null);
+  const updateSliderPosition = useCallback(
+    (clientX: number) => {
+      if (!containerRef.current || !afterRef.current || !sliderRef.current)
+        return;
 
-  // Scroll sync guard
-  const syncingRef = useRef<"before" | "after" | null>(null);
+      const rect = containerRef.current.getBoundingClientRect();
+      const x = clientX - rect.left;
+      const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
 
-  // Reduced motion detection
-  const prefersReducedMotion = useRef<boolean>(
-    typeof window !== "undefined" &&
-      window.matchMedia &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  ).current;
+      // Update DOM directly with no delays
+      afterRef.current.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
+      sliderRef.current.style.left = `${percentage}%`;
 
-  const clampPct = (pct: number) => Math.max(0, Math.min(100, pct));
-
-  const paint = useCallback((pct: number) => {
-    if (!afterRef.current || !sliderRef.current) return;
-    afterRef.current.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
-    sliderRef.current.style.left = `${pct}%`;
-  }, []);
-
-  const clientXToPct = useCallback((clientX: number) => {
-    if (!containerRef.current) return livePctRef.current;
-    const rect = containerRef.current.getBoundingClientRect();
-    const x = clientX - rect.left;
-    return clampPct((x / rect.width) * 100);
-  }, []);
-
-  // Pointer handlers (mouse/touch/pen unified)
-  const onPointerDown = useCallback(
-    (e: React.PointerEvent) => {
-      if (viewMode !== "comparison") return;
-      (e.currentTarget as HTMLElement).setPointerCapture?.(e.pointerId);
-      setIsDragging(true);
-    },
-    [viewMode]
-  );
-
-  const onPointerMove = useCallback(
-    (e: React.PointerEvent) => {
-      if (!isDragging || viewMode !== "comparison") return;
-      const next = clientXToPct(e.clientX);
-      livePctRef.current = next;
-
-      if (rafRef.current == null) {
-        rafRef.current = requestAnimationFrame(() => {
-          paint(livePctRef.current);
-          rafRef.current = null;
-        });
+      // Only update state when not dragging for final position
+      if (!isDragging) {
+        setSliderPosition(percentage);
       }
     },
-    [clientXToPct, isDragging, paint, viewMode]
+    [isDragging]
   );
 
-  const endDrag = useCallback(() => {
-    if (!isDragging) return;
+  const handleMouseDown = useCallback(() => {
+    setIsDragging(true);
+    setShowAnimation(false);
+  }, []);
+
+  const handleMouseUp = useCallback(() => {
     setIsDragging(false);
-    setSliderPct(livePctRef.current); // commit
-  }, [isDragging]);
+    // Update final state position when dragging stops
+    if (containerRef.current && sliderRef.current) {
+      const left = sliderRef.current.style.left;
+      const percentage = parseFloat(left.replace("%", ""));
+      setSliderPosition(percentage);
+    }
+  }, []);
 
-  // Keyboard accessibility for the handle
-  const onKeyDown = useCallback(
-    (e: React.KeyboardEvent) => {
-      if (viewMode !== "comparison") return;
-      const step = e.shiftKey ? 5 : 1;
-      if (e.key === "ArrowLeft") {
-        const next = clampPct(livePctRef.current - step);
-        livePctRef.current = next;
-        paint(next);
-        setSliderPct(next);
-        e.preventDefault();
-      } else if (e.key === "ArrowRight") {
-        const next = clampPct(livePctRef.current + step);
-        livePctRef.current = next;
-        paint(next);
-        setSliderPct(next);
-        e.preventDefault();
-      } else if (e.key === "Home") {
-        livePctRef.current = 0;
-        paint(0);
-        setSliderPct(0);
-        e.preventDefault();
-      } else if (e.key === "End") {
-        livePctRef.current = 100;
-        paint(100);
-        setSliderPct(100);
-        e.preventDefault();
-      }
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent) => {
+      if (!isDragging) return;
+      updateSliderPosition(e.clientX);
     },
-    [paint, viewMode]
+    [isDragging, updateSliderPosition]
   );
 
-  // Initial paint & viewMode changes
-  useEffect(() => {
-    paint(viewMode === "comparison" ? sliderPct : 100);
-  }, [paint, sliderPct, viewMode]);
+  const handleTouchMove = useCallback(
+    (e: React.TouchEvent) => {
+      if (!isDragging) return;
+      updateSliderPosition(e.touches[0].clientX);
+    },
+    [isDragging, updateSliderPosition]
+  );
 
-  // Keep percentage consistent on resize
-  useEffect(() => {
-    if (!containerRef.current) return;
-    const ro = new ResizeObserver(() => {
-      paint(livePctRef.current);
-    });
-    ro.observe(containerRef.current);
-    return () => ro.disconnect();
-  }, [paint]);
+  const syncScroll = useCallback(
+    (source: HTMLDivElement, target: HTMLDivElement) => {
+      target.scrollTop = source.scrollTop;
+    },
+    []
+  );
 
-  // Scroll sync (guard against feedback loops)
   const handleBeforeScroll = useCallback(() => {
-    if (!beforeScrollRef.current || !afterScrollRef.current) return;
-    if (syncingRef.current === "after") {
-      syncingRef.current = null;
-      return;
+    if (beforeScrollRef.current && afterScrollRef.current) {
+      syncScroll(beforeScrollRef.current, afterScrollRef.current);
     }
-    syncingRef.current = "before";
-    afterScrollRef.current.scrollTop = beforeScrollRef.current.scrollTop;
-  }, []);
+  }, [syncScroll]);
 
   const handleAfterScroll = useCallback(() => {
-    if (!beforeScrollRef.current || !afterScrollRef.current) return;
-    if (syncingRef.current === "before") {
-      syncingRef.current = null;
-      return;
+    if (afterScrollRef.current && beforeScrollRef.current) {
+      syncScroll(afterScrollRef.current, beforeScrollRef.current);
     }
-    syncingRef.current = "after";
-    beforeScrollRef.current.scrollTop = afterScrollRef.current.scrollTop;
-  }, []);
+  }, [syncScroll]);
 
   return (
     <div className="mb-20">
-      {/* Header */}
+      {/* Attention-grabbing header */}
       <div className="text-center space-y-6 mb-16">
-        <div
-          className={`inline-flex items-center gap-2 bg-gradient-to-r from-accent/10 to-primary/10 px-6 py-3 rounded-full border border-accent/20 ${
-            prefersReducedMotion ? "" : "animate-pulse"
-          }`}
-        >
-          <Sparkles
-            className={`w-5 h-5 text-accent ${
-              prefersReducedMotion ? "" : "animate-spin"
-            }`}
-          />
+        <div className="inline-flex items-center gap-2 bg-gradient-to-r from-accent/10 to-primary/10 px-6 py-3 rounded-full border border-accent/20 animate-pulse">
+          <Sparkles className="w-5 h-5 text-accent animate-spin" />
           <span className="text-sm font-semibold text-accent">
             Website Transformation
           </span>
-          <Sparkles
-            className={`w-5 h-5 text-accent ${
-              prefersReducedMotion ? "" : "animate-spin"
-            }`}
-          />
+          <Sparkles className="w-5 h-5 text-accent animate-spin" />
         </div>
         <h2 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
           Vorher vs. Nachher
@@ -188,47 +119,51 @@ const BeforeAfterComparison = () => {
           Erleben Sie die dramatische Transformation Ihrer Website interaktiv
         </p>
 
+        {/* View Mode Controls */}
+        <div className="flex justify-center mb-8">
+          <div className="bg-white/80 backdrop-blur-sm p-2 rounded-xl border border-accent/20 shadow-lg">
+            <div className="flex gap-2">
+              <button
+                onClick={() => setViewMode("before")}
+                className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
+                  viewMode === "before"
+                    ? "bg-accent text-white shadow-md"
+                    : "text-accent hover:bg-accent/10"
+                }`}
+              >
+                Vorher
+              </button>
+              <button
+                onClick={() => setViewMode("comparison")}
+                className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
+                  viewMode === "comparison"
+                    ? "bg-accent text-white shadow-md"
+                    : "text-accent hover:bg-accent/10"
+                }`}
+              >
+                Vergleich
+              </button>
+              <button
+                onClick={() => setViewMode("after")}
+                className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
+                  viewMode === "after"
+                    ? "bg-accent text-white shadow-md"
+                    : "text-accent hover:bg-accent/10"
+                }`}
+              >
+                Nachher
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Interactive instruction - only show in comparison mode */}
         {viewMode === "comparison" && (
-          <div
-            className={`flex items-center justify-center gap-3 text-sm text-accent ${
-              prefersReducedMotion ? "" : "animate-bounce"
-            } mb-6`}
-          >
+          <div className="flex items-center justify-center gap-3 text-sm text-accent animate-bounce mb-6">
             <MousePointer2 className="w-4 h-4" />
             <span>Ziehen Sie den Slider um den Unterschied zu sehen</span>
           </div>
         )}
-
-        {/* View Mode Controls */}
-        <div className="flex justify-center mb-8">
-          <div
-            className="bg-white/80 backdrop-blur-sm p-2 rounded-xl border border-accent/20 shadow-lg"
-            role="tablist"
-            aria-label="Ansicht wählen"
-          >
-            <div className="flex gap-2">
-              {(["before", "comparison", "after"] as ViewMode[]).map((m) => (
-                <button
-                  key={m}
-                  role="tab"
-                  aria-selected={viewMode === m}
-                  onClick={() => setViewMode(m)}
-                  className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
-                    viewMode === m
-                      ? "bg-accent text-white shadow-md"
-                      : "text-accent hover:bg-accent/10"
-                  }`}
-                >
-                  {m === "before"
-                    ? "Vorher"
-                    : m === "after"
-                    ? "Nachher"
-                    : "Vergleich"}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
       </div>
 
       {/* Interactive Before/After Display */}
@@ -238,13 +173,13 @@ const BeforeAfterComparison = () => {
           className={`relative h-[600px] md:h-[700px] rounded-2xl overflow-hidden shadow-2xl border-4 border-accent/20 ${
             viewMode === "comparison" ? "cursor-col-resize" : ""
           } select-none`}
-          onPointerDown={onPointerDown}
-          onPointerMove={onPointerMove}
-          onPointerUp={endDrag}
-          onPointerCancel={endDrag}
-          onPointerLeave={endDrag}
+          onMouseMove={viewMode === "comparison" ? handleMouseMove : undefined}
+          onMouseUp={viewMode === "comparison" ? handleMouseUp : undefined}
+          onMouseLeave={viewMode === "comparison" ? handleMouseUp : undefined}
+          onTouchMove={viewMode === "comparison" ? handleTouchMove : undefined}
+          onTouchEnd={viewMode === "comparison" ? handleMouseUp : undefined}
         >
-          {/* BEFORE (Old Website) */}
+          {/* Before (Old Website) - Show based on view mode */}
           <div
             ref={beforeScrollRef}
             className={`absolute inset-0 bg-slate-100 overflow-y-auto ${
@@ -262,7 +197,7 @@ const BeforeAfterComparison = () => {
               </div>
             </div>
 
-            {/* Old Website Content */}
+            {/* Old Website Content - Less dramatically bad */}
             <div className="min-h-[1200px] bg-gray-100">
               {/* Header */}
               <div className="bg-blue-900 text-white p-6 border-b-2 border-gray-400">
@@ -366,6 +301,7 @@ const BeforeAfterComparison = () => {
                     </div>
                   </div>
 
+                  {/* Additional outdated elements */}
                   <div className="bg-yellow-100 border-2 border-yellow-400 p-4">
                     <h4 className="text-lg font-bold">Wichtiger Hinweis:</h4>
                     <p className="text-sm mt-2">
@@ -379,7 +315,7 @@ const BeforeAfterComparison = () => {
             </div>
           </div>
 
-          {/* AFTER (Modern Website) */}
+          {/* After (Modern Website) - Show based on view mode */}
           <div
             ref={afterRef}
             className={`absolute inset-0 bg-white ${
@@ -392,7 +328,7 @@ const BeforeAfterComparison = () => {
             style={{
               clipPath:
                 viewMode === "comparison"
-                  ? `inset(0 ${100 - sliderPct}% 0 0)`
+                  ? `inset(0 ${100 - sliderPosition}% 0 0)`
                   : "inset(0 0% 0 0)",
             }}
           >
@@ -821,31 +757,24 @@ const BeforeAfterComparison = () => {
             </div>
           </div>
 
-          {/* HANDLE */}
+          {/* Slider Handle - only visible in comparison mode */}
           {viewMode === "comparison" && (
             <div
               ref={sliderRef}
               className="absolute top-0 h-full w-1 bg-white shadow-lg z-30 cursor-col-resize group"
-              style={{ left: `${sliderPct}%` }}
-              role="slider"
-              aria-label="Vorher/Nachher-Regler"
-              aria-valuemin={0}
-              aria-valuemax={100}
-              aria-valuenow={Math.round(sliderPct)}
-              tabIndex={0}
-              onKeyDown={onKeyDown}
+              style={{ left: `${sliderPosition}%` }}
+              onMouseDown={handleMouseDown}
+              onTouchStart={handleMouseDown}
             >
+              {/* Slider line with glow effect */}
               <div className="w-full h-full bg-gradient-to-b from-white via-accent to-white relative">
-                {!prefersReducedMotion && (
-                  <div
-                    className="absolute inset-0 bg-accent/30 blur-sm animate-pulse"
-                    aria-hidden="true"
-                  ></div>
-                )}
+                {/* Pulsing glow */}
+                <div className="absolute inset-0 bg-accent/30 blur-sm animate-pulse"></div>
               </div>
 
+              {/* Drag handle */}
               <div
-                className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-xl flex items-center justify-center border-2 border-accent group-hover:scale-125 transition-all duration-200 ${
+                className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-xl flex items-center justify-center border-2 border-accent group-hover:scale-125 transition-all duration-200 ${
                   isDragging ? "scale-125" : "scale-90"
                 }`}
               >
@@ -855,18 +784,13 @@ const BeforeAfterComparison = () => {
                 </div>
               </div>
 
-              <div
-                className="absolute top-8 -left-16 text-center"
-                aria-hidden="true"
-              >
+              {/* Labels */}
+              <div className="absolute top-8 -left-16 text-center">
                 <div className="bg-white text-slate-900 px-3 py-1 rounded-lg shadow-lg text-sm font-semibold border border-slate-200">
                   Vorher
                 </div>
               </div>
-              <div
-                className="absolute top-8 -right-16 text-center"
-                aria-hidden="true"
-              >
+              <div className="absolute top-8 -right-16 text-center">
                 <div className="bg-white text-slate-900 px-3 py-1 rounded-lg shadow-lg text-sm font-semibold border border-slate-200">
                   Nachher
                 </div>
