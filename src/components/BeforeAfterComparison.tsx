@@ -13,6 +13,8 @@ import {
   Award,
   Shield,
   Clock,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
@@ -24,6 +26,7 @@ const BeforeAfterComparison = () => {
   const [isDragging, setIsDragging] = useState(false);
   const [showAnimation, setShowAnimation] = useState(true);
   const [viewMode, setViewMode] = useState<ViewMode>("comparison");
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const afterRef = useRef<HTMLDivElement>(null);
   const sliderRef = useRef<HTMLDivElement>(null);
@@ -135,7 +138,7 @@ const BeforeAfterComparison = () => {
               </button>
               <button
                 onClick={() => setViewMode("comparison")}
-                className={`hidden md:flex px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
+                className={`px-4 md:px-6 py-2 md:py-3 rounded-lg font-medium transition-all duration-200 text-sm md:text-base ${
                   viewMode === "comparison"
                     ? "bg-accent text-white shadow-md"
                     : "text-accent hover:bg-accent/10"
@@ -535,7 +538,9 @@ const BeforeAfterComparison = () => {
                     <h3 className="text-3xl font-bold text-center mb-12 text-slate-900">
                       Was unsere Mandanten sagen
                     </h3>
-                    <div className="grid md:grid-cols-3 gap-8">
+                    
+                    {/* Desktop: Grid Layout */}
+                    <div className="hidden md:grid md:grid-cols-3 gap-8">
                       <div className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-slate-200/30">
                         <div className="flex mb-4">
                           {[...Array(5)].map((_, i) => (
@@ -618,6 +623,143 @@ const BeforeAfterComparison = () => {
                             </div>
                           </div>
                         </div>
+                      </div>
+                    </div>
+
+                    {/* Mobile: Slideshow */}
+                    <div className="md:hidden relative">
+                      <div className="overflow-hidden">
+                        <div 
+                          className="flex transition-transform duration-300 ease-in-out"
+                          style={{ transform: `translateX(-${currentTestimonial * 100}%)` }}
+                        >
+                          {/* Testimonial 1 */}
+                          <div className="w-full flex-shrink-0 px-4">
+                            <div className="bg-white/90 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-slate-200/30">
+                              <div className="flex mb-4">
+                                {[...Array(5)].map((_, i) => (
+                                  <Star
+                                    key={i}
+                                    className="w-5 h-5 fill-yellow-400 text-yellow-400"
+                                  />
+                                ))}
+                              </div>
+                              <p className="text-slate-600 mb-6 italic">
+                                "Hervorragende Beratung und professionelle Abwicklung
+                                meines Scheidungsverfahrens. Sehr empfehlenswert!"
+                              </p>
+                              <div className="flex items-center gap-3">
+                                <div className="w-12 h-12 bg-gradient-to-br from-slate-800 to-slate-600 rounded-full flex items-center justify-center">
+                                  <span className="text-white font-bold">MS</span>
+                                </div>
+                                <div>
+                                  <div className="font-semibold text-slate-900">
+                                    Maria S.
+                                  </div>
+                                  <div className="text-sm text-slate-600">
+                                    Mandantin seit 2022
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Testimonial 2 */}
+                          <div className="w-full flex-shrink-0 px-4">
+                            <div className="bg-white/90 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-slate-200/30">
+                              <div className="flex mb-4">
+                                {[...Array(5)].map((_, i) => (
+                                  <Star
+                                    key={i}
+                                    className="w-5 h-5 fill-yellow-400 text-yellow-400"
+                                  />
+                                ))}
+                              </div>
+                              <p className="text-slate-600 mb-6 italic">
+                                "Kompetente Vertretung im Arbeitsrecht. Dank der
+                                Kanzlei konnte ich eine faire Abfindung erzielen."
+                              </p>
+                              <div className="flex items-center gap-3">
+                                <div className="w-12 h-12 bg-gradient-to-br from-slate-800 to-slate-600 rounded-full flex items-center justify-center">
+                                  <span className="text-white font-bold">TK</span>
+                                </div>
+                                <div>
+                                  <div className="font-semibold text-slate-900">
+                                    Thomas K.
+                                  </div>
+                                  <div className="text-sm text-slate-600">
+                                    Mandant seit 2021
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Testimonial 3 */}
+                          <div className="w-full flex-shrink-0 px-4">
+                            <div className="bg-white/90 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-slate-200/30">
+                              <div className="flex mb-4">
+                                {[...Array(5)].map((_, i) => (
+                                  <Star
+                                    key={i}
+                                    className="w-5 h-5 fill-yellow-400 text-yellow-400"
+                                  />
+                                ))}
+                              </div>
+                              <p className="text-slate-600 mb-6 italic">
+                                "Zuverlässig, verständnisvoll und erfolgreich. Genau
+                                so sollte Rechtsberatung sein."
+                              </p>
+                              <div className="flex items-center gap-3">
+                                <div className="w-12 h-12 bg-gradient-to-br from-slate-800 to-slate-600 rounded-full flex items-center justify-center">
+                                  <span className="text-white font-bold">AL</span>
+                                </div>
+                                <div>
+                                  <div className="font-semibold text-slate-900">
+                                    Andrea L.
+                                  </div>
+                                  <div className="text-sm text-slate-600">
+                                    Mandantin seit 2020
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Navigation Arrows */}
+                      <button
+                        onClick={() => setCurrentTestimonial((prev) => Math.max(0, prev - 1))}
+                        disabled={currentTestimonial === 0}
+                        className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-lg border border-slate-200/50 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white transition-colors"
+                        aria-label="Previous testimonial"
+                      >
+                        <ChevronLeft className="w-6 h-6 text-slate-900" />
+                      </button>
+                      <button
+                        onClick={() => setCurrentTestimonial((prev) => Math.min(2, prev + 1))}
+                        disabled={currentTestimonial === 2}
+                        className="absolute right-0 top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-lg border border-slate-200/50 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white transition-colors"
+                        aria-label="Next testimonial"
+                      >
+                        <ChevronRight className="w-6 h-6 text-slate-900" />
+                      </button>
+
+                      {/* Dots Indicator */}
+                      <div className="flex justify-center gap-2 mt-6">
+                        {[0, 1, 2].map((index) => (
+                          <button
+                            key={index}
+                            onClick={() => setCurrentTestimonial(index)}
+                            className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                              currentTestimonial === index
+                                ? "bg-slate-900 w-8"
+                                : "bg-slate-300"
+                            }`}
+                            aria-label={`Go to testimonial ${index + 1}`}
+                          />
+                        ))}
                       </div>
                     </div>
                   </div>
