@@ -200,158 +200,256 @@ const BeforeAfterComparison = () => {
               </div>
             </div>
 
-            {/* Old Website Content - Uglier design */}
-            <div className="min-h-[1200px] bg-gradient-to-br from-gray-200 via-blue-100 to-gray-300">
-              {/* Header with Comic Sans */}
-              <div className="bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900 text-white p-4 md:p-6 border-b-4 border-yellow-400 shadow-lg">
-                <h1 className="text-2xl md:text-3xl font-bold mb-4 text-center" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
-                  ⚖️ Rechtsanwaltskanzlei Dr. Müller ⚖️
-                </h1>
-                <div className="flex flex-wrap justify-center gap-2 md:gap-4 text-xs md:text-sm">
-                  <span className="border-2 border-yellow-400 px-2 md:px-3 py-1 bg-blue-800">HOME</span>
-                  <span className="border-2 border-yellow-400 px-2 md:px-3 py-1 bg-blue-800">
-                    ÜBER UNS
-                  </span>
-                  <span className="border-2 border-yellow-400 px-2 md:px-3 py-1 bg-blue-800">
-                    LEISTUNGEN
-                  </span>
-                  <span className="border-2 border-yellow-400 px-2 md:px-3 py-1 bg-blue-800">KONTAKT</span>
+            {/* Old Website Content - Poorly built, no concept */}
+            <div className="min-h-[1200px] bg-white">
+              {/* Top Banner - like old Geocities sites */}
+              <div className="bg-gradient-to-r from-red-500 via-yellow-400 to-red-500 p-2 text-center">
+                <div className="text-sm font-bold animate-pulse">
+                  🔥 WILLKOMMEN! Sie sind Besucher Nr. 000347 🔥 Neue Hotline: 0621/987654
                 </div>
               </div>
 
-              {/* Main Content */}
-              <div className="p-3 md:p-6">
-                {/* Welcome Section with blinking text */}
-                <div className="bg-gradient-to-r from-yellow-200 via-yellow-100 to-yellow-200 border-4 border-red-500 p-4 md:p-6 mb-6 text-center shadow-xl">
-                  <h2 className="text-xl md:text-2xl font-bold mb-3" style={{ fontFamily: 'Comic Sans MS, cursive', color: '#ff0000' }}>
-                    🎉 Willkommen bei Ihrer Anwaltskanzlei - Seit 1995 🎉
-                  </h2>
-                  <p className="text-base md:text-lg font-bold text-blue-900">Ihre Rechte sind unser Auftrag!</p>
-                  <div className="mt-3 bg-red-600 text-white px-4 py-2 inline-block animate-pulse font-bold">
-                    NEU: Jetzt auch Samstags geöffnet!
-                  </div>
-                </div>
-
-                {/* Main Text */}
-                <div className="bg-white border-4 border-blue-500 p-4 md:p-6 mb-6 shadow-lg">
-                  <h3 className="text-lg md:text-xl font-bold mb-3 text-blue-900 underline" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
-                    ⭐ Professionelle Rechtsberatung seit über 25 Jahren ⭐
-                  </h3>
-                  <p className="mb-4 text-sm md:text-base text-justify leading-relaxed">
-                    Seit über 25 Jahren vertreten wir erfolgreich die Interessen
-                    unserer Mandanten in allen Rechtsbereichen. Vertrauen Sie
-                    auf unsere Erfahrung und Kompetenz! Wir sind spezialisiert
-                    auf Familienrecht, Arbeitsrecht, Strafrecht, Zivilrecht und
-                    vieles mehr.
-                  </p>
-                  <p className="font-bold text-red-600 text-base md:text-lg">
-                    ☎️ Kontaktieren Sie uns noch heute für eine kostenlose
-                    Erstberatung!
-                  </p>
-                  <div className="mt-4 bg-green-200 border-2 border-green-600 p-3 text-center">
-                    <p className="font-bold text-green-800">✓ Über 1000 zufriedene Mandanten</p>
-                    <p className="font-bold text-green-800">✓ 95% Erfolgsquote</p>
-                    <p className="font-bold text-green-800">✓ Kostenlose Erstberatung</p>
-                  </div>
-                </div>
-
-                {/* Services */}
-                <div className="grid md:grid-cols-2 gap-4 mb-6">
-                  <div className="bg-gradient-to-br from-pink-200 to-pink-100 border-4 border-purple-500 p-4 shadow-lg">
-                    <h4 className="text-base md:text-lg font-bold mb-2 text-purple-900" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
-                      ⚖️ Familienrecht
-                    </h4>
-                    <p className="text-sm md:text-base mb-3">
-                      Scheidung, Sorgerecht, Unterhalt - wir helfen Ihnen
-                      kompetent und diskret!
-                    </p>
-                    <div className="mt-3 bg-blue-400 text-white p-2 text-center text-xs md:text-sm font-bold border-2 border-blue-600 animate-pulse">
-                      ⭐ Kostenlose Erstberatung ⭐
-                    </div>
-                  </div>
-                  <div className="bg-gradient-to-br from-green-200 to-green-100 border-4 border-orange-500 p-4 shadow-lg">
-                    <h4 className="text-base md:text-lg font-bold mb-2 text-orange-900" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
-                      🏢 Arbeitsrecht
-                    </h4>
-                    <p className="text-sm md:text-base mb-3">
-                      Kündigung, Abfindung, Arbeitsverträge - Ihre Rechte
-                      durchsetzen
-                    </p>
-                    <div className="mt-3 bg-green-500 text-white p-2 text-center text-xs md:text-sm font-bold border-2 border-green-700 animate-pulse">
-                      ⏰ Auch Termine außerhalb der Geschäftszeiten
-                    </div>
-                  </div>
-                </div>
-
-                {/* Contact */}
-                <div className="bg-gradient-to-r from-red-600 via-orange-600 to-red-600 text-white p-4 md:p-6 text-center border-4 border-yellow-300 shadow-2xl">
-                  <h3 className="text-xl md:text-2xl font-bold mb-3 animate-pulse" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
-                    📞 Kontaktieren Sie uns JETZT! 📞
-                  </h3>
-                  <p className="text-lg md:text-xl font-bold mb-2">Telefon: 0621 / 987654</p>
-                  <p className="text-base md:text-lg mt-2">E-Mail: info@mueller-law.de</p>
-                  <div className="mt-4 bg-yellow-400 text-black px-4 py-2 inline-block font-bold border-2 border-black">
-                    Rufen Sie an - Wir beraten Sie gerne!
-                  </div>
-                </div>
-
-                {/* More Content for Scrolling */}
-                <div className="mt-6 space-y-4">
-                  <div className="bg-white border-3 border-blue-600 p-4 shadow-lg">
-                    <h4 className="text-lg md:text-xl font-bold mb-3 text-blue-900" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
-                      🏆 Unsere Erfolge:
-                    </h4>
-                    <ul className="list-disc list-inside space-y-1 text-sm md:text-base">
-                      <li>Über 1000 erfolgreich abgeschlossene Fälle</li>
-                      <li>25 Jahre Berufserfahrung</li>
-                      <li>Spezialisierung auf komplexe Rechtsfälle</li>
-                      <li>Transparente und faire Kostenabrechnung</li>
-                      <li>Persönliche Betreuung durch erfahrene Anwälte</li>
-                      <li>Schnelle Reaktionszeiten</li>
-                    </ul>
-                  </div>
-
-                  <div className="bg-gradient-to-r from-blue-200 to-purple-200 border-3 border-purple-500 p-4 shadow-lg">
-                    <h4 className="text-lg md:text-xl font-bold mb-3" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
-                      ⏰ Öffnungszeiten:
-                    </h4>
-                    <div className="text-sm md:text-base">
-                      <p className="font-bold">Montag - Freitag: 8:00 - 18:00 Uhr</p>
-                      <p className="font-bold">Samstag: 9:00 - 14:00 Uhr</p>
-                      <p className="mt-3 font-bold text-red-600 bg-yellow-200 p-2 border-2 border-red-600">
-                        ⚡ Termine auch außerhalb der Öffnungszeiten nach
-                        Vereinbarung möglich!
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Testimonials */}
-                  <div className="bg-gradient-to-br from-green-100 to-yellow-100 border-4 border-green-500 p-4 shadow-lg">
-                    <h4 className="text-lg md:text-xl font-bold mb-3 text-green-900" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
-                      💬 Das sagen unsere Mandanten:
-                    </h4>
-                    <div className="space-y-3 text-sm md:text-base">
-                      <div className="bg-white p-3 border-2 border-blue-400">
-                        <p className="italic mb-2">"Hervorragende Beratung und professionelle Abwicklung meines Scheidungsverfahrens. Sehr empfehlenswert!"</p>
-                        <p className="font-bold text-blue-900">- Maria S., Mandantin seit 2022</p>
+              {/* Header - messy table layout */}
+              <table width="100%" cellPadding="0" cellSpacing="0" style={{ backgroundColor: '#000080' }}>
+                <tbody>
+                  <tr>
+                    <td width="30%" style={{ padding: '15px' }}>
+                      <div style={{ fontFamily: 'Times New Roman', color: 'yellow', fontSize: '24px', fontWeight: 'bold' }}>
+                        Dr. Müller
                       </div>
-                      <div className="bg-white p-3 border-2 border-blue-400">
-                        <p className="italic mb-2">"Kompetente Vertretung im Arbeitsrecht. Dank der Kanzlei konnte ich eine faire Abfindung erzielen."</p>
-                        <p className="font-bold text-blue-900">- Thomas K., Mandant seit 2021</p>
+                      <div style={{ fontFamily: 'Arial', color: 'white', fontSize: '11px' }}>
+                        Rechtsanwalt • Seit 1995
                       </div>
-                    </div>
-                  </div>
+                    </td>
+                    <td style={{ textAlign: 'right', padding: '10px' }}>
+                      <img src="https://web.archive.org/web/20091027053842im_/http://geocities.com/animated_gifs/under_construction.gif" 
+                           alt="construction" 
+                           style={{ width: '88px', height: '31px', display: 'inline-block' }}
+                           onError={(e) => { e.currentTarget.style.display = 'none' }} />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
 
-                  {/* Additional outdated elements */}
-                  <div className="bg-yellow-200 border-4 border-red-500 p-4 animate-pulse">
-                    <h4 className="text-base md:text-lg font-bold text-red-600">⚠️ Wichtiger Hinweis:</h4>
-                    <p className="text-xs md:text-sm mt-2 font-bold">
-                      Diese Website wurde zuletzt im Jahr 2010 aktualisiert.
-                      Aktuelle Informationen erhalten Sie telefonisch oder per
-                      E-Mail.
-                    </p>
+              {/* Navigation as table */}
+              <table width="100%" cellPadding="0" cellSpacing="0" style={{ backgroundColor: '#c0c0c0', borderBottom: '3px solid black' }}>
+                <tbody>
+                  <tr>
+                    <td style={{ padding: '5px 15px', borderRight: '1px solid black' }}>
+                      <a style={{ color: 'blue', textDecoration: 'underline', fontFamily: 'Arial', fontSize: '14px' }}>Home</a>
+                    </td>
+                    <td style={{ padding: '5px 15px', borderRight: '1px solid black' }}>
+                      <a style={{ color: 'blue', textDecoration: 'underline', fontFamily: 'Arial', fontSize: '14px' }}>Über uns</a>
+                    </td>
+                    <td style={{ padding: '5px 15px', borderRight: '1px solid black' }}>
+                      <a style={{ color: 'blue', textDecoration: 'underline', fontFamily: 'Arial', fontSize: '14px' }}>Leistungen</a>
+                    </td>
+                    <td style={{ padding: '5px 15px' }}>
+                      <a style={{ color: 'blue', textDecoration: 'underline', fontFamily: 'Arial', fontSize: '14px' }}>Kontakt</a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              {/* Main content - chaotic table layout */}
+              <table width="100%" cellPadding="0" cellSpacing="10">
+                <tbody>
+                  <tr>
+                    {/* Left sidebar */}
+                    <td width="20%" valign="top" style={{ backgroundColor: '#ffffe0', border: '2px solid #800000', padding: '10px' }}>
+                      <div style={{ fontFamily: 'Verdana', fontSize: '12px', fontWeight: 'bold', color: '#800000', marginBottom: '10px' }}>
+                        ★ AKTUELL ★
+                      </div>
+                      <div style={{ fontFamily: 'Arial', fontSize: '10px', lineHeight: '1.4', marginBottom: '15px' }}>
+                        Kostenlose Erstberatung! Rufen Sie jetzt an!
+                      </div>
+                      <div style={{ fontFamily: 'Verdana', fontSize: '12px', fontWeight: 'bold', color: '#800000', marginBottom: '10px' }}>
+                        KONTAKT
+                      </div>
+                      <div style={{ fontFamily: 'Arial', fontSize: '10px', lineHeight: '1.6' }}>
+                        Tel: 0621 / 987654<br />
+                        Fax: 0621 / 987655<br />
+                        Email:<br />
+                        <a style={{ color: 'blue', textDecoration: 'underline', fontSize: '9px' }}>info@mueller-law.de</a>
+                      </div>
+                      <div style={{ marginTop: '20px', padding: '5px', backgroundColor: '#ff6600', color: 'white', textAlign: 'center', fontWeight: 'bold', fontSize: '11px' }}>
+                        NEU: Auch Samstags!
+                      </div>
+                      <div style={{ marginTop: '15px', border: '1px solid #666', padding: '5px', backgroundColor: 'white' }}>
+                        <div style={{ fontFamily: 'Arial', fontSize: '9px', fontWeight: 'bold', marginBottom: '5px' }}>
+                          Besucherzähler:
+                        </div>
+                        <div style={{ fontFamily: 'Courier New', fontSize: '14px', color: 'red', fontWeight: 'bold' }}>
+                          000347
+                        </div>
+                      </div>
+                    </td>
+
+                    {/* Main content */}
+                    <td width="80%" valign="top" style={{ padding: '0 10px' }}>
+                      {/* Welcome banner */}
+                      <div style={{ backgroundColor: '#ffffcc', border: '3px dashed #ff0000', padding: '15px', marginBottom: '15px' }}>
+                        <center>
+                          <h1 style={{ fontFamily: 'Arial Black', color: '#cc0000', fontSize: '28px', margin: '0 0 10px 0' }}>
+                            Herzlich Willkommen!
+                          </h1>
+                          <p style={{ fontFamily: 'Comic Sans MS', fontSize: '16px', color: '#000080', fontWeight: 'bold' }}>
+                            🎓 Ihre Anwaltskanzlei in Mannheim 🎓
+                          </p>
+                        </center>
+                      </div>
+
+                      {/* Main text - no structure */}
+                      <div style={{ fontFamily: 'Times New Roman', fontSize: '14px', lineHeight: '1.5', textAlign: 'justify' }}>
+                        <p style={{ marginBottom: '10px' }}>
+                          <b><u>Professionelle Rechtsberatung seit über 25 Jahren</u></b>
+                        </p>
+                        <p style={{ marginBottom: '10px' }}>
+                          Seit über 25 Jahren vertreten wir erfolgreich die Interessen unserer Mandanten in allen Rechtsbereichen. 
+                          Vertrauen Sie auf unsere Erfahrung und Kompetenz! Wir sind spezialisiert auf Familienrecht, Arbeitsrecht, 
+                          Strafrecht, Zivilrecht und vieles mehr.
+                        </p>
+                      </div>
+
+                      {/* Random animated gif banner */}
+                      <div style={{ margin: '15px 0', padding: '10px', backgroundColor: '#ff99cc', border: '5px ridge #cc00cc', textAlign: 'center' }}>
+                        <span style={{ fontFamily: 'Impact', fontSize: '20px', color: '#ffffff', textShadow: '2px 2px #000000' }}>
+                          ✨ KOSTENLOSE ERSTBERATUNG ✨
+                        </span>
+                      </div>
+
+                      {/* Services - bad table */}
+                      <table width="100%" cellPadding="8" cellSpacing="0" style={{ marginTop: '20px' }}>
+                        <tbody>
+                          <tr>
+                            <td width="50%" style={{ backgroundColor: '#e6f2ff', border: '2px solid #0066cc', verticalAlign: 'top' }}>
+                              <h3 style={{ fontFamily: 'Arial', color: '#0066cc', fontSize: '16px', margin: '0 0 8px 0' }}>
+                                ⚖️ Familienrecht
+                              </h3>
+                              <div style={{ fontFamily: 'Verdana', fontSize: '11px' }}>
+                                <p>Scheidung, Sorgerecht, Unterhalt - wir helfen Ihnen kompetent und diskret!</p>
+                                <ul style={{ margin: '5px 0', paddingLeft: '20px' }}>
+                                  <li>Scheidungsverfahren</li>
+                                  <li>Sorgerecht & Umgang</li>
+                                  <li>Unterhalt & Versorgungsausgleich</li>
+                                </ul>
+                              </div>
+                            </td>
+                            <td width="50%" style={{ backgroundColor: '#fff0e6', border: '2px solid #cc6600', verticalAlign: 'top' }}>
+                              <h3 style={{ fontFamily: 'Arial', color: '#cc6600', fontSize: '16px', margin: '0 0 8px 0' }}>
+                                🏢 Arbeitsrecht
+                              </h3>
+                              <div style={{ fontFamily: 'Verdana', fontSize: '11px' }}>
+                                <p>Kündigung, Abfindung, Arbeitsverträge - Ihre Rechte durchsetzen</p>
+                                <ul style={{ margin: '5px 0', paddingLeft: '20px' }}>
+                                  <li>Kündigungsschutz</li>
+                                  <li>Abfindungsverhandlungen</li>
+                                  <li>Arbeitsverträge</li>
+                                </ul>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                      {/* Random centered content */}
+                      <div style={{ marginTop: '20px', textAlign: 'center' }}>
+                        <table width="90%" align="center" cellPadding="10" style={{ backgroundColor: '#ccffcc', border: '3px double #006600' }}>
+                          <tbody>
+                            <tr>
+                              <td>
+                                <div style={{ fontFamily: 'Georgia', fontSize: '18px', color: '#006600', fontWeight: 'bold', marginBottom: '10px' }}>
+                                  Unsere Erfolge:
+                                </div>
+                                <div style={{ fontFamily: 'Arial', fontSize: '12px', textAlign: 'left' }}>
+                                  ✓ Über 1000 zufriedene Mandanten<br />
+                                  ✓ 95% Erfolgsquote<br />
+                                  ✓ 25 Jahre Berufserfahrung<br />
+                                  ✓ Transparente Kostenabrechnung<br />
+                                  ✓ Persönliche Betreuung
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+
+                      {/* Testimonials - badly formatted */}
+                      <div style={{ marginTop: '25px', padding: '15px', backgroundColor: '#f0f0f0', border: '1px solid #999' }}>
+                        <h3 style={{ fontFamily: 'Courier New', fontSize: '16px', color: '#333', marginBottom: '10px' }}>
+                          {'>>>'} Das sagen unsere Mandanten:
+                        </h3>
+                        <div style={{ backgroundColor: 'white', padding: '10px', marginBottom: '10px', borderLeft: '4px solid #666' }}>
+                          <p style={{ fontFamily: 'Times New Roman', fontSize: '13px', fontStyle: 'italic', marginBottom: '5px' }}>
+                            "Hervorragende Beratung und professionelle Abwicklung meines Scheidungsverfahrens. Sehr empfehlenswert!"
+                          </p>
+                          <p style={{ fontFamily: 'Arial', fontSize: '11px', fontWeight: 'bold', color: '#666' }}>
+                            - Maria S., Mandantin seit 2022
+                          </p>
+                        </div>
+                        <div style={{ backgroundColor: 'white', padding: '10px', borderLeft: '4px solid #666' }}>
+                          <p style={{ fontFamily: 'Times New Roman', fontSize: '13px', fontStyle: 'italic', marginBottom: '5px' }}>
+                            "Kompetente Vertretung im Arbeitsrecht. Dank der Kanzlei konnte ich eine faire Abfindung erzielen."
+                          </p>
+                          <p style={{ fontFamily: 'Arial', fontSize: '11px', fontWeight: 'bold', color: '#666' }}>
+                            - Thomas K., Mandant seit 2021
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Opening hours - random placement */}
+                      <table width="100%" cellPadding="8" style={{ marginTop: '20px', backgroundColor: '#ffe6e6', border: '2px solid #cc0000' }}>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <div style={{ fontFamily: 'Impact', fontSize: '18px', color: '#cc0000', marginBottom: '10px' }}>
+                                ÖFFNUNGSZEITEN:
+                              </div>
+                              <div style={{ fontFamily: 'Verdana', fontSize: '12px' }}>
+                                <b>Montag - Freitag:</b> 8:00 - 18:00 Uhr<br />
+                                <b>Samstag:</b> 9:00 - 14:00 Uhr<br />
+                                <br />
+                                <span style={{ color: '#cc0000', fontWeight: 'bold' }}>
+                                  ⚡ Termine auch außerhalb der Öffnungszeiten nach Vereinbarung möglich!
+                                </span>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              {/* Footer - centered with bad formatting */}
+                      <div style={{ marginTop: '30px', padding: '20px', backgroundColor: '#000080', borderTop: '5px solid gold' }}>
+                <center>
+                  <div style={{ fontFamily: 'Arial', fontSize: '16px', color: 'yellow', fontWeight: 'bold', marginBottom: '10px' }}>
+                    📞 KONTAKTIEREN SIE UNS JETZT! 📞
                   </div>
-                </div>
+                  <div style={{ fontFamily: 'Times New Roman', fontSize: '14px', color: 'white' }}>
+                    <p>Telefon: 0621 / 987654</p>
+                    <p>E-Mail: info@mueller-law.de</p>
+                  </div>
+                  <div style={{ marginTop: '15px' }}>
+                    <button style={{ 
+                      backgroundColor: 'yellow', 
+                      color: 'black', 
+                      padding: '10px 20px', 
+                      border: '3px outset #666',
+                      fontFamily: 'Arial Black',
+                      fontSize: '14px',
+                      cursor: 'pointer'
+                    }}>
+                      {'>>>'} JETZT ANRUFEN! {'<<<'}
+                    </button>
+                  </div>
+                  <div style={{ marginTop: '20px', fontSize: '10px', color: '#cccccc', fontFamily: 'Arial' }}>
+                    <p>© 2010 Rechtsanwaltskanzlei Dr. Müller | Letzte Aktualisierung: 15.03.2010</p>
+                    <p style={{ fontSize: '8px' }}>Best viewed with Internet Explorer 6.0 at 1024x768 resolution</p>
+                  </div>
+                </center>
               </div>
             </div>
           </div>
@@ -964,17 +1062,6 @@ const BeforeAfterComparison = () => {
                 </div>
               </div>
 
-              {/* Labels */}
-              <div className="absolute top-8 -left-16 text-center">
-                <div className="bg-white text-slate-900 px-3 py-1 rounded-lg shadow-lg text-sm font-semibold border border-slate-200">
-                  Vorher
-                </div>
-              </div>
-              <div className="absolute top-8 -right-16 text-center">
-                <div className="bg-white text-slate-900 px-3 py-1 rounded-lg shadow-lg text-sm font-semibold border border-slate-200">
-                  Nachher
-                </div>
-              </div>
             </div>
           )}
         </div>
