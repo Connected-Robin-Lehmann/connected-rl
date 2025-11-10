@@ -9,10 +9,10 @@ const References = () => {
     {
       title: "TC Schwarz-Gelb Heidelberg e.V.",
       category: "Sportverein",
-      description: "Moderne Vereins-Website für einen traditionsreichen Tennisclub mit 612 Mitgliedern. Umfassende Funktionen für Mitgliederverwaltung, Veranstaltungen, News und Vereinsinformationen.",
-      technologies: ["React", "TypeScript", "Tailwind CSS", "Lovable"],
+      description: "Moderne Vereins-Website für einen traditionsreichen Tennisclub mit über 600 Mitgliedern. Umfassende Funktionen für Veranstaltungen, Nachrichten und Vereinsinformationen.",
+      technologies: ["React", "TypeScript", "Tailwind CSS"],
       image: "https://images.unsplash.com/photo-1554068865-24cecd4e34b8?w=600&h=400&fit=crop",
-      features: ["Responsive Design", "Event Management", "News System", "Member Portal"],
+      features: ["Responsive Design", "Event Management", "News System"],
       link: "https://preview--tcsgheidelberg.lovable.app/"
     }
   ];
