@@ -7,36 +7,13 @@ import { ExternalLink } from "lucide-react";
 const References = () => {
   const projects = [
     {
-      title: "E-Commerce Plattform",
-      category: "Online Shop",
-      description: "Vollständige E-Commerce-Lösung mit Produktkatalog, Warenkorb und Zahlungsabwicklung. Responsive Design mit optimierter Conversion-Rate.",
-      technologies: ["React", "Node.js", "Stripe", "MongoDB"],
-      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop",
-      features: ["Mobile-First Design", "SEO-Optimierung", "Payment Integration", "Analytics"]
-    },
-    {
-      title: "Unternehmens-Website",
-      category: "Corporate",
-      description: "Moderne Firmen-Website mit CMS, Blog-System und Kontaktformularen. Fokus auf professionellem Erscheinungsbild und Benutzerfreundlichkeit.",
-      technologies: ["WordPress", "PHP", "MySQL", "JavaScript"],
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop",
-      features: ["Content Management", "Blog System", "Multi-Language", "Contact Forms"]
-    },
-    {
-      title: "Portfolio-Website",
-      category: "Portfolio",
-      description: "Kreative Portfolio-Website für einen Fotografen mit Galerie-System und Buchungskalender. Besonderer Fokus auf Bildpräsentation.",
-      technologies: ["Next.js", "TypeScript", "Prisma", "PostgreSQL"],
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=400&fit=crop",
-      features: ["Image Gallery", "Booking System", "Admin Panel", "Performance Optimization"]
-    },
-    {
-      title: "Lokaler Dienstleister",
-      category: "Service",
-      description: "Website für lokalen Dienstleister mit Terminbuchung, Leistungsübersicht und Kundenbewertungen. Integration von Google Maps und Bewertungssystemen.",
-      technologies: ["React", "Express", "MongoDB", "Google APIs"],
-      image: "https://images.unsplash.com/photo-1553484771-371a605b060b?w=600&h=400&fit=crop",
-      features: ["Appointment Booking", "Review System", "Maps Integration", "Mobile App"]
+      title: "TC Schwarz-Gelb Heidelberg e.V.",
+      category: "Sportverein",
+      description: "Moderne Vereins-Website für einen traditionsreichen Tennisclub mit 612 Mitgliedern. Umfassende Funktionen für Mitgliederverwaltung, Veranstaltungen, News und Vereinsinformationen.",
+      technologies: ["React", "TypeScript", "Tailwind CSS", "Lovable"],
+      image: "https://images.unsplash.com/photo-1554068865-24cecd4e34b8?w=600&h=400&fit=crop",
+      features: ["Responsive Design", "Event Management", "News System", "Member Portal"],
+      link: "https://preview--tcsgheidelberg.lovable.app/"
     }
   ];
 
@@ -50,7 +27,7 @@ const References = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 mb-16">
+        <div className="grid lg:grid-cols-1 gap-8 mb-16 max-w-3xl mx-auto">
           {projects.map((project, index) => (
             <Card key={index} className="shadow-card hover:shadow-lg transition-all duration-300 bg-gradient-card border-0 overflow-hidden">
               <div className="aspect-video relative overflow-hidden">
@@ -66,8 +43,15 @@ const References = () => {
               
               <CardHeader>
                 <CardTitle className="flex items-center justify-between">
-                  {project.title}
-                  <ExternalLink className="w-5 h-5 text-muted-foreground" />
+                  <a 
+                    href={project.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="hover:text-primary transition-colors flex items-center gap-2"
+                  >
+                    {project.title}
+                    <ExternalLink className="w-5 h-5" />
+                  </a>
                 </CardTitle>
                 <CardDescription className="text-base">
                   {project.description}
@@ -107,12 +91,12 @@ const References = () => {
           <div className="text-center max-w-3xl mx-auto">
             <h2 className="text-2xl md:text-3xl font-bold mb-6">Was unsere Kunden sagen</h2>
             <blockquote className="text-lg italic text-muted-foreground mb-6">
-              "Robin hat unsere Website nicht nur technisch perfekt umgesetzt, sondern auch 
-              strategisch beraten. Die Zusammenarbeit war professionell und das Ergebnis 
-              übertrifft unsere Erwartungen. Wir können Connected uneingeschränkt empfehlen."
+              "Die Zusammenarbeit mit Robin war hervorragend. Er hat nicht nur eine moderne, 
+              funktionale Website erstellt, sondern auch unsere spezifischen Anforderungen als 
+              Sportverein perfekt umgesetzt. Das Ergebnis spricht für sich!"
             </blockquote>
             <div className="text-sm font-medium">
-              — Beispielkunde, Geschäftsführer einer mittelständischen Firma
+              — TC Schwarz-Gelb Heidelberg e.V.
             </div>
           </div>
         </div>
