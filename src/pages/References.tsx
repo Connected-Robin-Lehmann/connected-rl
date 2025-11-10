@@ -11,7 +11,7 @@ const References = () => {
       category: "Sportverein",
       description: "Moderne Vereins-Website für einen traditionsreichen Tennisclub mit über 600 Mitgliedern. Umfassende Funktionen für Veranstaltungen, Nachrichten und Vereinsinformationen.",
       technologies: ["React", "TypeScript", "Tailwind CSS"],
-      image: "https://images.unsplash.com/photo-1554068865-24cecd4e34b8?w=600&h=400&fit=crop",
+      image: "/images/tc-schwarzgelb-screenshot.png",
       features: ["Responsive Design", "Event Management", "News System"],
       link: "https://preview--tcsgheidelberg.lovable.app/"
     }
