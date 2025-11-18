@@ -13,7 +13,7 @@ const References = () => {
       technologies: ["React", "TypeScript", "Tailwind CSS"],
       image: "https://images.unsplash.com/photo-1554068865-24cecd4e34b8?w=600&h=400&fit=crop",
       features: ["Responsive Design", "Event Management", "News System"],
-      link: "https://preview--tcsgheidelberg.lovable.app/"
+      link: "https://tcsgheidelberg.vercel.app"
     }
   ];
 
