@@ -107,28 +107,28 @@ const BeforeAfterComparison = () => {
   return (
     <div className="mb-20">
       {/* Attention-grabbing header */}
-      <div className="text-center space-y-6 mb-16">
-        <div className="inline-flex items-center gap-2 bg-gradient-to-r from-accent/10 to-primary/10 px-6 py-3 rounded-full border border-accent/20 animate-pulse">
-          <Sparkles className="w-5 h-5 text-accent animate-spin" />
-          <span className="text-sm font-semibold text-accent">
+      <div className="text-center space-y-4 md:space-y-6 mb-8 md:mb-16 px-4">
+        <div className="inline-flex items-center gap-2 bg-gradient-to-r from-accent/10 to-primary/10 px-4 md:px-6 py-2 md:py-3 rounded-full border border-accent/20 animate-pulse">
+          <Sparkles className="w-4 md:w-5 h-4 md:h-5 text-accent animate-spin" />
+          <span className="text-xs md:text-sm font-semibold text-accent">
             Website Transformation
           </span>
-          <Sparkles className="w-5 h-5 text-accent animate-spin" />
+          <Sparkles className="w-4 md:w-5 h-4 md:h-5 text-accent animate-spin" />
         </div>
-        <h2 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+        <h2 className="text-3xl md:text-6xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
           Vorher vs. Nachher
         </h2>
-        <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+        <p className="text-base md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
           Erleben Sie die dramatische Transformation Ihrer Website interaktiv
         </p>
 
         {/* View Mode Controls */}
-        <div className="flex justify-center mb-8">
-          <div className="bg-white/80 backdrop-blur-sm p-2 rounded-xl border border-accent/20 shadow-lg">
-            <div className="flex gap-2">
+        <div className="flex justify-center mb-6 md:mb-8">
+          <div className="bg-white/80 backdrop-blur-sm p-1.5 md:p-2 rounded-xl border border-accent/20 shadow-lg">
+            <div className="flex gap-1.5 md:gap-2">
               <button
                 onClick={() => setViewMode("before")}
-                className={`px-4 md:px-6 py-2 md:py-3 rounded-lg font-medium transition-all duration-200 text-sm md:text-base ${
+                className={`px-3 md:px-6 py-2.5 md:py-3 rounded-lg font-medium transition-all duration-200 text-xs md:text-base min-w-[80px] md:min-w-0 ${
                   viewMode === "before"
                     ? "bg-accent text-white shadow-md"
                     : "text-accent hover:bg-accent/10"
@@ -138,7 +138,7 @@ const BeforeAfterComparison = () => {
               </button>
               <button
                 onClick={() => setViewMode("comparison")}
-                className={`px-4 md:px-6 py-2 md:py-3 rounded-lg font-medium transition-all duration-200 text-sm md:text-base ${
+                className={`px-3 md:px-6 py-2.5 md:py-3 rounded-lg font-medium transition-all duration-200 text-xs md:text-base min-w-[80px] md:min-w-0 ${
                   viewMode === "comparison"
                     ? "bg-accent text-white shadow-md"
                     : "text-accent hover:bg-accent/10"
@@ -148,7 +148,7 @@ const BeforeAfterComparison = () => {
               </button>
               <button
                 onClick={() => setViewMode("after")}
-                className={`px-4 md:px-6 py-2 md:py-3 rounded-lg font-medium transition-all duration-200 text-sm md:text-base ${
+                className={`px-3 md:px-6 py-2.5 md:py-3 rounded-lg font-medium transition-all duration-200 text-xs md:text-base min-w-[80px] md:min-w-0 ${
                   viewMode === "after"
                     ? "bg-accent text-white shadow-md"
                     : "text-accent hover:bg-accent/10"
@@ -162,18 +162,18 @@ const BeforeAfterComparison = () => {
 
         {/* Interactive instruction - only show in comparison mode */}
         {viewMode === "comparison" && (
-          <div className="flex items-center justify-center gap-3 text-sm text-accent animate-bounce mb-6">
-            <MousePointer2 className="w-4 h-4" />
-            <span>Ziehen Sie den Slider um den Unterschied zu sehen</span>
+          <div className="flex items-center justify-center gap-2 md:gap-3 text-xs md:text-sm text-accent animate-bounce mb-4 md:mb-6 px-4">
+            <MousePointer2 className="w-3 md:w-4 h-3 md:h-4" />
+            <span className="text-center">Ziehen Sie den Slider um den Unterschied zu sehen</span>
           </div>
         )}
       </div>
 
       {/* Interactive Before/After Display */}
-      <div className="max-w-[98vw] mx-auto mb-16">
+      <div className="max-w-[98vw] mx-auto mb-8 md:mb-16 px-2 md:px-0">
         <div
           ref={containerRef}
-          className={`relative h-[600px] md:h-[700px] rounded-2xl overflow-hidden shadow-2xl border-4 border-accent/20 ${
+          className={`relative h-[500px] md:h-[700px] rounded-xl md:rounded-2xl overflow-hidden shadow-2xl border-2 md:border-4 border-accent/20 ${
             viewMode === "comparison" ? "cursor-col-resize" : ""
           } select-none`}
           onMouseMove={viewMode === "comparison" ? handleMouseMove : undefined}
@@ -1039,7 +1039,7 @@ const BeforeAfterComparison = () => {
           {viewMode === "comparison" && (
             <div
               ref={sliderRef}
-              className="absolute top-0 h-full w-1 bg-white shadow-lg z-30 cursor-col-resize group"
+              className="absolute top-0 h-full w-1 md:w-1 bg-white shadow-lg z-30 cursor-col-resize group"
               style={{ left: `${sliderPosition}%` }}
               onMouseDown={handleMouseDown}
               onTouchStart={handleMouseDown}
@@ -1050,15 +1050,15 @@ const BeforeAfterComparison = () => {
                 <div className="absolute inset-0 bg-accent/30 blur-sm animate-pulse"></div>
               </div>
 
-              {/* Drag handle */}
+              {/* Drag handle - larger on mobile */}
               <div
-                className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-xl flex items-center justify-center border-2 border-accent group-hover:scale-125 transition-all duration-200 ${
-                  isDragging ? "scale-125" : "scale-90"
+                className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 md:w-10 md:h-10 bg-white rounded-full shadow-xl flex items-center justify-center border-2 border-accent group-hover:scale-125 transition-all duration-200 ${
+                  isDragging ? "scale-125" : "scale-100 md:scale-90"
                 }`}
               >
                 <div className="flex gap-0.5">
-                  <div className="w-0.5 h-4 bg-accent rounded-full"></div>
-                  <div className="w-0.5 h-4 bg-accent rounded-full"></div>
+                  <div className="w-0.5 h-5 md:h-4 bg-accent rounded-full"></div>
+                  <div className="w-0.5 h-5 md:h-4 bg-accent rounded-full"></div>
                 </div>
               </div>
 
@@ -1067,51 +1067,51 @@ const BeforeAfterComparison = () => {
         </div>
 
         {/* Feature Comparison */}
-        <div className="grid md:grid-cols-2 gap-8 mt-12 max-w-4xl mx-auto">
-          <div className="space-y-4 p-6 bg-destructive/5 rounded-xl border border-destructive/20">
-            <h4 className="text-xl font-bold text-destructive flex items-center gap-2">
-              <X className="w-6 h-6" />
+        <div className="grid md:grid-cols-2 gap-6 md:gap-8 mt-8 md:mt-12 max-w-4xl mx-auto px-4">
+          <div className="space-y-3 md:space-y-4 p-4 md:p-6 bg-destructive/5 rounded-xl border border-destructive/20">
+            <h4 className="text-lg md:text-xl font-bold text-destructive flex items-center gap-2">
+              <X className="w-5 md:w-6 h-5 md:h-6" />
               Probleme der alten Website
             </h4>
-            <div className="space-y-3 text-muted-foreground">
-              <div className="flex items-center gap-3">
+            <div className="space-y-2 md:space-y-3 text-sm md:text-base text-muted-foreground">
+              <div className="flex items-center gap-2 md:gap-3">
                 <X className="w-4 h-4 text-destructive flex-shrink-0" />
                 <span>Überladenes Design mit grellen Farben</span>
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 md:gap-3">
                 <X className="w-4 h-4 text-destructive flex-shrink-0" />
                 <span>Keine mobile Optimierung</span>
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 md:gap-3">
                 <X className="w-4 h-4 text-destructive flex-shrink-0" />
                 <span>Unübersichtliche Struktur</span>
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 md:gap-3">
                 <X className="w-4 h-4 text-destructive flex-shrink-0" />
                 <span>Veraltete Technik & schlechte Performance</span>
               </div>
             </div>
           </div>
 
-          <div className="space-y-4 p-6 bg-accent/5 rounded-xl border border-accent/20">
-            <h4 className="text-xl font-bold text-accent flex items-center gap-2">
-              <Check className="w-6 h-6" />
+          <div className="space-y-3 md:space-y-4 p-4 md:p-6 bg-accent/5 rounded-xl border border-accent/20">
+            <h4 className="text-lg md:text-xl font-bold text-accent flex items-center gap-2">
+              <Check className="w-5 md:w-6 h-5 md:h-6" />
               Vorteile der neuen Website
             </h4>
-            <div className="space-y-3 text-muted-foreground">
-              <div className="flex items-center gap-3">
+            <div className="space-y-2 md:space-y-3 text-sm md:text-base text-muted-foreground">
+              <div className="flex items-center gap-2 md:gap-3">
                 <Check className="w-4 h-4 text-accent flex-shrink-0" />
                 <span>Elegantes, warmes Farbschema</span>
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 md:gap-3">
                 <Check className="w-4 h-4 text-accent flex-shrink-0" />
                 <span>Vollständig responsive Design</span>
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 md:gap-3">
                 <Check className="w-4 h-4 text-accent flex-shrink-0" />
                 <span>Klare Struktur & intuitive Navigation</span>
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 md:gap-3">
                 <Check className="w-4 h-4 text-accent flex-shrink-0" />
                 <span>Moderne Technologien & beste Performance</span>
               </div>
@@ -1121,12 +1121,12 @@ const BeforeAfterComparison = () => {
       </div>
 
       {/* Call to Action */}
-      <div className="text-center bg-gradient-primary rounded-2xl p-8 md:p-12 text-white">
-        <h2 className="text-3xl font-bold mb-4">Bereit für Ihr Projekt?</h2>
-        <p className="text-lg mb-6 opacity-90">
+      <div className="text-center bg-gradient-primary rounded-xl md:rounded-2xl p-6 md:p-12 text-white mx-4 md:mx-0">
+        <h2 className="text-2xl md:text-3xl font-bold mb-3 md:mb-4">Bereit für Ihr Projekt?</h2>
+        <p className="text-base md:text-lg mb-5 md:mb-6 opacity-90">
           Lassen Sie uns gemeinsam Ihre digitale Präsenz optimieren
         </p>
-        <Button size="lg" variant="secondary" className="text-lg px-8" asChild>
+        <Button size="lg" variant="secondary" className="text-base md:text-lg px-6 md:px-8" asChild>
           <Link to="/contact">Jetzt Beratung anfragen</Link>
         </Button>
       </div>
