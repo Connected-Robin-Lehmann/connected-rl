@@ -1,5 +1,7 @@
 import Hero from "@/components/Hero";
 import BeforeAfterComparison from "@/components/BeforeAfterComparison";
+import MobileComparisonTabs from "@/components/MobileComparisonTabs";
+import MobileComparisonAnimated from "@/components/MobileComparisonAnimated";
 import {
   Card,
   CardContent,
@@ -57,10 +59,27 @@ const Home = () => {
         </div>
       </section> */}
 
-      {/* Before/After Comparison Section */}
-      <section className="py-20">
+      {/* Before/After Comparison Section - Desktop/Tablet */}
+      <section className="py-20 hidden md:block">
         <div className="container mx-auto px-4">
           <BeforeAfterComparison />
+        </div>
+      </section>
+
+      {/* Mobile Comparison Options */}
+      <section className="py-12 md:hidden">
+        <div className="container mx-auto px-4">
+          <div className="text-center space-y-4 mb-8">
+            <h2 className="text-2xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+              Vorher vs. Nachher
+            </h2>
+            <p className="text-sm text-muted-foreground">
+              Vergleiche zwei Mobile-Ansichten
+            </p>
+          </div>
+          
+          <MobileComparisonTabs />
+          <MobileComparisonAnimated />
         </div>
       </section>
 
