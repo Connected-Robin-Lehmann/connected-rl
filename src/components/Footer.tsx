@@ -17,7 +17,7 @@ const Footer = () => {
                 <strong>Inhaber:</strong> Robin Lehmann
               </p>
               <p>
-                <strong>E-Mail:</strong> connected.rl@gmail.com
+                <strong>E-Mail:</strong> robin.lehmann@connected-webdesign.de
               </p>
               <p>
                 <strong>Adresse:</strong> Dürerstraße 10, 69126 Heidelberg

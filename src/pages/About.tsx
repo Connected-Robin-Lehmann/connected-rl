@@ -272,7 +272,7 @@ const About = () => {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-8 mb-6 md:mb-8">
               <div className="flex items-center space-x-3">
                 <Mail className="w-4 h-4 md:w-5 md:h-5 text-primary" />
-                <span className="text-sm md:text-base">connected.rl@gmail.com</span>
+                <span className="text-sm md:text-base">robin.lehmann@connected-webdesign.de</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="w-4 h-4 md:w-5 md:h-5 text-primary" />
