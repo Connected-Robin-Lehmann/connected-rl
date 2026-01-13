@@ -102,6 +102,50 @@ const About = () => {
             </CardContent>
           </Card>
 
+          {/* Tech Stack Section */}
+          <Card className="bg-gradient-card border-0 shadow-card mb-16">
+            <CardContent className="p-8">
+              <h3 className="text-2xl font-bold mb-6 text-center">
+                Mein Tech-Stack
+              </h3>
+              <div className="grid md:grid-cols-2 gap-8">
+                {/* Frontend */}
+                <div>
+                  <h4 className="font-semibold mb-4 text-primary">Frontend</h4>
+                  <div className="flex flex-wrap gap-3">
+                    <span className="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium hover:bg-primary/20 transition-colors">
+                      React
+                    </span>
+                    <span className="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium hover:bg-primary/20 transition-colors">
+                      TypeScript
+                    </span>
+                    <span className="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium hover:bg-primary/20 transition-colors">
+                      Tailwind CSS
+                    </span>
+                    <span className="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium hover:bg-primary/20 transition-colors">
+                      Next.js
+                    </span>
+                  </div>
+                </div>
+                {/* Backend */}
+                <div>
+                  <h4 className="font-semibold mb-4 text-primary">Backend</h4>
+                  <div className="flex flex-wrap gap-3">
+                    <span className="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium hover:bg-primary/20 transition-colors">
+                      Node.js
+                    </span>
+                    <span className="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium hover:bg-primary/20 transition-colors">
+                      Supabase
+                    </span>
+                    <span className="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium hover:bg-primary/20 transition-colors">
+                      PostgreSQL
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
           {/* Contact Info */}
           <div className="text-center">
             <h3 className="text-2xl font-bold mb-6">Kontakt</h3>
