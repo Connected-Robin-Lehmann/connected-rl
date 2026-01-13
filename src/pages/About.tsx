@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, Phone, ArrowRight } from "lucide-react";
 
 const About = () => {
   return (
@@ -61,13 +61,15 @@ const About = () => {
             </div>
           </div>
 
-          {/* Values Section */}
+          {/* Values & Process Section */}
           <Card className="bg-gradient-card border-0 shadow-card mb-16">
             <CardContent className="p-8">
               <h3 className="text-2xl font-bold mb-6 text-center">
                 Meine Arbeitsweise
               </h3>
-              <div className="grid md:grid-cols-3 gap-8">
+              
+              {/* Values */}
+              <div className="grid md:grid-cols-3 gap-8 mb-12">
                 <div className="text-center">
                   <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4">
                     <span className="text-2xl text-white">🎯</span>
@@ -98,6 +100,96 @@ const About = () => {
                     Funktionalität.
                   </p>
                 </div>
+              </div>
+
+              {/* Divider */}
+              <div className="border-t border-primary/20 my-8" />
+
+              {/* Process Flowchart */}
+              <h4 className="text-xl font-semibold mb-8 text-center">
+                Der Projektablauf
+              </h4>
+              
+              {/* Desktop Flowchart */}
+              <div className="hidden md:flex items-center justify-center gap-2">
+                {/* Step 1 */}
+                <div className="flex flex-col items-center min-w-[120px]">
+                  <div className="w-14 h-14 bg-gradient-primary rounded-xl flex items-center justify-center mb-3 shadow-lg">
+                    <span className="text-lg font-bold text-white">1</span>
+                  </div>
+                  <h5 className="font-semibold text-sm mb-1">Erstkontakt</h5>
+                  <p className="text-xs text-muted-foreground text-center">Anfrage & Kennenlernen</p>
+                </div>
+                
+                <ArrowRight className="w-6 h-6 text-primary flex-shrink-0" />
+                
+                {/* Step 2 */}
+                <div className="flex flex-col items-center min-w-[120px]">
+                  <div className="w-14 h-14 bg-gradient-primary rounded-xl flex items-center justify-center mb-3 shadow-lg">
+                    <span className="text-lg font-bold text-white">2</span>
+                  </div>
+                  <h5 className="font-semibold text-sm mb-1">Beratung</h5>
+                  <p className="text-xs text-muted-foreground text-center">Ziele & Strategie</p>
+                </div>
+                
+                <ArrowRight className="w-6 h-6 text-primary flex-shrink-0" />
+                
+                {/* Step 3 */}
+                <div className="flex flex-col items-center min-w-[120px]">
+                  <div className="w-14 h-14 bg-gradient-primary rounded-xl flex items-center justify-center mb-3 shadow-lg">
+                    <span className="text-lg font-bold text-white">3</span>
+                  </div>
+                  <h5 className="font-semibold text-sm mb-1">Konzept</h5>
+                  <p className="text-xs text-muted-foreground text-center">Design & Entwurf</p>
+                </div>
+                
+                <ArrowRight className="w-6 h-6 text-primary flex-shrink-0" />
+                
+                {/* Step 4 */}
+                <div className="flex flex-col items-center min-w-[120px]">
+                  <div className="w-14 h-14 bg-gradient-primary rounded-xl flex items-center justify-center mb-3 shadow-lg">
+                    <span className="text-lg font-bold text-white">4</span>
+                  </div>
+                  <h5 className="font-semibold text-sm mb-1">Vertiefung</h5>
+                  <p className="text-xs text-muted-foreground text-center">Feedback & Feinschliff</p>
+                </div>
+                
+                <ArrowRight className="w-6 h-6 text-primary flex-shrink-0" />
+                
+                {/* Step 5 */}
+                <div className="flex flex-col items-center min-w-[120px]">
+                  <div className="w-14 h-14 bg-gradient-primary rounded-xl flex items-center justify-center mb-3 shadow-lg">
+                    <span className="text-lg font-bold text-white">5</span>
+                  </div>
+                  <h5 className="font-semibold text-sm mb-1">Launch</h5>
+                  <p className="text-xs text-muted-foreground text-center">Go-Live & Support</p>
+                </div>
+              </div>
+
+              {/* Mobile Flowchart - vertical */}
+              <div className="md:hidden flex flex-col items-center gap-3">
+                {[
+                  { num: "1", title: "Erstkontakt", desc: "Anfrage & Kennenlernen" },
+                  { num: "2", title: "Beratung", desc: "Ziele & Strategie" },
+                  { num: "3", title: "Konzept", desc: "Design & Entwurf" },
+                  { num: "4", title: "Vertiefung", desc: "Feedback & Feinschliff" },
+                  { num: "5", title: "Launch", desc: "Go-Live & Support" },
+                ].map((step, index) => (
+                  <div key={step.num} className="flex flex-col items-center">
+                    <div className="flex items-center gap-4 bg-background/50 rounded-xl p-4 w-full max-w-xs">
+                      <div className="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                        <span className="text-lg font-bold text-white">{step.num}</span>
+                      </div>
+                      <div>
+                        <h5 className="font-semibold text-sm">{step.title}</h5>
+                        <p className="text-xs text-muted-foreground">{step.desc}</p>
+                      </div>
+                    </div>
+                    {index < 4 && (
+                      <div className="w-0.5 h-4 bg-primary/30 my-1" />
+                    )}
+                  </div>
+                ))}
               </div>
             </CardContent>
           </Card>
@@ -146,75 +238,6 @@ const About = () => {
             </CardContent>
           </Card>
 
-          {/* Process Section */}
-          <Card className="bg-gradient-card border-0 shadow-card mb-16">
-            <CardContent className="p-8">
-              <h3 className="text-2xl font-bold mb-8 text-center">
-                So läuft eine Zusammenarbeit ab
-              </h3>
-              <div className="relative">
-                {/* Timeline Line - hidden on mobile */}
-                <div className="hidden md:block absolute top-8 left-0 right-0 h-0.5 bg-primary/20" />
-                
-                <div className="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-4">
-                  {/* Step 1 */}
-                  <div className="text-center relative">
-                    <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4 relative z-10">
-                      <span className="text-xl font-bold text-white">1</span>
-                    </div>
-                    <h4 className="font-semibold mb-2">Erstkontakt</h4>
-                    <p className="text-xs text-muted-foreground">
-                      Ihre Anfrage & erstes Kennenlernen
-                    </p>
-                  </div>
-
-                  {/* Step 2 */}
-                  <div className="text-center relative">
-                    <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4 relative z-10">
-                      <span className="text-xl font-bold text-white">2</span>
-                    </div>
-                    <h4 className="font-semibold mb-2">Beratung & Planung</h4>
-                    <p className="text-xs text-muted-foreground">
-                      Ziele definieren & Strategie entwickeln
-                    </p>
-                  </div>
-
-                  {/* Step 3 */}
-                  <div className="text-center relative">
-                    <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4 relative z-10">
-                      <span className="text-xl font-bold text-white">3</span>
-                    </div>
-                    <h4 className="font-semibold mb-2">Konzept & Entwurf</h4>
-                    <p className="text-xs text-muted-foreground">
-                      Design & erste Umsetzung
-                    </p>
-                  </div>
-
-                  {/* Step 4 */}
-                  <div className="text-center relative">
-                    <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4 relative z-10">
-                      <span className="text-xl font-bold text-white">4</span>
-                    </div>
-                    <h4 className="font-semibold mb-2">Vertiefung</h4>
-                    <p className="text-xs text-muted-foreground">
-                      Feedback & Feinschliff
-                    </p>
-                  </div>
-
-                  {/* Step 5 */}
-                  <div className="text-center relative">
-                    <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4 relative z-10">
-                      <span className="text-xl font-bold text-white">5</span>
-                    </div>
-                    <h4 className="font-semibold mb-2">Launch</h4>
-                    <p className="text-xs text-muted-foreground">
-                      Go-Live & Betreuung
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
 
           {/* Contact Info */}
           <div className="text-center">
