@@ -8,9 +8,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Globe, Shield, Zap } from "lucide-react";
+import { Globe, Shield, Zap, ArrowRight } from "lucide-react";
 
 const Home = () => {
   const features = [
@@ -69,6 +70,53 @@ const Home = () => {
       <section className="py-6 md:hidden">
         <div className="container mx-auto px-3">
           <MobileComparisonTabs />
+        </div>
+      </section>
+
+      {/* References Preview Section */}
+      <section className="py-12 md:py-20">
+        <div className="container mx-auto px-4">
+          <div className="text-center space-y-2 md:space-y-4 mb-8 md:mb-12">
+            <h2 className="text-2xl md:text-4xl font-bold">Unsere Referenzen</h2>
+            <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
+              Erfolgreiche Projekte, die für sich sprechen
+            </p>
+          </div>
+
+          <div className="max-w-4xl mx-auto">
+            <Card className="shadow-card hover:shadow-lg transition-all duration-300 bg-gradient-card border-0 overflow-hidden">
+              <div className="grid md:grid-cols-2 gap-0">
+                <div className="aspect-video md:aspect-auto relative overflow-hidden">
+                  <img
+                    src="https://images.unsplash.com/photo-1554068865-24cecd4e34b8?w=600&h=400&fit=crop"
+                    alt="TC Schwarz-Gelb Heidelberg"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute top-3 left-3">
+                    <Badge variant="secondary" className="text-xs">Sportverein</Badge>
+                  </div>
+                </div>
+                
+                <div className="p-5 md:p-6 flex flex-col justify-center">
+                  <h3 className="text-lg md:text-xl font-bold mb-2">TC Schwarz-Gelb Heidelberg e.V.</h3>
+                  <p className="text-sm md:text-base text-muted-foreground mb-4">
+                    Moderne Vereins-Website für einen traditionsreichen Tennisclub mit über 600 Mitgliedern.
+                  </p>
+                  <div className="flex flex-wrap gap-1.5 mb-4">
+                    <Badge variant="outline" className="text-xs">React</Badge>
+                    <Badge variant="outline" className="text-xs">TypeScript</Badge>
+                    <Badge variant="outline" className="text-xs">Tailwind CSS</Badge>
+                  </div>
+                  <Button asChild variant="outline" size="sm" className="w-fit">
+                    <Link to="/references" className="flex items-center gap-2">
+                      Alle Referenzen ansehen
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+            </Card>
+          </div>
         </div>
       </section>
 
