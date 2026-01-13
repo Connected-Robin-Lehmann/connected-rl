@@ -66,9 +66,9 @@ const Hero = () => {
               </p>
             </div>
 
-            {/* Feature Cards - Horizontal scroll on mobile, grid on desktop */}
-            <div className="flex gap-3 overflow-x-auto pb-2 -mx-4 px-4 md:mx-0 md:px-0 md:grid md:grid-cols-3 md:gap-4 md:overflow-visible scrollbar-hide">
-              <div className="flex-shrink-0 w-40 md:w-auto flex items-center gap-3 p-3 md:p-4 rounded-lg bg-card/50 border border-border/50 backdrop-blur-sm hover-lift">
+            {/* Feature Cards - Stack on mobile, grid on desktop */}
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-3 md:gap-4">
+              <div className="flex items-center gap-3 p-3 md:p-4 rounded-lg bg-card/50 border border-border/50 backdrop-blur-sm hover-lift">
                 <div className="p-2 rounded-lg bg-primary/10">
                   <Code className="w-4 h-4 md:w-5 md:h-5 text-primary" />
                 </div>
@@ -80,7 +80,7 @@ const Hero = () => {
                 </div>
               </div>
 
-              <div className="flex-shrink-0 w-40 md:w-auto flex items-center gap-3 p-3 md:p-4 rounded-lg bg-card/50 border border-border/50 backdrop-blur-sm hover-lift">
+              <div className="flex items-center gap-3 p-3 md:p-4 rounded-lg bg-card/50 border border-border/50 backdrop-blur-sm hover-lift">
                 <div className="p-2 rounded-lg bg-accent/10">
                   <Palette className="w-4 h-4 md:w-5 md:h-5 text-accent" />
                 </div>
@@ -92,7 +92,7 @@ const Hero = () => {
                 </div>
               </div>
 
-              <div className="flex-shrink-0 w-40 md:w-auto flex items-center gap-3 p-3 md:p-4 rounded-lg bg-card/50 border border-border/50 backdrop-blur-sm hover-lift">
+              <div className="flex items-center gap-3 p-3 md:p-4 rounded-lg bg-card/50 border border-border/50 backdrop-blur-sm hover-lift">
                 <div className="p-2 rounded-lg bg-primary/10">
                   <Zap className="w-4 h-4 md:w-5 md:h-5 text-primary" />
                 </div>
