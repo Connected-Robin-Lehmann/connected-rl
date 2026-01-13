@@ -45,94 +45,69 @@ const Hero = () => {
     //     </div>
     //   </div>
     // </section>
-    <section className="min-h-max relative overflow-hidden items-center flex py-12">
-      {/* Animated background elements */}
-      {/* <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-20 left-10 w-32 h-32 bg-primary/5 rounded-full blur-xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-20 w-48 h-48 bg-accent/5 rounded-full blur-2xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-gradient-primary opacity-3 rounded-full blur-3xl animate-pulse delay-500"></div>
-      </div> */}
-
-      <div className="container mx-auto px-4 h-full flex items-center relative z-10">
-        <div className="grid lg:grid-cols-12 gap-12 items-center w-full">
-          {/* Left Content - 7 columns */}
-          <div className="lg:col-span-7 space-y-8 animate-fade-in-left">
-            <div className="space-y-6">
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-none">
+    <section className="relative overflow-hidden py-8 md:py-12">
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="grid lg:grid-cols-12 gap-6 lg:gap-12 items-center">
+          {/* Left Content - 7 columns on desktop, full width on mobile */}
+          <div className="lg:col-span-7 space-y-6 lg:space-y-8 animate-fade-in-left order-1">
+            <div className="space-y-4 lg:space-y-6">
+              <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-none">
                 <span className="block text-foreground">Digitale</span>
                 <span className="block text-gradient-primary">Exzellenz</span>
-                <span className="block text-muted-foreground text-2xl md:text-3lg lg:text-4xl font-normal mt-4">
+                <span className="block text-muted-foreground text-xl sm:text-2xl lg:text-4xl font-normal mt-2 lg:mt-4">
                   für Ihr Unternehmen
                 </span>
               </h1>
 
-              <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
+              <p className="text-base lg:text-lg text-muted-foreground leading-relaxed max-w-2xl">
                 Connected verbindet innovative Technologie mit erstklassigem
                 Design. Wir erschaffen digitale Erlebnisse, die Ihre Kunden
                 begeistern und Ihr Business vorantreiben.
               </p>
             </div>
 
-            {/* Feature Cards */}
-            <div className="grid md:grid-cols-3 gap-4">
-              <div className="flex items-center gap-3 p-4 rounded-lg bg-card/50 border border-border/50 backdrop-blur-sm hover-lift">
+            {/* Feature Cards - Horizontal scroll on mobile, grid on desktop */}
+            <div className="flex gap-3 overflow-x-auto pb-2 -mx-4 px-4 md:mx-0 md:px-0 md:grid md:grid-cols-3 md:gap-4 md:overflow-visible scrollbar-hide">
+              <div className="flex-shrink-0 w-40 md:w-auto flex items-center gap-3 p-3 md:p-4 rounded-lg bg-card/50 border border-border/50 backdrop-blur-sm hover-lift">
                 <div className="p-2 rounded-lg bg-primary/10">
-                  <Code className="w-5 h-5 text-primary" />
+                  <Code className="w-4 h-4 md:w-5 md:h-5 text-primary" />
                 </div>
                 <div>
-                  <div className="font-medium text-sm">Clean Code</div>
+                  <div className="font-medium text-xs md:text-sm">Clean Code</div>
                   <div className="text-xs text-muted-foreground">
                     Wartbar &amp; skalierbar
                   </div>
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 p-4 rounded-lg bg-card/50 border border-border/50 backdrop-blur-sm hover-lift">
+              <div className="flex-shrink-0 w-40 md:w-auto flex items-center gap-3 p-3 md:p-4 rounded-lg bg-card/50 border border-border/50 backdrop-blur-sm hover-lift">
                 <div className="p-2 rounded-lg bg-accent/10">
-                  <Palette className="w-5 h-5 text-accent" />
+                  <Palette className="w-4 h-4 md:w-5 md:h-5 text-accent" />
                 </div>
                 <div>
-                  <div className="font-medium text-sm">Modern Design</div>
+                  <div className="font-medium text-xs md:text-sm">Modern Design</div>
                   <div className="text-xs text-muted-foreground">
                     Zeitlos &amp; ansprechend
                   </div>
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 p-4 rounded-lg bg-card/50 border border-border/50 backdrop-blur-sm hover-lift">
+              <div className="flex-shrink-0 w-40 md:w-auto flex items-center gap-3 p-3 md:p-4 rounded-lg bg-card/50 border border-border/50 backdrop-blur-sm hover-lift">
                 <div className="p-2 rounded-lg bg-primary/10">
-                  <Zap className="w-5 h-5 text-primary" />
+                  <Zap className="w-4 h-4 md:w-5 md:h-5 text-primary" />
                 </div>
                 <div>
-                  <div className="font-medium text-sm">Performance</div>
+                  <div className="font-medium text-xs md:text-sm">Performance</div>
                   <div className="text-xs text-muted-foreground">
                     Blitzschnell &amp; optimiert
                   </div>
                 </div>
               </div>
             </div>
-
-            {/* CTA */}
-            {/* <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Button
-                size="lg"
-                className="group bg-gradient-primary border-0 shadow-hero hover-lift text-lg px-8"
-              >
-                Projekt besprechen
-                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="hover-lift text-lg px-8 border-primary/20"
-              >
-                Arbeiten ansehen
-              </Button>
-            </div> */}
           </div>
 
-          {/* Right Visual - 5 columns */}
-          <div className="lg:col-span-5 relative animate-fade-in-right">
+          {/* Right Visual - Hidden on mobile, visible on lg+ */}
+          <div className="hidden lg:block lg:col-span-5 relative animate-fade-in-right order-2">
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-secondary opacity-20 blur-2xl rounded-3xl transform rotate-6"></div>
               <img
