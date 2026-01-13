@@ -54,7 +54,7 @@ const Datenschutz = () => {
               <p>Robin Lehmann</p>
               <p>Dürerstraße 10</p>
               <p>69126 Heidelberg</p>
-              <p>E-Mail: connected.rl@gmail.com</p>
+              <p>E-Mail: robin.lehmann@connected-webdesign.de</p>
             </div>
           </section>
 

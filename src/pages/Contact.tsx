@@ -81,8 +81,8 @@ const Contact = () => {
     {
       icon: Mail,
       title: "E-Mail",
-      value: "connected.rl@gmail.com",
-      link: "mailto:connected.rl@gmail.com",
+      value: "robin.lehmann@connected-webdesign.de",
+      link: "mailto:robin.lehmann@connected-webdesign.de",
     },
     {
       icon: Phone,
