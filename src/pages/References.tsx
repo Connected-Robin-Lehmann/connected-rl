@@ -87,7 +87,7 @@ const References = () => {
         </div>
 
         {/* Testimonial Section */}
-        <div className="bg-muted/50 rounded-2xl p-8 md:p-12 mb-16">
+        {/* <div className="bg-muted/50 rounded-2xl p-8 md:p-12 mb-16">
           <div className="text-center max-w-3xl mx-auto">
             <h2 className="text-2xl md:text-3xl font-bold mb-6">Was unsere Kunden sagen</h2>
             <blockquote className="text-lg italic text-muted-foreground mb-6">
@@ -99,7 +99,7 @@ const References = () => {
               — TC Schwarz-Gelb Heidelberg e.V.
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className="text-center bg-gradient-primary rounded-2xl p-8 md:p-12 text-white">
           <h2 className="text-3xl font-bold mb-4">Ihr Projekt ist der nächste Erfolg</h2>
