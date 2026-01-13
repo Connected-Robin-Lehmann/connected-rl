@@ -146,6 +146,76 @@ const About = () => {
             </CardContent>
           </Card>
 
+          {/* Process Section */}
+          <Card className="bg-gradient-card border-0 shadow-card mb-16">
+            <CardContent className="p-8">
+              <h3 className="text-2xl font-bold mb-8 text-center">
+                So läuft eine Zusammenarbeit ab
+              </h3>
+              <div className="relative">
+                {/* Timeline Line - hidden on mobile */}
+                <div className="hidden md:block absolute top-8 left-0 right-0 h-0.5 bg-primary/20" />
+                
+                <div className="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-4">
+                  {/* Step 1 */}
+                  <div className="text-center relative">
+                    <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4 relative z-10">
+                      <span className="text-xl font-bold text-white">1</span>
+                    </div>
+                    <h4 className="font-semibold mb-2">Erstkontakt</h4>
+                    <p className="text-xs text-muted-foreground">
+                      Ihre Anfrage & erstes Kennenlernen
+                    </p>
+                  </div>
+
+                  {/* Step 2 */}
+                  <div className="text-center relative">
+                    <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4 relative z-10">
+                      <span className="text-xl font-bold text-white">2</span>
+                    </div>
+                    <h4 className="font-semibold mb-2">Beratung & Planung</h4>
+                    <p className="text-xs text-muted-foreground">
+                      Ziele definieren & Strategie entwickeln
+                    </p>
+                  </div>
+
+                  {/* Step 3 */}
+                  <div className="text-center relative">
+                    <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4 relative z-10">
+                      <span className="text-xl font-bold text-white">3</span>
+                    </div>
+                    <h4 className="font-semibold mb-2">Konzept & Entwurf</h4>
+                    <p className="text-xs text-muted-foreground">
+                      Design & erste Umsetzung
+                    </p>
+                  </div>
+
+                  {/* Step 4 */}
+                  <div className="text-center relative">
+                    <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4 relative z-10">
+                      <span className="text-xl font-bold text-white">4</span>
+                    </div>
+                    <h4 className="font-semibold mb-2">Vertiefung</h4>
+                    <p className="text-xs text-muted-foreground">
+                      Feedback & Feinschliff
+                    </p>
+                  </div>
+
+                  {/* Step 5 */}
+                  <div className="text-center relative">
+                    <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4 relative z-10">
+                      <span className="text-xl font-bold text-white">5</span>
+                    </div>
+                    <h4 className="font-semibold mb-2">Launch</h4>
+                    <p className="text-xs text-muted-foreground">
+                      Go-Live & Betreuung
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
           {/* Contact Info */}
           <div className="text-center">
             <h3 className="text-2xl font-bold mb-6">Kontakt</h3>
