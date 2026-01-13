@@ -166,30 +166,29 @@ const About = () => {
                 </div>
               </div>
 
-              {/* Mobile Flowchart - vertical */}
-              <div className="md:hidden flex flex-col items-center gap-3">
-                {[
-                  { num: "1", title: "Erstkontakt", desc: "Anfrage & Kennenlernen" },
-                  { num: "2", title: "Beratung", desc: "Ziele & Strategie" },
-                  { num: "3", title: "Konzept", desc: "Design & Entwurf" },
-                  { num: "4", title: "Vertiefung", desc: "Feedback & Feinschliff" },
-                  { num: "5", title: "Launch", desc: "Go-Live & Support" },
-                ].map((step, index) => (
-                  <div key={step.num} className="flex flex-col items-center">
-                    <div className="flex items-center gap-4 bg-background/50 rounded-xl p-4 w-full max-w-xs">
-                      <div className="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
-                        <span className="text-lg font-bold text-white">{step.num}</span>
+              {/* Mobile Flowchart - compact horizontal scroll */}
+              <div className="md:hidden overflow-x-auto pb-4 -mx-5">
+                <div className="flex items-start gap-1 px-5 min-w-max">
+                  {[
+                    { num: "1", title: "Erstkontakt" },
+                    { num: "2", title: "Beratung" },
+                    { num: "3", title: "Konzept" },
+                    { num: "4", title: "Vertiefung" },
+                    { num: "5", title: "Launch" },
+                  ].map((step, index) => (
+                    <div key={step.num} className="flex items-center">
+                      <div className="flex flex-col items-center w-16">
+                        <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center shadow-md">
+                          <span className="text-sm font-bold text-white">{step.num}</span>
+                        </div>
+                        <span className="text-xs font-medium mt-2 text-center leading-tight">{step.title}</span>
                       </div>
-                      <div>
-                        <h5 className="font-semibold text-sm">{step.title}</h5>
-                        <p className="text-xs text-muted-foreground">{step.desc}</p>
-                      </div>
+                      {index < 4 && (
+                        <ArrowRight className="w-4 h-4 text-primary/60 mx-0.5 flex-shrink-0 mt-[-12px]" />
+                      )}
                     </div>
-                    {index < 4 && (
-                      <div className="w-0.5 h-4 bg-primary/30 my-1" />
-                    )}
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </CardContent>
           </Card>
