@@ -4,7 +4,7 @@ import { Star, Sparkles, MousePointer2 } from "lucide-react";
 type TabMode = "before" | "after";
 
 const MobileComparisonTabs = () => {
-  const [activeTab, setActiveTab] = useState<TabMode>("after");
+  const [activeTab, setActiveTab] = useState<TabMode>("before");
 
   return (
     <div className="mb-8">
