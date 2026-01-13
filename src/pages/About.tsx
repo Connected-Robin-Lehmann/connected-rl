@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Mail, Phone, ArrowRight } from "lucide-react";
+import { Mail, Phone, ArrowRight, ArrowDown } from "lucide-react";
 
 const About = () => {
   return (
@@ -166,29 +166,30 @@ const About = () => {
                 </div>
               </div>
 
-              {/* Mobile Flowchart - compact horizontal scroll */}
-              <div className="md:hidden overflow-x-auto pb-4 -mx-5">
-                <div className="flex items-start gap-1 px-5 min-w-max">
-                  {[
-                    { num: "1", title: "Erstkontakt" },
-                    { num: "2", title: "Beratung" },
-                    { num: "3", title: "Konzept" },
-                    { num: "4", title: "Vertiefung" },
-                    { num: "5", title: "Launch" },
-                  ].map((step, index) => (
-                    <div key={step.num} className="flex items-center">
-                      <div className="flex flex-col items-center w-16">
-                        <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center shadow-md">
-                          <span className="text-sm font-bold text-white">{step.num}</span>
-                        </div>
-                        <span className="text-xs font-medium mt-2 text-center leading-tight">{step.title}</span>
+              {/* Mobile Flowchart - vertical */}
+              <div className="md:hidden flex flex-col items-center gap-2">
+                {[
+                  { num: "1", title: "Erstkontakt", desc: "Anfrage & Kennenlernen" },
+                  { num: "2", title: "Beratung", desc: "Ziele & Strategie" },
+                  { num: "3", title: "Konzept", desc: "Design & Entwurf" },
+                  { num: "4", title: "Vertiefung", desc: "Feedback & Feinschliff" },
+                  { num: "5", title: "Launch", desc: "Go-Live & Support" },
+                ].map((step, index) => (
+                  <div key={step.num} className="flex flex-col items-center w-full">
+                    <div className="flex items-center gap-3 bg-background/60 backdrop-blur-sm border border-primary/10 rounded-xl p-3 w-full max-w-[280px] shadow-sm">
+                      <div className="w-11 h-11 bg-gradient-primary rounded-xl flex items-center justify-center flex-shrink-0 shadow-md">
+                        <span className="text-base font-bold text-white">{step.num}</span>
                       </div>
-                      {index < 4 && (
-                        <ArrowRight className="w-4 h-4 text-primary/60 mx-0.5 flex-shrink-0 mt-[-12px]" />
-                      )}
+                      <div className="flex-1 min-w-0">
+                        <h5 className="font-semibold text-sm">{step.title}</h5>
+                        <p className="text-xs text-muted-foreground">{step.desc}</p>
+                      </div>
                     </div>
-                  ))}
-                </div>
+                    {index < 4 && (
+                      <ArrowDown className="w-5 h-5 text-primary/50 my-1" />
+                    )}
+                  </div>
+                ))}
               </div>
             </CardContent>
           </Card>
