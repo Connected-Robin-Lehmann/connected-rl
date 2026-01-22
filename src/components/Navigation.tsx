@@ -17,11 +17,18 @@ const Navigation = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-        <Link to="/" className="text-2xl font-bold text-primary">
-          Connected
-        </Link>
+    <>
+      <a 
+        href="#main-content" 
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[60] focus:bg-primary focus:text-primary-foreground focus:px-4 focus:py-2 focus:rounded-md"
+      >
+        Zum Inhalt springen
+      </a>
+      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+          <Link to="/" className="text-2xl font-bold text-primary" aria-label="Connected - Zur Startseite">
+            Connected
+          </Link>
         
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-6">
@@ -75,9 +82,10 @@ const Navigation = () => {
               </Button>
             </nav>
           </SheetContent>
-        </Sheet>
-      </div>
-    </header>
+          </Sheet>
+        </div>
+      </header>
+    </>
   );
 };
 

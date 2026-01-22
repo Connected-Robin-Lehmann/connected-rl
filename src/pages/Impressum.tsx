@@ -19,7 +19,12 @@ const Impressum = () => {
           <section>
             <h2 className="text-2xl font-semibold mb-4">Kontakt</h2>
             <div className="space-y-2">
-              <p><strong>E-Mail:</strong> robin.lehmann@connected-webdesign.de</p>
+              <p>
+                <strong>E-Mail:</strong>{" "}
+                <a href="mailto:robin.lehmann@connected-webdesign.de" className="text-primary hover:underline">
+                  robin.lehmann@connected-webdesign.de
+                </a>
+              </p>
             </div>
           </section>
 
