@@ -27,19 +27,30 @@ const References = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-1 gap-8 mb-16 max-w-3xl mx-auto">
+        <div className="grid lg:grid-cols-1 gap-8 mb-16 max-w-4xl mx-auto">
           {projects.map((project, index) => (
             <Card key={index} className="shadow-card hover:shadow-lg transition-all duration-300 bg-gradient-card border-0 overflow-hidden">
-              <div className="aspect-video relative overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+              <a 
+                href={project.link} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="block aspect-[16/10] relative overflow-hidden bg-muted group cursor-pointer"
+              >
+                <iframe
+                  src={project.link}
+                  title={`Vorschau: ${project.title}`}
+                  className="w-full h-full border-0 pointer-events-none scale-100"
+                  loading="lazy"
                 />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
+                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-primary text-primary-foreground px-4 py-2 rounded-md flex items-center gap-2 font-medium">
+                    Website besuchen <ExternalLink className="w-4 h-4" />
+                  </div>
+                </div>
                 <div className="absolute top-4 left-4">
                   <Badge variant="secondary">{project.category}</Badge>
                 </div>
-              </div>
+              </a>
               
               <CardHeader>
                 <CardTitle className="flex items-center justify-between">
