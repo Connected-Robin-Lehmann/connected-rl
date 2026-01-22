@@ -53,73 +53,32 @@ const Services = () => {
     },
   ];
 
-  const codeExamples = [
-    {
-      title: "React Komponente",
-      language: "tsx",
-      description: "Wiederverwendbare UI-Komponenten mit TypeScript",
-      code: `import { Button } from "@/components/ui/button";
+  const codeSnippet = `import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 
-const HeroSection = () => {
+const WelcomeSection = () => {
   return (
-    <section className="py-20 bg-gradient-primary">
-      <h1 className="text-5xl font-bold">
-        Willkommen
-      </h1>
-      <Button size="lg">
-        Jetzt starten
-      </Button>
+    <section className="py-20">
+      <Card className="p-8 shadow-lg">
+        <h1 className="text-4xl font-bold">
+          Willkommen
+        </h1>
+        <p className="text-muted-foreground">
+          Moderne Webentwicklung mit React
+        </p>
+        <Button size="lg" className="mt-6">
+          Jetzt starten
+        </Button>
+      </Card>
     </section>
   );
-};`,
-    },
-    {
-      title: "Tailwind CSS Styling",
-      language: "css",
-      description: "Utility-First CSS für schnelles, konsistentes Design",
-      code: `/* Design System mit CSS Variables */
-:root {
-  --primary: 221 83% 53%;
-  --background: 0 0% 100%;
-  --foreground: 222 47% 11%;
-}
-
-/* Responsive Grid Layout */
-.grid {
-  @apply grid-cols-1 md:grid-cols-2 
-         lg:grid-cols-3 gap-8;
-}`,
-    },
-    {
-      title: "Vite Konfiguration",
-      language: "typescript",
-      description: "Blitzschnelle Build-Tools für optimale Performance",
-      code: `import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import path from 'path';
-
-export default defineConfig({
-  plugins: [react()],
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-    },
-  },
-  build: {
-    minify: 'terser',
-    sourcemap: false,
-  },
-});`,
-    },
-  ];
+};`;
 
   const techStack = [
-    { name: "React", description: "UI Library", color: "bg-blue-500" },
-    { name: "TypeScript", description: "Type Safety", color: "bg-blue-700" },
-    { name: "Vite", description: "Build Tool", color: "bg-purple-500" },
-    { name: "Tailwind CSS", description: "Styling", color: "bg-cyan-500" },
-    { name: "shadcn/ui", description: "Components", color: "bg-zinc-700" },
-    { name: "React Router", description: "Navigation", color: "bg-red-500" },
+    { name: "React", color: "bg-sky-400" },
+    { name: "TypeScript", color: "bg-blue-600" },
+    { name: "Vite", color: "bg-purple-500" },
+    { name: "Tailwind CSS", color: "bg-cyan-400" },
   ];
 
   return (
@@ -165,66 +124,129 @@ export default defineConfig({
           ))}
         </div>
 
-        {/* Tech Stack Section */}
+        {/* Code Showcase Section */}
         <div className="mb-20">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Moderne Technologien</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Moderne Webentwicklung</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Ich nutze die neuesten Web-Technologien für performante und wartbare Websites
+              Sauberer, strukturierter Code für performante Websites
             </p>
           </div>
-          
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
-            {techStack.map((tech, index) => (
-              <div
-                key={index}
-                className="flex items-center gap-3 bg-muted/50 rounded-full px-5 py-3 hover:bg-muted transition-colors"
-              >
-                <div className={`w-3 h-3 rounded-full ${tech.color}`} />
-                <div>
-                  <span className="font-semibold">{tech.name}</span>
-                  <span className="text-muted-foreground text-sm ml-2">
-                    {tech.description}
-                  </span>
+
+          {/* Carbon-style Code Window */}
+          <div className="max-w-3xl mx-auto">
+            <div className="relative group">
+              {/* Glow Effect */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-purple-500/20 to-cyan-500/20 rounded-2xl blur-xl opacity-70 group-hover:opacity-100 transition-opacity duration-500" />
+              
+              {/* Code Window */}
+              <div className="relative rounded-xl overflow-hidden shadow-2xl">
+                {/* Window Header */}
+                <div className="bg-zinc-800 px-4 py-3 flex items-center gap-2">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full bg-red-500" />
+                    <div className="w-3 h-3 rounded-full bg-yellow-500" />
+                    <div className="w-3 h-3 rounded-full bg-green-500" />
+                  </div>
+                  <div className="flex-1 text-center">
+                    <span className="text-zinc-400 text-sm font-medium">WelcomeSection.tsx</span>
+                  </div>
+                </div>
+                
+                {/* Code Content */}
+                <div className="bg-[#1e1e2e] p-6 overflow-x-auto">
+                  <pre className="text-sm md:text-base font-mono leading-relaxed">
+                    <code>
+                      <span className="text-purple-400">import</span>
+                      <span className="text-zinc-300"> {"{"} </span>
+                      <span className="text-yellow-300">Button</span>
+                      <span className="text-zinc-300"> {"}"} </span>
+                      <span className="text-purple-400">from</span>
+                      <span className="text-green-400"> "@/components/ui/button"</span>
+                      <span className="text-zinc-500">;</span>
+                      {"\n"}
+                      <span className="text-purple-400">import</span>
+                      <span className="text-zinc-300"> {"{"} </span>
+                      <span className="text-yellow-300">Card</span>
+                      <span className="text-zinc-300"> {"}"} </span>
+                      <span className="text-purple-400">from</span>
+                      <span className="text-green-400"> "@/components/ui/card"</span>
+                      <span className="text-zinc-500">;</span>
+                      {"\n\n"}
+                      <span className="text-purple-400">const</span>
+                      <span className="text-sky-300"> WelcomeSection</span>
+                      <span className="text-zinc-300"> = () </span>
+                      <span className="text-purple-400">=&gt;</span>
+                      <span className="text-zinc-300"> {"{"}</span>
+                      {"\n"}
+                      <span className="text-zinc-300">{"  "}</span>
+                      <span className="text-purple-400">return</span>
+                      <span className="text-zinc-300"> (</span>
+                      {"\n"}
+                      <span className="text-zinc-300">{"    "}&lt;</span>
+                      <span className="text-pink-400">section</span>
+                      <span className="text-sky-300"> className</span>
+                      <span className="text-zinc-300">=</span>
+                      <span className="text-green-400">"py-20"</span>
+                      <span className="text-zinc-300">&gt;</span>
+                      {"\n"}
+                      <span className="text-zinc-300">{"      "}&lt;</span>
+                      <span className="text-yellow-300">Card</span>
+                      <span className="text-sky-300"> className</span>
+                      <span className="text-zinc-300">=</span>
+                      <span className="text-green-400">"p-8 shadow-lg"</span>
+                      <span className="text-zinc-300">&gt;</span>
+                      {"\n"}
+                      <span className="text-zinc-300">{"        "}&lt;</span>
+                      <span className="text-pink-400">h1</span>
+                      <span className="text-zinc-300">&gt;</span>
+                      <span className="text-zinc-100">Willkommen</span>
+                      <span className="text-zinc-300">&lt;/</span>
+                      <span className="text-pink-400">h1</span>
+                      <span className="text-zinc-300">&gt;</span>
+                      {"\n"}
+                      <span className="text-zinc-300">{"        "}&lt;</span>
+                      <span className="text-yellow-300">Button</span>
+                      <span className="text-sky-300"> size</span>
+                      <span className="text-zinc-300">=</span>
+                      <span className="text-green-400">"lg"</span>
+                      <span className="text-zinc-300">&gt;</span>
+                      {"\n"}
+                      <span className="text-zinc-100">{"          "}Jetzt starten</span>
+                      {"\n"}
+                      <span className="text-zinc-300">{"        "}&lt;/</span>
+                      <span className="text-yellow-300">Button</span>
+                      <span className="text-zinc-300">&gt;</span>
+                      {"\n"}
+                      <span className="text-zinc-300">{"      "}&lt;/</span>
+                      <span className="text-yellow-300">Card</span>
+                      <span className="text-zinc-300">&gt;</span>
+                      {"\n"}
+                      <span className="text-zinc-300">{"    "}&lt;/</span>
+                      <span className="text-pink-400">section</span>
+                      <span className="text-zinc-300">&gt;</span>
+                      {"\n"}
+                      <span className="text-zinc-300">{"  "});</span>
+                      {"\n"}
+                      <span className="text-zinc-300">{"}"};</span>
+                    </code>
+                  </pre>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
+            </div>
 
-        {/* Code Examples Section */}
-        <div className="mb-20">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">So entstehen moderne Websites</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Ein Einblick in den Code – sauber, strukturiert und nach Best Practices entwickelt
-            </p>
-          </div>
-
-          <div className="grid lg:grid-cols-3 gap-6">
-            {codeExamples.map((example, index) => (
-              <Card key={index} className="overflow-hidden border-0 shadow-card">
-                <CardHeader className="pb-3">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Code className="w-5 h-5 text-primary" />
-                    <CardTitle className="text-lg">{example.title}</CardTitle>
-                  </div>
-                  <CardDescription>{example.description}</CardDescription>
-                </CardHeader>
-                <CardContent className="pt-0">
-                  <div className="relative">
-                    <div className="flex items-center gap-1.5 absolute top-3 left-3">
-                      <div className="w-3 h-3 rounded-full bg-red-500" />
-                      <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                      <div className="w-3 h-3 rounded-full bg-green-500" />
-                    </div>
-                    <pre className="bg-zinc-900 text-zinc-100 rounded-lg p-4 pt-10 overflow-x-auto text-xs md:text-sm font-mono leading-relaxed">
-                      <code>{example.code}</code>
-                    </pre>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+            {/* Tech Pills */}
+            <div className="flex flex-wrap justify-center gap-3 mt-8">
+              {techStack.map((tech, index) => (
+                <div
+                  key={index}
+                  className="flex items-center gap-2 bg-muted/80 backdrop-blur-sm rounded-full px-4 py-2 text-sm font-medium"
+                >
+                  <div className={`w-2.5 h-2.5 rounded-full ${tech.color}`} />
+                  {tech.name}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
