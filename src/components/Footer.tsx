@@ -17,7 +17,10 @@ const Footer = () => {
                 <strong>Inhaber:</strong> Robin Lehmann
               </p>
               <p>
-                <strong>E-Mail:</strong> robin.lehmann@connected-webdesign.de
+                <strong>E-Mail:</strong>{" "}
+                <a href="mailto:robin.lehmann@connected-webdesign.de" className="hover:text-primary transition-colors">
+                  robin.lehmann@connected-webdesign.de
+                </a>
               </p>
               <p>
                 <strong>Adresse:</strong> Dürerstraße 10, 69126 Heidelberg
@@ -52,14 +55,14 @@ const Footer = () => {
                   Über mich
                 </Link>
               </li>
-              {/* <li>
+              <li>
                 <Link
                   to="/references"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   Referenzen
                 </Link>
-              </li> */}
+              </li>
               <li>
                 <Link
                   to="/contact"
