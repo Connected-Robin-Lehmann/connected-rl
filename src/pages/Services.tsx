@@ -168,14 +168,45 @@ const WelcomeSection = () => {
                       <span className="text-purple-400">import</span>
                       <span className="text-zinc-300"> {"{"} </span>
                       <span className="text-yellow-300">Card</span>
+                      <span className="text-zinc-300">, </span>
+                      <span className="text-yellow-300">CardHeader</span>
+                      <span className="text-zinc-300">, </span>
+                      <span className="text-yellow-300">CardTitle</span>
                       <span className="text-zinc-300"> {"}"} </span>
                       <span className="text-purple-400">from</span>
                       <span className="text-green-400"> "@/components/ui/card"</span>
                       <span className="text-zinc-500">;</span>
+                      {"\n"}
+                      <span className="text-purple-400">import</span>
+                      <span className="text-zinc-300"> {"{"} </span>
+                      <span className="text-yellow-300">motion</span>
+                      <span className="text-zinc-300"> {"}"} </span>
+                      <span className="text-purple-400">from</span>
+                      <span className="text-green-400"> "framer-motion"</span>
+                      <span className="text-zinc-500">;</span>
+                      {"\n\n"}
+                      <span className="text-purple-400">interface</span>
+                      <span className="text-yellow-300"> WelcomeProps</span>
+                      <span className="text-zinc-300"> {"{"}</span>
+                      {"\n"}
+                      <span className="text-zinc-300">{"  "}title</span>
+                      <span className="text-zinc-500">:</span>
+                      <span className="text-sky-300"> string</span>
+                      <span className="text-zinc-500">;</span>
+                      {"\n"}
+                      <span className="text-zinc-300">{"  "}subtitle</span>
+                      <span className="text-zinc-500">?:</span>
+                      <span className="text-sky-300"> string</span>
+                      <span className="text-zinc-500">;</span>
+                      {"\n"}
+                      <span className="text-zinc-300">{"}"}</span>
                       {"\n\n"}
                       <span className="text-purple-400">const</span>
                       <span className="text-sky-300"> WelcomeSection</span>
-                      <span className="text-zinc-300"> = () </span>
+                      <span className="text-zinc-300"> = ({"{"} title, subtitle {"}"}</span>
+                      <span className="text-zinc-500">:</span>
+                      <span className="text-yellow-300"> WelcomeProps</span>
+                      <span className="text-zinc-300">) </span>
                       <span className="text-purple-400">=&gt;</span>
                       <span className="text-zinc-300"> {"{"}</span>
                       {"\n"}
@@ -184,25 +215,71 @@ const WelcomeSection = () => {
                       <span className="text-zinc-300"> (</span>
                       {"\n"}
                       <span className="text-zinc-300">{"    "}&lt;</span>
-                      <span className="text-pink-400">section</span>
-                      <span className="text-sky-300"> className</span>
+                      <span className="text-yellow-300">motion.section</span>
+                      {"\n"}
+                      <span className="text-sky-300">{"      "}initial</span>
                       <span className="text-zinc-300">=</span>
-                      <span className="text-green-400">"py-20"</span>
-                      <span className="text-zinc-300">&gt;</span>
+                      <span className="text-zinc-300">{"{"}{"{"} opacity: </span>
+                      <span className="text-orange-400">0</span>
+                      <span className="text-zinc-300"> {"}"}{"}"}</span>
+                      {"\n"}
+                      <span className="text-sky-300">{"      "}animate</span>
+                      <span className="text-zinc-300">=</span>
+                      <span className="text-zinc-300">{"{"}{"{"} opacity: </span>
+                      <span className="text-orange-400">1</span>
+                      <span className="text-zinc-300"> {"}"}{"}"}</span>
+                      {"\n"}
+                      <span className="text-sky-300">{"      "}className</span>
+                      <span className="text-zinc-300">=</span>
+                      <span className="text-green-400">"py-20 bg-gradient-hero"</span>
+                      {"\n"}
+                      <span className="text-zinc-300">{"    "}&gt;</span>
                       {"\n"}
                       <span className="text-zinc-300">{"      "}&lt;</span>
                       <span className="text-yellow-300">Card</span>
                       <span className="text-sky-300"> className</span>
                       <span className="text-zinc-300">=</span>
-                      <span className="text-green-400">"p-8 shadow-lg"</span>
+                      <span className="text-green-400">"p-8 shadow-card"</span>
                       <span className="text-zinc-300">&gt;</span>
                       {"\n"}
                       <span className="text-zinc-300">{"        "}&lt;</span>
-                      <span className="text-pink-400">h1</span>
+                      <span className="text-yellow-300">CardHeader</span>
                       <span className="text-zinc-300">&gt;</span>
-                      <span className="text-zinc-100">Willkommen</span>
-                      <span className="text-zinc-300">&lt;/</span>
-                      <span className="text-pink-400">h1</span>
+                      {"\n"}
+                      <span className="text-zinc-300">{"          "}&lt;</span>
+                      <span className="text-yellow-300">CardTitle</span>
+                      <span className="text-sky-300"> className</span>
+                      <span className="text-zinc-300">=</span>
+                      <span className="text-green-400">"text-4xl font-bold"</span>
+                      <span className="text-zinc-300">&gt;</span>
+                      {"\n"}
+                      <span className="text-zinc-300">{"            "}{"{"}title{"}"}</span>
+                      {"\n"}
+                      <span className="text-zinc-300">{"          "}&lt;/</span>
+                      <span className="text-yellow-300">CardTitle</span>
+                      <span className="text-zinc-300">&gt;</span>
+                      {"\n"}
+                      <span className="text-zinc-300">{"          "}{"{"}subtitle </span>
+                      <span className="text-purple-400">&amp;&amp;</span>
+                      <span className="text-zinc-300"> (</span>
+                      {"\n"}
+                      <span className="text-zinc-300">{"            "}&lt;</span>
+                      <span className="text-pink-400">p</span>
+                      <span className="text-sky-300"> className</span>
+                      <span className="text-zinc-300">=</span>
+                      <span className="text-green-400">"text-muted-foreground"</span>
+                      <span className="text-zinc-300">&gt;</span>
+                      {"\n"}
+                      <span className="text-zinc-300">{"              "}{"{"}subtitle{"}"}</span>
+                      {"\n"}
+                      <span className="text-zinc-300">{"            "}&lt;/</span>
+                      <span className="text-pink-400">p</span>
+                      <span className="text-zinc-300">&gt;</span>
+                      {"\n"}
+                      <span className="text-zinc-300">{"          "}){"}"}</span>
+                      {"\n"}
+                      <span className="text-zinc-300">{"        "}&lt;/</span>
+                      <span className="text-yellow-300">CardHeader</span>
                       <span className="text-zinc-300">&gt;</span>
                       {"\n"}
                       <span className="text-zinc-300">{"        "}&lt;</span>
@@ -210,6 +287,9 @@ const WelcomeSection = () => {
                       <span className="text-sky-300"> size</span>
                       <span className="text-zinc-300">=</span>
                       <span className="text-green-400">"lg"</span>
+                      <span className="text-sky-300"> variant</span>
+                      <span className="text-zinc-300">=</span>
+                      <span className="text-green-400">"default"</span>
                       <span className="text-zinc-300">&gt;</span>
                       {"\n"}
                       <span className="text-zinc-100">{"          "}Jetzt starten</span>
@@ -223,12 +303,16 @@ const WelcomeSection = () => {
                       <span className="text-zinc-300">&gt;</span>
                       {"\n"}
                       <span className="text-zinc-300">{"    "}&lt;/</span>
-                      <span className="text-pink-400">section</span>
+                      <span className="text-yellow-300">motion.section</span>
                       <span className="text-zinc-300">&gt;</span>
                       {"\n"}
                       <span className="text-zinc-300">{"  "});</span>
                       {"\n"}
                       <span className="text-zinc-300">{"}"};</span>
+                      {"\n\n"}
+                      <span className="text-purple-400">export default</span>
+                      <span className="text-sky-300"> WelcomeSection</span>
+                      <span className="text-zinc-500">;</span>
                     </code>
                   </pre>
                 </div>
