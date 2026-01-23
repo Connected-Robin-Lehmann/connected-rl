@@ -127,10 +127,62 @@ const WelcomeSection = () => {
         {/* Code Showcase Section */}
         <div className="mb-20">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Moderne Webentwicklung</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Sauberer, strukturierter Code für performante Websites
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Echte Webentwicklung – keine Baukästen</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
+              Wir entwickeln Ihre Website von Grund auf mit professionellem Code – 
+              keine Templates, keine Einschränkungen, volle Kontrolle.
             </p>
+            
+            {/* Comparison Grid */}
+            <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto text-left mb-12">
+              {/* What we DON'T do */}
+              <div className="bg-red-500/5 border border-red-500/20 rounded-xl p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center">
+                    <span className="text-red-500 text-xl">✕</span>
+                  </div>
+                  <h3 className="font-semibold text-lg">Nicht bei uns</h3>
+                </div>
+                <ul className="space-y-2 text-muted-foreground text-sm">
+                  <li className="flex items-center gap-2">
+                    <span className="text-red-400">–</span> Wix, Jimdo, Squarespace
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="text-red-400">–</span> WordPress-Templates
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="text-red-400">–</span> Eingeschränkte Anpassungen
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="text-red-400">–</span> Langsame Ladezeiten
+                  </li>
+                </ul>
+              </div>
+              
+              {/* What we DO */}
+              <div className="bg-green-500/5 border border-green-500/20 rounded-xl p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
+                    <span className="text-green-500 text-xl">✓</span>
+                  </div>
+                  <h3 className="font-semibold text-lg">Unsere Arbeitsweise</h3>
+                </div>
+                <ul className="space-y-2 text-muted-foreground text-sm">
+                  <li className="flex items-center gap-2">
+                    <span className="text-green-400">+</span> Individueller Code
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="text-green-400">+</span> Maßgeschneidertes Design
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="text-green-400">+</span> Volle Flexibilität
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="text-green-400">+</span> Optimale Performance
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
 
           {/* Carbon-style Code Window */}
