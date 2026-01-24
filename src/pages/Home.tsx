@@ -76,44 +76,78 @@ const Home = () => {
       {/* References Preview Section */}
       <section className="py-12 md:py-20">
         <div className="container mx-auto px-4">
-          <div className="text-center space-y-2 md:space-y-4 mb-8 md:mb-12">
+          <div className="text-center space-y-2 md:space-y-4 mb-6 md:mb-12">
             <h2 className="text-2xl md:text-4xl font-bold">Unsere Referenzen</h2>
-            <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-sm md:text-lg text-muted-foreground max-w-2xl mx-auto px-2">
               Erfolgreiche Projekte, die für sich sprechen
             </p>
           </div>
 
           <div className="max-w-4xl mx-auto">
             <Card className="shadow-card hover:shadow-lg transition-all duration-300 bg-gradient-card border-0 overflow-hidden">
-              <div className="grid md:grid-cols-2 gap-0">
-                <div className="aspect-video md:aspect-auto relative overflow-hidden">
-                  <img
-                    src="https://images.unsplash.com/photo-1554068865-24cecd4e34b8?w=600&h=400&fit=crop"
-                    alt="TC Schwarz-Gelb Heidelberg"
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute top-3 left-3">
-                    <Badge variant="secondary" className="text-xs">Sportverein</Badge>
+              {/* Browser Window Preview */}
+              <div className="bg-muted/50 border-b border-border/50">
+                <div className="flex items-center gap-2 px-3 py-2 md:px-4 md:py-3">
+                  <div className="flex gap-1.5">
+                    <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-red-400" />
+                    <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-yellow-400" />
+                    <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-green-400" />
+                  </div>
+                  <div className="flex-1 mx-2 md:mx-4">
+                    <div className="bg-background/80 rounded-md px-2 py-1 md:px-3 md:py-1.5 text-xs text-muted-foreground truncate">
+                      tcsgheidelberg.vercel.app
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <a 
+                href="https://tcsgheidelberg.vercel.app" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="block relative aspect-video overflow-hidden group"
+              >
+                <iframe
+                  src="https://tcsgheidelberg.vercel.app"
+                  className="w-full h-full pointer-events-none"
+                  title="TC Schwarz-Gelb Heidelberg Preview"
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                  <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-background/90 backdrop-blur-sm px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-medium shadow-lg">
+                    Website besuchen →
+                  </span>
+                </div>
+              </a>
+              
+              {/* Project Info */}
+              <div className="p-4 md:p-6">
+                <div className="flex items-start justify-between gap-3 mb-3">
+                  <div>
+                    <div className="flex items-center gap-2 flex-wrap mb-1">
+                      <h3 className="text-base md:text-xl font-bold">TC Schwarz-Gelb Heidelberg e.V.</h3>
+                      <span className="inline-flex items-center gap-1 bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 px-2 py-0.5 rounded-full text-[10px] md:text-xs font-medium">
+                        <span className="w-1.5 h-1.5 bg-amber-500 rounded-full animate-pulse" />
+                        In Entwicklung
+                      </span>
+                    </div>
+                    <p className="text-xs md:text-sm text-muted-foreground">
+                      Vereins-Website für einen traditionsreichen Tennisclub
+                    </p>
                   </div>
                 </div>
                 
-                <div className="p-5 md:p-6 flex flex-col justify-center">
-                  <h3 className="text-lg md:text-xl font-bold mb-2">TC Schwarz-Gelb Heidelberg e.V.</h3>
-                  <p className="text-sm md:text-base text-muted-foreground mb-4">
-                    Moderne Vereins-Website für einen traditionsreichen Tennisclub mit über 600 Mitgliedern.
-                  </p>
-                  <div className="flex flex-wrap gap-1.5 mb-4">
-                    <Badge variant="outline" className="text-xs">React</Badge>
-                    <Badge variant="outline" className="text-xs">TypeScript</Badge>
-                    <Badge variant="outline" className="text-xs">Tailwind CSS</Badge>
-                  </div>
-                  <Button asChild variant="outline" size="sm" className="w-fit">
-                    <Link to="/references" className="flex items-center gap-2">
-                      Alle Referenzen ansehen
-                      <ArrowRight className="w-4 h-4" />
-                    </Link>
-                  </Button>
+                <div className="flex flex-wrap gap-1.5 mb-4">
+                  <Badge variant="secondary" className="text-[10px] md:text-xs">Sportverein</Badge>
+                  <Badge variant="outline" className="text-[10px] md:text-xs">600+ Mitglieder</Badge>
+                  <Badge variant="outline" className="text-[10px] md:text-xs">Responsive</Badge>
                 </div>
+                
+                <Button asChild variant="outline" size="sm" className="w-full md:w-fit text-xs md:text-sm">
+                  <Link to="/references" className="flex items-center justify-center gap-2">
+                    Alle Referenzen ansehen
+                    <ArrowRight className="w-3 h-3 md:w-4 md:h-4" />
+                  </Link>
+                </Button>
               </div>
             </Card>
           </div>
