@@ -128,15 +128,12 @@ const Hero = () => {
 
             <div className="hidden lg:block lg:col-span-5 relative animate-fade-in-right">
               <div className="relative">
-              <div className="absolute inset-0 bg-gradient-secondary opacity-20 blur-2xl rounded-3xl transform rotate-6"></div>
-              <img
-                src={heroDevices}
-                alt="Webentwicklung Illustration"
-                className="relative rounded-3xl shadow-hero w-full h-auto hover-scale"
-                fetchPriority="high"
-              />
+                <div className="absolute inset-0 bg-gradient-secondary opacity-20 blur-2xl rounded-3xl transform rotate-6"></div>
+                <img
+                  src={heroDevices}
                   alt="Webentwicklung Illustration"
                   className="relative rounded-3xl shadow-hero w-full h-auto hover-scale"
+                  fetchPriority="high"
                 />
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-card/95 backdrop-blur-sm rounded-full px-6 py-3 shadow-card border">
                   <div className="flex items-center gap-2">
@@ -146,7 +143,6 @@ const Hero = () => {
                 </div>
               </div>
             </div>
-          </div>
         </div>
       </div>
     </section>
