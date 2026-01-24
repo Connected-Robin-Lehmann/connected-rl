@@ -1,18 +1,18 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, ArrowRight } from "lucide-react";
 
 const References = () => {
   const projects = [
     {
       title: "TC Schwarz-Gelb Heidelberg e.V.",
-      category: "Sportverein",
-      description: "Moderne Vereins-Website für einen traditionsreichen Tennisclub mit über 600 Mitgliedern. Umfassende Funktionen für Veranstaltungen, Nachrichten und Vereinsinformationen.",
-      technologies: ["React", "TypeScript", "Tailwind CSS"],
-      image: "https://images.unsplash.com/photo-1554068865-24cecd4e34b8?w=600&h=400&fit=crop",
-      features: ["Responsive Design", "Event Management", "News System"],
+      subtitle: "Tennisverein mit über 600 Mitgliedern",
+      description: "Eine moderne Vereins-Website, die Mitgliedern und Interessenten alle wichtigen Informationen übersichtlich präsentiert – von Veranstaltungen über News bis hin zu Trainingszeiten.",
+      highlights: [
+        "Übersichtliche Darstellung aller Vereinsinfos",
+        "Einfache Verwaltung von Events & News",
+        "Optimiert für Smartphone & Desktop"
+      ],
       link: "https://tcsgheidelberg.vercel.app"
     }
   ];
@@ -20,105 +20,98 @@ const References = () => {
   return (
     <div className="min-h-screen py-20">
       <div className="container mx-auto px-4">
+        {/* Header */}
         <div className="text-center space-y-4 mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold">Referenzen</h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Erfolgreiche Projekte aus verschiedenen Branchen – von E-Commerce bis Corporate Websites
+          <h1 className="text-4xl md:text-5xl font-bold">Unsere Projekte</h1>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            Websites, die funktionieren – für zufriedene Kunden
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-1 gap-8 mb-16 max-w-4xl mx-auto">
+        {/* Featured Project */}
+        <div className="max-w-5xl mx-auto mb-20">
           {projects.map((project, index) => (
-            <Card key={index} className="shadow-card hover:shadow-lg transition-all duration-300 bg-gradient-card border-0 overflow-hidden">
+            <div key={index} className="group">
+              {/* Preview Window */}
               <a 
                 href={project.link} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="block aspect-[16/10] relative overflow-hidden bg-muted group cursor-pointer"
+                className="block relative rounded-2xl overflow-hidden shadow-2xl mb-8 bg-muted"
               >
-                <iframe
-                  src={project.link}
-                  title={`Vorschau: ${project.title}`}
-                  className="w-full h-full border-0 pointer-events-none scale-100"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
-                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-primary text-primary-foreground px-4 py-2 rounded-md flex items-center gap-2 font-medium">
-                    Website besuchen <ExternalLink className="w-4 h-4" />
+                {/* Browser Chrome */}
+                <div className="bg-zinc-800 px-4 py-3 flex items-center gap-2">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full bg-red-500" />
+                    <div className="w-3 h-3 rounded-full bg-yellow-500" />
+                    <div className="w-3 h-3 rounded-full bg-green-500" />
                   </div>
-                </div>
-                <div className="absolute top-4 left-4">
-                  <Badge variant="secondary">{project.category}</Badge>
-                </div>
-              </a>
-              
-              <CardHeader>
-                <CardTitle className="flex items-center justify-between">
-                  <a 
-                    href={project.link} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="hover:text-primary transition-colors flex items-center gap-2"
-                  >
-                    {project.title}
-                    <ExternalLink className="w-5 h-5" />
-                  </a>
-                </CardTitle>
-                <CardDescription className="text-base">
-                  {project.description}
-                </CardDescription>
-              </CardHeader>
-              
-              <CardContent className="space-y-4">
-                <div>
-                  <h4 className="font-semibold mb-2">Verwendete Technologien:</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {project.technologies.map((tech, techIndex) => (
-                      <Badge key={techIndex} variant="outline">
-                        {tech}
-                      </Badge>
-                    ))}
+                  <div className="flex-1 flex justify-center">
+                    <div className="bg-zinc-700 rounded-md px-4 py-1 text-zinc-400 text-sm flex items-center gap-2">
+                      <span className="hidden sm:inline">{project.link.replace('https://', '')}</span>
+                      <span className="sm:hidden">tcsgheidelberg.vercel.app</span>
+                    </div>
                   </div>
                 </div>
                 
+                {/* Website Preview */}
+                <div className="aspect-[16/9] relative overflow-hidden">
+                  <iframe
+                    src={project.link}
+                    title={`Vorschau: ${project.title}`}
+                    className="w-full h-full border-0 pointer-events-none"
+                    loading="lazy"
+                  />
+                  {/* Hover Overlay */}
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
+                    <div className="opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:scale-100 scale-95">
+                      <div className="bg-white text-zinc-900 px-6 py-3 rounded-full flex items-center gap-2 font-semibold shadow-lg">
+                        Website ansehen <ExternalLink className="w-4 h-4" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              {/* Project Info */}
+              <div className="grid md:grid-cols-2 gap-8 items-start">
                 <div>
-                  <h4 className="font-semibold mb-2">Key Features:</h4>
-                  <ul className="grid grid-cols-2 gap-1 text-sm">
-                    {project.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center">
-                        <div className="w-1.5 h-1.5 bg-accent rounded-full mr-2 flex-shrink-0"></div>
-                        {feature}
+                  <h2 className="text-2xl md:text-3xl font-bold mb-2">{project.title}</h2>
+                  <p className="text-primary font-medium mb-4">{project.subtitle}</p>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {project.description}
+                  </p>
+                </div>
+                
+                <div className="bg-muted/50 rounded-xl p-6">
+                  <h3 className="font-semibold mb-4">Das haben wir erreicht:</h3>
+                  <ul className="space-y-3">
+                    {project.highlights.map((highlight, hIndex) => (
+                      <li key={hIndex} className="flex items-start gap-3">
+                        <div className="w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                          <span className="text-green-500 text-xs">✓</span>
+                        </div>
+                        <span className="text-sm">{highlight}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           ))}
         </div>
 
-        {/* Testimonial Section */}
-        {/* <div className="bg-muted/50 rounded-2xl p-8 md:p-12 mb-16">
-          <div className="text-center max-w-3xl mx-auto">
-            <h2 className="text-2xl md:text-3xl font-bold mb-6">Was unsere Kunden sagen</h2>
-            <blockquote className="text-lg italic text-muted-foreground mb-6">
-              "Die Zusammenarbeit mit Robin war hervorragend. Er hat nicht nur eine moderne, 
-              funktionale Website erstellt, sondern auch unsere spezifischen Anforderungen als 
-              Sportverein perfekt umgesetzt. Das Ergebnis spricht für sich!"
-            </blockquote>
-            <div className="text-sm font-medium">
-              — TC Schwarz-Gelb Heidelberg e.V.
-            </div>
-          </div>
-        </div> */}
-
-        <div className="text-center bg-gradient-primary rounded-2xl p-8 md:p-12 text-white">
-          <h2 className="text-3xl font-bold mb-4">Ihr Projekt ist der nächste Erfolg</h2>
-          <p className="text-lg mb-6 opacity-90">
-            Lassen Sie uns gemeinsam eine Website erstellen, die Ihre Ziele erreicht
+        {/* CTA Section */}
+        <div className="text-center bg-gradient-primary rounded-2xl p-8 md:p-12 text-white max-w-4xl mx-auto">
+          <h2 className="text-3xl font-bold mb-4">Ihr Projekt könnte hier stehen</h2>
+          <p className="text-lg mb-6 opacity-90 max-w-xl mx-auto">
+            Lassen Sie uns gemeinsam eine Website erstellen, auf die Sie stolz sein können
           </p>
-          <Button size="lg" variant="secondary" className="text-lg px-8" asChild>
-            <Link to="/contact">Projekt starten</Link>
+          <Button size="lg" variant="secondary" className="text-lg px-8 group" asChild>
+            <Link to="/contact">
+              Projekt besprechen
+              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </Link>
           </Button>
         </div>
       </div>
