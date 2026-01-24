@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import heroImage from "@/assets/hero-image.jpg";
-import heroSplit from "@/assets/hero-split.jpg";
+import heroDevices from "@/assets/hero-devices.png";
 import { ArrowRight, Code, Palette, Zap } from "lucide-react";
 
 const Hero = () => {
@@ -129,9 +128,13 @@ const Hero = () => {
 
             <div className="hidden lg:block lg:col-span-5 relative animate-fade-in-right">
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-secondary opacity-20 blur-2xl rounded-3xl transform rotate-6"></div>
-                <img
-                  src={heroSplit}
+              <div className="absolute inset-0 bg-gradient-secondary opacity-20 blur-2xl rounded-3xl transform rotate-6"></div>
+              <img
+                src={heroDevices}
+                alt="Webentwicklung Illustration"
+                className="relative rounded-3xl shadow-hero w-full h-auto hover-scale"
+                fetchPriority="high"
+              />
                   alt="Webentwicklung Illustration"
                   className="relative rounded-3xl shadow-hero w-full h-auto hover-scale"
                 />
