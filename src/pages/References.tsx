@@ -13,7 +13,8 @@ const References = () => {
         "Einfache Verwaltung von Events & News",
         "Optimiert für Smartphone & Desktop"
       ],
-      link: "https://tcsgheidelberg.vercel.app"
+      link: "https://tcsgheidelberg.vercel.app",
+      inDevelopment: true
     }
   ];
 
@@ -73,10 +74,17 @@ const References = () => {
                 </div>
               </a>
 
-              {/* Project Info */}
               <div className="grid md:grid-cols-2 gap-8 items-start">
                 <div>
-                  <h2 className="text-2xl md:text-3xl font-bold mb-2">{project.title}</h2>
+                  <div className="flex items-center gap-3 mb-2 flex-wrap">
+                    <h2 className="text-2xl md:text-3xl font-bold">{project.title}</h2>
+                    {project.inDevelopment && (
+                      <span className="inline-flex items-center gap-1.5 bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 px-3 py-1 rounded-full text-xs font-medium">
+                        <span className="w-1.5 h-1.5 bg-amber-500 rounded-full animate-pulse" />
+                        In Entwicklung
+                      </span>
+                    )}
+                  </div>
                   <p className="text-primary font-medium mb-4">{project.subtitle}</p>
                   <p className="text-muted-foreground leading-relaxed">
                     {project.description}
