@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import heroImage from "@/assets/hero-image.jpg";
-import heroSplit from "@/assets/hero-split.jpg";
+import heroDevices from "@/assets/hero-devices.png";
 import { ArrowRight, Code, Palette, Zap } from "lucide-react";
 
 const Hero = () => {
@@ -131,9 +130,10 @@ const Hero = () => {
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-secondary opacity-20 blur-2xl rounded-3xl transform rotate-6"></div>
                 <img
-                  src={heroSplit}
+                  src={heroDevices}
                   alt="Webentwicklung Illustration"
                   className="relative rounded-3xl shadow-hero w-full h-auto hover-scale"
+                  fetchPriority="high"
                 />
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-card/95 backdrop-blur-sm rounded-full px-6 py-3 shadow-card border">
                   <div className="flex items-center gap-2">
