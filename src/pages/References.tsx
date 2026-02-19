@@ -14,7 +14,7 @@ const References = () => {
         "Optimiert für Smartphone & Desktop"
       ],
       link: "https://tcsgheidelberg.vercel.app",
-      inDevelopment: true
+      inDevelopment: false
     }
   ];
 
