@@ -125,10 +125,6 @@ const Home = () => {
                   <div>
                     <div className="flex items-center gap-2 flex-wrap mb-1">
                       <h3 className="text-base md:text-xl font-bold">TC Schwarz-Gelb Heidelberg e.V.</h3>
-                      <span className="inline-flex items-center gap-1 bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 px-2 py-0.5 rounded-full text-[10px] md:text-xs font-medium">
-                        <span className="w-1.5 h-1.5 bg-amber-500 rounded-full animate-pulse" />
-                        In Entwicklung
-                      </span>
                     </div>
                     <p className="text-xs md:text-sm text-muted-foreground">
                       Vereins-Website für einen traditionsreichen Tennisclub
