@@ -102,13 +102,13 @@ const Home = () => {
               </div>
               
               <a 
-                href="https://tcsgheidelberg.vercel.app" 
+                href="https://schwarzgelb-heidelberg.de" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="block relative aspect-video overflow-hidden group"
               >
                 <iframe
-                  src="https://tcsgheidelberg.vercel.app"
+                  src="https://schwarzgelb-heidelberg.de"
                   className="w-full h-full pointer-events-none"
                   title="TC Schwarz-Gelb Heidelberg Preview"
                 />

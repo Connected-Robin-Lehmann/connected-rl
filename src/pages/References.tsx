@@ -13,8 +13,12 @@ const References = () => {
         "Einfache Verwaltung von Events & News",
         "Optimiert für Smartphone & Desktop"
       ],
-      link: "https://tcsgheidelberg.vercel.app",
-      inDevelopment: false
+      link: "https://schwarzgelb-heidelberg.de",
+      inDevelopment: false,
+      testimonial: {
+        quote: "Very very nice, clean, easy to navigate, professional!",
+        source: "Vereinsmitglied"
+      }
     }
   ];
 
@@ -105,6 +109,19 @@ const References = () => {
                   </ul>
                 </div>
               </div>
+
+              {/* Testimonial */}
+              {project.testimonial && (
+                <div className="mt-8 bg-muted/30 border border-border/50 rounded-xl p-6 md:p-8">
+                  <div className="flex items-start gap-4">
+                    <span className="text-4xl text-primary/30 font-serif leading-none">"</span>
+                    <div>
+                      <p className="text-lg italic text-foreground/80 mb-2">{project.testimonial.quote}</p>
+                      <p className="text-sm text-muted-foreground">– {project.testimonial.source}</p>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           ))}
         </div>
