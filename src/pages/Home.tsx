@@ -82,24 +82,24 @@ const Home = () => {
                 </div>
               </div>
               
-              <a 
-                href="https://schwarzgelb-heidelberg.de" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="block relative aspect-video overflow-hidden group"
-              >
-                <img
-                  src="/images/tc-schwarzgelb-screenshot.png"
-                  alt="TC Schwarz-Gelb Heidelberg Website Preview"
-                  className="w-full h-full object-cover object-top"
+              <div className="relative aspect-video overflow-hidden group">
+                <iframe
+                  src="https://schwarzgelb-heidelberg.de"
+                  title="TC Schwarz-Gelb Heidelberg Website Preview"
+                  className="w-full h-full border-0 pointer-events-none"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                <a 
+                  href="https://schwarzgelb-heidelberg.de" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center"
+                >
                   <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-background/90 backdrop-blur-sm px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-medium shadow-lg">
                     Website besuchen →
                   </span>
-                </div>
-              </a>
+                </a>
+              </div>
               
               {/* Project Info */}
               <div className="p-4 md:p-6">

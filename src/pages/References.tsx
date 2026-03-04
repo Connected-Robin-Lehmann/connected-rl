@@ -61,10 +61,10 @@ const References = () => {
                 
                 {/* Website Preview */}
                 <div className="aspect-[16/9] relative overflow-hidden">
-                  <img
-                    src="/images/tc-schwarzgelb-screenshot.png"
-                    alt={`Vorschau: ${project.title}`}
-                    className="w-full h-full object-cover object-top"
+                  <iframe
+                    src={project.link}
+                    title={`Vorschau: ${project.title}`}
+                    className="w-full h-full border-0 pointer-events-none"
                     loading="lazy"
                   />
                   {/* Hover Overlay */}
