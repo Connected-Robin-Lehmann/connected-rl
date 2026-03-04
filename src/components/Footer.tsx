@@ -98,10 +98,6 @@ const Footer = () => {
         </div>
 
         <div className="border-t mt-12 pt-8 text-center text-sm text-muted-foreground">
-          {/* <p>
-            &copy; {new Date().getFullYear()} Connected - Robin Lehmann. Alle
-            Rechte vorbehalten.
-          </p> */}
           <p>Connected - Inhaber: Robin Lehmann</p>
         </div>
       </div>

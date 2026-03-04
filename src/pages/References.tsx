@@ -54,17 +54,17 @@ const References = () => {
                   <div className="flex-1 flex justify-center">
                     <div className="bg-zinc-700 rounded-md px-4 py-1 text-zinc-400 text-sm flex items-center gap-2">
                       <span className="hidden sm:inline">{project.link.replace('https://', '')}</span>
-                      <span className="sm:hidden">tcsgheidelberg.vercel.app</span>
+                      <span className="sm:hidden">schwarzgelb-heidelberg.de</span>
                     </div>
                   </div>
                 </div>
                 
                 {/* Website Preview */}
                 <div className="aspect-[16/9] relative overflow-hidden">
-                  <iframe
-                    src={project.link}
-                    title={`Vorschau: ${project.title}`}
-                    className="w-full h-full border-0 pointer-events-none"
+                  <img
+                    src="/images/tc-schwarzgelb-screenshot.png"
+                    alt={`Vorschau: ${project.title}`}
+                    className="w-full h-full object-cover object-top"
                     loading="lazy"
                   />
                   {/* Hover Overlay */}

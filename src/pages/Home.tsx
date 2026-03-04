@@ -39,25 +39,6 @@ const Home = () => {
     <div className="min-h-screen">
       <Hero />
 
-      {/* About Section */}
-      {/* <section className="py-20 bg-muted/50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center space-y-6">
-            <h2 className="text-3xl md:text-4xl font-bold">
-              Ihr Partner für digitale Präsenz
-            </h2>
-            <p className="text-lg text-muted-foreground">
-              Connected steht für professionelle Webentwicklung mit persönlicher Betreuung. 
-              Als Ihr zuverlässiger Partner sorgen wir dafür, dass Ihre Online-Präsenz 
-              nicht nur technisch einwandfrei funktioniert, sondern auch dauerhaft aktuell 
-              und erfolgreich bleibt.
-            </p>
-            <Button asChild variant="outline" size="lg">
-              <Link to="/about">Mehr über uns erfahren</Link>
-            </Button>
-          </div>
-        </div>
-      </section> */}
 
       {/* Before/After Comparison Section - Desktop/Tablet */}
       <section className="py-20 hidden md:block">
@@ -95,7 +76,7 @@ const Home = () => {
                   </div>
                   <div className="flex-1 mx-2 md:mx-4">
                     <div className="bg-background/80 rounded-md px-2 py-1 md:px-3 md:py-1.5 text-xs text-muted-foreground truncate">
-                      tcsgheidelberg.vercel.app
+                      schwarzgelb-heidelberg.de
                     </div>
                   </div>
                 </div>
@@ -107,10 +88,11 @@ const Home = () => {
                 rel="noopener noreferrer"
                 className="block relative aspect-video overflow-hidden group"
               >
-                <iframe
-                  src="https://schwarzgelb-heidelberg.de"
-                  className="w-full h-full pointer-events-none"
-                  title="TC Schwarz-Gelb Heidelberg Preview"
+                <img
+                  src="/images/tc-schwarzgelb-screenshot.png"
+                  alt="TC Schwarz-Gelb Heidelberg Website Preview"
+                  className="w-full h-full object-cover object-top"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
                   <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-background/90 backdrop-blur-sm px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-medium shadow-lg">
