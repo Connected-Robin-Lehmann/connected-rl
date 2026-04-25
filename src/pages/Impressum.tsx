@@ -1,7 +1,14 @@
+import SEO from "@/components/SEO";
 
 const Impressum = () => {
   return (
     <div className="container mx-auto px-4 py-12">
+      <SEO
+        title="Impressum | Connected Webdesign"
+        description="Impressum und rechtliche Angaben gemäß § 5 TMG für Connected – Robin Lehmann, Webentwicklung in Heidelberg."
+        path="/impressum"
+        noindex
+      />
       <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl font-bold text-primary mb-8">Impressum</h1>
         

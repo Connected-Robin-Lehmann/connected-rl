@@ -12,6 +12,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Mail, Phone, Clock, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import SEO from "@/components/SEO";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -98,8 +99,33 @@ const Contact = () => {
     },
   ];
 
+  const contactJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    url: "https://connected-webdesign.de/contact",
+    mainEntity: {
+      "@type": "Organization",
+      name: "Connected",
+      email: "robin.lehmann@connected-webdesign.de",
+      url: "https://connected-webdesign.de/",
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "customer service",
+        email: "robin.lehmann@connected-webdesign.de",
+        availableLanguage: ["German", "English"],
+        hoursAvailable: "Mo-Fr 09:00-18:00",
+      },
+    },
+  };
+
   return (
     <div className="min-h-screen py-20">
+      <SEO
+        title="Kontakt – Kostenloses Erstgespräch | Connected"
+        description="Sprechen Sie mit Robin Lehmann über Ihr Webprojekt. Kostenlose Erstberatung, persönlicher Ansprechpartner, schnelle Antwort. Jetzt Kontakt aufnehmen."
+        path="/contact"
+        jsonLd={contactJsonLd}
+      />
       <div className="container mx-auto px-4">
         <div className="text-center space-y-4 mb-16">
           <h1 className="text-4xl md:text-5xl font-bold">Kontakt</h1>

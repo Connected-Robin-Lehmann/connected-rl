@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ExternalLink, ArrowRight } from "lucide-react";
+import SEO from "@/components/SEO";
 
 const References = () => {
   const projects = [
@@ -22,8 +23,29 @@ const References = () => {
     }
   ];
 
+  const portfolioJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: projects.map((p, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      item: {
+        "@type": "WebSite",
+        name: p.title,
+        url: p.link,
+        description: p.description,
+      },
+    })),
+  };
+
   return (
     <div className="min-h-screen py-20">
+      <SEO
+        title="Referenzen & Projekte | Connected Webdesign"
+        description="Erfolgreiche Webprojekte von Connected: TC Schwarz-Gelb Heidelberg und weitere Kunden-Websites, die überzeugen – modern, schnell und benutzerfreundlich."
+        path="/references"
+        jsonLd={portfolioJsonLd}
+      />
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center space-y-4 mb-16">

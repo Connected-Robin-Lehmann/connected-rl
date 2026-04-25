@@ -1,7 +1,14 @@
+import SEO from "@/components/SEO";
 
 const Datenschutz = () => {
   return (
     <div className="container mx-auto px-4 py-12">
+      <SEO
+        title="Datenschutzerklärung | Connected Webdesign"
+        description="Datenschutzerklärung gemäß DSGVO für connected-webdesign.de – Informationen zur Erhebung und Verarbeitung personenbezogener Daten."
+        path="/datenschutz"
+        noindex
+      />
       <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl font-bold text-primary mb-8">Datenschutzerklärung</h1>
         
