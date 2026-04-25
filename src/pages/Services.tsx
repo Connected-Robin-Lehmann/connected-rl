@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Code, Settings, Users } from "lucide-react";
 import BeforeAfterComparison from "@/components/BeforeAfterComparison";
+import SEO from "@/components/SEO";
 
 const Services = () => {
   const services = [
@@ -81,8 +82,38 @@ const WelcomeSection = () => {
     { name: "Tailwind CSS", color: "bg-cyan-400" },
   ];
 
+  const servicesJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: "Webentwicklung & Website-Betreuung",
+    provider: {
+      "@type": "ProfessionalService",
+      name: "Connected - Robin Lehmann",
+      url: "https://connected-webdesign.de/",
+    },
+    areaServed: { "@type": "Country", name: "Deutschland" },
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Webentwicklung Leistungen",
+      itemListElement: services.map((s) => ({
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: s.title,
+          description: s.description,
+        },
+      })),
+    },
+  };
+
   return (
     <div className="min-h-screen py-20">
+      <SEO
+        title="Leistungen – Webentwicklung, Wartung & Betreuung | Connected"
+        description="Professionelle Webentwicklung, kontinuierliche Wartung und persönliche Betreuung Ihrer Website. Individuelle Lösungen statt Baukasten – von Robin Lehmann."
+        path="/services"
+        jsonLd={servicesJsonLd}
+      />
       <div className="container mx-auto px-4">
         <div className="text-center space-y-4 mb-16">
           <h1 className="text-4xl md:text-5xl font-bold">Unsere Leistungen</h1>

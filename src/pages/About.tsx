@@ -2,10 +2,37 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Mail, Phone, ArrowRight, ArrowDown } from "lucide-react";
+import SEO from "@/components/SEO";
 
 const About = () => {
+  const personJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Robin Lehmann",
+    jobTitle: "Webentwickler & Digital Consultant",
+    url: "https://connected-webdesign.de/about",
+    image: "https://connected-webdesign.de/images/Robin-Lehmann.png",
+    email: "robin.lehmann@connected-webdesign.de",
+    worksFor: {
+      "@type": "Organization",
+      name: "Connected",
+      url: "https://connected-webdesign.de/",
+    },
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Heidelberg",
+      addressCountry: "DE",
+    },
+  };
+
   return (
     <div className="min-h-screen py-12 md:py-20">
+      <SEO
+        title="Über mich – Robin Lehmann | Connected Webdesign"
+        description="Lernen Sie Robin Lehmann kennen – Ihr persönlicher Ansprechpartner für moderne Webentwicklung in Heidelberg. Zielorientiert, persönlich und effizient."
+        path="/about"
+        jsonLd={personJsonLd}
+      />
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           {/* Header Section */}
