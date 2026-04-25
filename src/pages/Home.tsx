@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero";
+import SEO from "@/components/SEO";
 import BeforeAfterComparison from "@/components/BeforeAfterComparison";
 import MobileComparisonTabs from "@/components/MobileComparisonTabs";
 import {
@@ -35,8 +36,55 @@ const Home = () => {
     },
   ];
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://connected-webdesign.de/#business",
+        name: "Connected - Webdesign Robin Lehmann",
+        url: "https://connected-webdesign.de/",
+        image: "https://connected-webdesign.de/og-image.png",
+        description:
+          "Professionelle Webentwicklung und -betreuung durch Robin Lehmann. Von der ersten Idee bis zur langfristigen Pflege – alles aus einer Hand.",
+        priceRange: "€€",
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: "Dürerstraße 10",
+          postalCode: "69126",
+          addressLocality: "Heidelberg",
+          addressCountry: "DE",
+        },
+        founder: {
+          "@type": "Person",
+          name: "Robin Lehmann",
+        },
+        areaServed: "DE",
+        serviceType: [
+          "Webentwicklung",
+          "Webdesign",
+          "Website-Wartung",
+          "SEO-Optimierung",
+        ],
+      },
+      {
+        "@type": "WebSite",
+        url: "https://connected-webdesign.de/",
+        name: "Connected",
+        inLanguage: "de-DE",
+        publisher: { "@id": "https://connected-webdesign.de/#business" },
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Connected - Webseiten erstellen, betreuen und aktuell halten"
+        description="Professionelle Webentwicklung und -betreuung durch Robin Lehmann. Von der ersten Idee bis zur langfristigen Pflege – alles aus einer Hand."
+        path="/"
+        jsonLd={jsonLd}
+      />
       <Hero />
 
 
