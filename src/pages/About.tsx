@@ -28,8 +28,8 @@ const About = () => {
   return (
     <div className="min-h-screen py-12 md:py-20">
       <SEO
-        title="Über mich – Robin Lehmann | Connected Webdesign"
-        description="Lernen Sie Robin Lehmann kennen – Ihr persönlicher Ansprechpartner für moderne Webentwicklung in Heidelberg. Zielorientiert, persönlich und effizient."
+        title="Webentwickler Heidelberg – Robin Lehmann | Connected"
+        description="Robin Lehmann – Ihr Webentwickler aus Heidelberg für individuelles Webdesign, moderne Webseiten und persönliche Betreuung. Lernen Sie mich kennen."
         path="/about"
         jsonLd={personJsonLd}
       />

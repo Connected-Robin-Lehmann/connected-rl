@@ -80,8 +80,8 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       <SEO
-        title="Connected - Webseiten erstellen, betreuen und aktuell halten"
-        description="Professionelle Webentwicklung und -betreuung durch Robin Lehmann. Von der ersten Idee bis zur langfristigen Pflege – alles aus einer Hand."
+        title="Webdesign Heidelberg | Webentwickler & Webseiten – Connected"
+        description="Webdesign Heidelberg von Robin Lehmann: individuelle Webseiten, moderne Webentwicklung und persönliche Betreuung. Ihr Webentwickler aus Heidelberg."
         path="/"
         jsonLd={jsonLd}
       />
