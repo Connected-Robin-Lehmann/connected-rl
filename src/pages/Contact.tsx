@@ -121,8 +121,8 @@ const Contact = () => {
   return (
     <div className="min-h-screen py-20">
       <SEO
-        title="Kontakt – Kostenloses Erstgespräch | Connected"
-        description="Sprechen Sie mit Robin Lehmann über Ihr Webprojekt. Kostenlose Erstberatung, persönlicher Ansprechpartner, schnelle Antwort. Jetzt Kontakt aufnehmen."
+        title="Kontakt – Webdesign & Webentwicklung Heidelberg | Connected"
+        description="Kontakt zu Robin Lehmann – Webdesign und Webentwicklung in Heidelberg. Kostenloses Erstgespräch, persönlicher Ansprechpartner, schnelle Antwort."
         path="/contact"
         jsonLd={contactJsonLd}
       />

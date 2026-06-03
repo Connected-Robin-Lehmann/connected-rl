@@ -109,17 +109,17 @@ const WelcomeSection = () => {
   return (
     <div className="min-h-screen py-20">
       <SEO
-        title="Leistungen – Webentwicklung, Wartung & Betreuung | Connected"
-        description="Professionelle Webentwicklung, kontinuierliche Wartung und persönliche Betreuung Ihrer Website. Individuelle Lösungen statt Baukasten – von Robin Lehmann."
+        title="Leistungen – Webdesign & Webentwicklung Heidelberg | Connected"
+        description="Webdesign, Webentwicklung und Wartung aus Heidelberg. Individuelle Webseiten statt Baukasten – professionell umgesetzt von Robin Lehmann."
         path="/services"
         jsonLd={servicesJsonLd}
       />
       <div className="container mx-auto px-4">
         <div className="text-center space-y-4 mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold">Unsere Leistungen</h1>
+          <h1 className="text-4xl md:text-5xl font-bold">Webdesign & Webentwicklung aus Heidelberg</h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Professionelle Webentwicklung und -betreuung – von der ersten Idee
-            bis zur langfristigen Pflege
+            Professionelle Webseiten, Webentwicklung und Betreuung – von der
+            ersten Idee bis zur langfristigen Pflege.
           </p>
         </div>
 

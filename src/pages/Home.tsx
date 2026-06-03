@@ -80,8 +80,8 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       <SEO
-        title="Connected - Webseiten erstellen, betreuen und aktuell halten"
-        description="Professionelle Webentwicklung und -betreuung durch Robin Lehmann. Von der ersten Idee bis zur langfristigen Pflege – alles aus einer Hand."
+        title="Webdesign Heidelberg | Webentwickler & Webseiten – Connected"
+        description="Webdesign Heidelberg von Robin Lehmann: individuelle Webseiten, moderne Webentwicklung und persönliche Betreuung. Ihr Webentwickler aus Heidelberg."
         path="/"
         jsonLd={jsonLd}
       />
@@ -99,6 +99,24 @@ const Home = () => {
       <section className="py-6 md:hidden">
         <div className="container mx-auto px-3">
           <MobileComparisonTabs />
+        </div>
+      </section>
+
+      {/* Local SEO content section */}
+      <section className="py-12 md:py-16">
+        <div className="container mx-auto px-4 max-w-3xl text-center space-y-4">
+          <h2 className="text-2xl md:text-3xl font-bold">
+            Webdesign Heidelberg – individuelle Webseiten vom Webentwickler vor Ort
+          </h2>
+          <p className="text-muted-foreground text-base md:text-lg">
+            Sie suchen einen <strong>Webentwickler in Heidelberg</strong>, der
+            Ihre <strong>Webseite</strong> nicht aus dem Baukasten zieht,
+            sondern individuell entwickelt? Connected steht für modernes
+            <strong> Webdesign aus Heidelberg</strong>: handgeschriebener Code,
+            schnelle Ladezeiten, sauberes Design und persönliche Betreuung –
+            für Unternehmen, Vereine und Selbstständige in Heidelberg und der
+            Metropolregion Rhein-Neckar.
+          </p>
         </div>
       </section>
 
